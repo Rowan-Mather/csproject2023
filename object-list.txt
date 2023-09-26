@@ -1,4 +1,4 @@
-monkey:1
-tree:2
-candle:3
-cornflakes:4
+monkey
+tree
+candle
+cornflakes
