@@ -1,4 +1,2 @@
 monkey
-tree
-candle
-cornflakes
+ico-red
