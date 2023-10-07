@@ -1,0 +1,124 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[margin=1in]{geometry}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{hyperref}
+
+\bibliographystyle{ieeetr}
+%\bibliographystyle{plain}
+\newcommand{\mycomment}[1]{}
+
+\title{Project Specification: Reconstructing Historical Sites with Augmented Reality}
+\author{Rowan Mather}
+\date{September 2023}
+
+\begin{document}
+
+\maketitle
+
+\section{Outline}
+Overcoming the dissonance between a modern day landscape and its historical counterpart can often be challenging if you are less educated on the area or it is in a state of complete ruin. To aid visitors, many popular historical sites provide an immersive series of images presenting our best guess of how it would have looked. Sketches on notice boards are commonplace, but we are increasingly seeing virtual or augmented reality experiences as well.
+
+Accordingly, the direction of this project is to create a mobile application for viewing user-created 3D models layered over large real-world objects, based on their co-ordinate location. I will refer to these models as a 'site'. Although intended for primarily archaeological purposes, a creator will be able to place down any structure in any location across the world and for other users to walk around and inspect it. 
+
+\section{Existing Work}
+I have identified some related existing tools, documented below. However, this project has two crucial distinguishing features:
+\begin{enumerate}
+    \item It is general-purpose. \\
+    Most of the aforementioned augmented reality applications are bespoke, made by an external company to suit the exact needs and layout of the site. This project is not as tailored, but usable anywhere in the world for any model. Often smaller locations/projects will not have the resources to develop their own system, but can use this freely instead.
+    \item It is GPS location-based. \\
+    Augmented reality applications that require the virtual object to be placed in a specific position often use some form of image 'anchor' or 'marker', such as a table. As you move your phone, the app tracks the relative position of the table and keeps the virtual object still. Since this project operates on on a much larger scale, markers are not as suitable. It uses the absolute position instead.
+\end{enumerate}
+
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% Beamer presentation requires \usepackage{colortbl} instead of \usepackage[table,xcdraw]{xcolor}
+\begin{table}[]
+\begin{tabular}{|l|l|l|}
+\hline
+\rowcolor[HTML]{EFEFEF} 
+\textbf{Technology}   & \textbf{Description}                    & \textbf{Issues (for this application)} \\ \hline
+Timelooper \cite{timelooper}     & Viewing reproduced historical moments.  & Fixed in place.                        \\ \hline
+Google Earth \cite{googleearth}   & Puts 3D models in a world-view.         & Not live, cannot be widely shared.     \\ \hline
+Historik \cite{historik}       & Sites tagged with information.          & Mostly still images of sites.          \\ \hline
+Arki \cite{arki}           & Models for construction demo on site.   & Marker-based, built-in 3D editor.      \\ \hline
+Morpholio Sketch Walk \cite{morpholio} & Construction layout pulled up into 3D.  & Marker-based, local sharing only.      \\ \hline
+Historic VR \cite{historicvr}          & 3D dynamic environments.                & Fixed on LCD screens and bespoke.      \\ \hline
+RomeMVR \cite{romemvr}              & Viewing 3D reconstructions over Rome.   & Bespoke, limited movement.             \\ \hline
+Tamworth Castle Trail \cite{tamworth} & Virtual people/objects explaining site. & Small-scale, marker-based.             \\ \hline
+\end{tabular}
+\end{table}
+
+\mycomment{
+- https://www.timelooper.com/
+lets viewers experience various historical moments—George Washington’s second inaugural address, the construction of the Empire State Building, the Great Fire of London.
+fixed point
+- google earth
+virtual only not immersive, import 3d models and view locally
+- https://www.historik.com/
+mostly stills
+- https://www.darfdesign.com/arki.html
+- morpholio sketch walk 
+anchor based and local collab only
+https://morpholioapps.com/trace/
+- https://gamma-ar.com/
+seems pretty perfect to me....
+- https://historicvr.com/index.php
+fixed on lcd screens and bespoke
+- rome mvr
+https://apps.apple.com/us/app/rome-mvr-time-window/id997392001
+bespoke, limited walkabout
+- tamworth castle
+https://www.tamworthcastle.co.uk/ar-trail
+anchors on the floor in each room
+}
+
+\section{Tools}
+To create the main viewing application, I will be using the Unity game engine, and therefore coding in C\#. Unity has excellent handling of graphics, including VR/AR, and a vast library of assets written by users. Using a tool designed for building graphics-heavy mobile apps will streamline the process, even though it's not a game. 
+
+To publicise sites, the models and their metadata will be simply uploaded to a web-server. Sites will be downloaded as needed from the app. Initially, I will use a GitHub repository as the server.
+
+Model files will be stored in the wavefront (.obj) format. I chose this as it's one of the most ubiquitous file types for 3D models \cite{obj1} \cite{obj2}, which aligns with the idea of my project being a generalist tool. Most 3D modelling software can will import/export it, but I will be using Blender for testing purposes, as well as for any built-in 3D graphics. 
+
+I will be using Unity's location services for determining the GPS co-ordinates of a user. I considered other ways of locating a model, including marker-based \cite{anchor}, and Bluetooth beacons \cite{beacons}. However, due to the larger scale, small budget and requirements to be generally accessible, GPS was the most appropriate single method. 
+
+I will be testing on my personal Android mobile device first and foremost. 
+
+\section{Objectives}
+Detailed below are the exact aims for the project, prioritised by core functionality (A), expansion (B) and extension features (C).
+
+I spoke to archaeologist :)
+
+\section{Timeline and Methodology}
+I have scheduled time for all the core functionality of my project (and some extension/expansion objectives) using a custom Gantt chart (see figure \ref{fig:gantt}.1). Since it also functions as a form of checklist, I will be modifying it continuously with updates on my progress. This will allow me to distribute work evenly and recall quickly how far along a section is.
+
+Due to the quite distinct stages, work will be completed following a methodology most akin to incremental \cite{agile}, but with more agile elements. The specification at the start of each iteration will not be fully detailed since I will need to experiment with different tools within Unity, but the overall objectives will be clear. 
+
+I will keep a progress log detailing the time and activity of each work session. This will help track the issues I have faced, and allow me to reschedule tasks where necessary, as well as reporting the successes. 
+
+\section{Risks}
+\begin{itemize}
+    \item Device failure. 
+    Since I will be working primarily on my personal laptop, which has Unity installed, it failing would be a set-back. I will keep copies of all the code and documentation on GitHub and Google Docs 
+\end{itemize}
+Whilst I will be working on my personal laptop, copies of all the code and documentation will be stored on GitHub or Google Docs. This will allow me to access previous versions where they may be more successful
+
+- GPS inaccuracy
+
+\section{Legal \& Ethical Considerations}
+- Unity charges
+- Device failure
+- Ts\& Cs of unity and the packages
+- Controlling uploading models safety, security \& privacy
+
+
+\begin{figure}
+    \includegraphics[width=600pt, angle=90]{Gantt Chart - Sheet1.pdf}
+        %\caption{SYN flood sample exact output}
+        \label{fig:gantt}
+\end{figure}
+
+\newpage
+\bibliography{bibliography}
+
+\end{document}
