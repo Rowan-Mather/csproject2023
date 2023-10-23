@@ -1,0 +1,8 @@
+.vscode/
+Logs/
+Packages/
+UserSettings/
+Assets/Scenes
+Library/
+Temp/
+ProjectSettings/
