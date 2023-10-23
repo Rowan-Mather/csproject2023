@@ -22,7 +22,7 @@ public class UserLocationScript : MonoBehaviour
     public GCS getLocation() { return userLoc; }
 
 
-    // Setting the location from the editor
+    // Setting the location from the editor for testing
     public double tempLat = 0;
     public double tempLong = 0;
     [ContextMenu("Set location")]
