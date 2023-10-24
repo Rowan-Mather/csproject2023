@@ -1,23 +1,23 @@
 using System;
 public class GCS
 {
-    private double latitude;
     private double longitude;
-    public double Latitude
-    {
-        get { return latitude; }
-        set { latitude = value; }
-    }
+    private double latitude;
     public double Longitude
     {
         get { return longitude; }
         set { longitude = value; }
     }
+    public double Latitude
+    {
+        get { return latitude; }
+        set { latitude = value; }
+    }
     public GCS() {
         this.latitude = 0;
         this.longitude = 0;
     }
-    public GCS(double lat, double lon) {
+    public GCS(double lon, double lat) {
         this.latitude = lat;
         this.longitude = lon;
     }

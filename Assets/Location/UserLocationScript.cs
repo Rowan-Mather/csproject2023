@@ -13,9 +13,9 @@ public class UserLocationScript : MonoBehaviour
         locDisplay.updateDisplay(userLoc);
     }
 
-    public void setLocation(double lat, double lon) {
-        userLoc.Latitude = lat;
+    public void setLocation(double lon, double lat) {
         userLoc.Longitude = lon;
+        userLoc.Latitude = lat;
         locDisplay.updateDisplay(userLoc);
     }
 
@@ -23,10 +23,10 @@ public class UserLocationScript : MonoBehaviour
 
 
     // Setting the location from the editor for testing
-    public double tempLat = 0;
     public double tempLong = 0;
+    public double tempLat = 0;
     [ContextMenu("Set location")]
     public void tempLocSet() {
-        setLocation(tempLat, tempLong);
+        setLocation(tempLong, tempLat);
     }
 }
