@@ -1,4 +1,5 @@
 using System;
+//Global Co-ordinates system
 public class GCS
 {
     private double longitude;
