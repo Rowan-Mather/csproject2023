@@ -10,6 +10,7 @@ using System.Globalization;
 
 public class ImporterScript : MonoBehaviour
 {
+    public SiteHolderScript siteHolderScript;
     private string repoURL = 
         "https://raw.githubusercontent.com/Rowan-Mather/csproject2023/sites/";
     private string objectListFile = "object-list.txt";
@@ -79,10 +80,14 @@ public class ImporterScript : MonoBehaviour
         // Load the texture (todo)
         // You can specify an mtl path also using the OBJLoader().Load(obj,mtl);
 
-        loadedObj.transform.Translate((float)loc.Latitude, (float)loc.Longitude, 1);
-
+        try {
+            siteHolderScript.addSite(loadedObj, siteName, loc);
+        }
+        catch {
+            Debug.Log("Failed to load site: " + siteName);
+        }
+        //loadedObj.transform.Translate((float)loc.Latitude, (float)loc.Longitude, 1);
         return loadedObj;
-        
     }
 
 }

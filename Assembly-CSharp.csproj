@@ -46,6 +46,7 @@
      <Compile Include="Assets\ModelImporting\OBJImport\OBJObjectBuilder.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\Samples\ObjFromFile.cs" />
      <Compile Include="Assets\Location\LocationDisplayScript.cs" />
+     <Compile Include="Assets\Sites\SiteHolderScript.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\OBJLoader.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\BinaryExtensions.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\DDSLoader.cs" />
@@ -58,6 +59,7 @@
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\ImageUtils.cs" />
      <Compile Include="Assets\Location\UserLocationScript.cs" />
      <Compile Include="Assets\ModelImporting\ImporterScript.cs" />
+     <Compile Include="Assets\Sites\SiteScript.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\ImageLoaderHelper.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\OBJLoaderHelper.cs" />
     <Reference Include="UnityEngine">
