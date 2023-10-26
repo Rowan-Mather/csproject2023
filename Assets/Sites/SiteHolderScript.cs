@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SiteHolderScript : MonoBehaviour
 {
+    public UserLocationScript userLocation;
     public GameObject siteTemplate;
     public List<GameObject> sites = new List<GameObject>();
     // Start is called before the first frame update
@@ -19,13 +20,15 @@ public class SiteHolderScript : MonoBehaviour
     }
     
     public void addSite(GameObject siteModel, string title, GCS location) {
-        // Create a new site parent for the model & set its name
+        // Create a new site parent for the model, set its name
         GameObject site = Instantiate(siteTemplate, this.transform);
         site.name = "Site: " + title;
         // Add the model as a child
         siteModel.transform.SetParent(site.transform);
-        //newObject.transform.SetParent(site);
-        //loadedObj.transform.Translate((float)location.Latitude, (float)location.Longitude, 1);
+        // Set location
+        var siteScript = site.GetComponent<SiteScript>();
+        siteScript.setGCSLocation(location);
+        siteScript.setSceneLocation(userLocation.getLocation());
         // Put the parent in the site list
         sites.Add(site);
     }

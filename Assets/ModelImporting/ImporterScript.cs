@@ -80,12 +80,12 @@ public class ImporterScript : MonoBehaviour
         // Load the texture (todo)
         // You can specify an mtl path also using the OBJLoader().Load(obj,mtl);
 
-        try {
+        //try {
             siteHolderScript.addSite(loadedObj, siteName, loc);
-        }
-        catch {
-            Debug.Log("Failed to load site: " + siteName);
-        }
+        //}
+        //catch {
+        //    Debug.Log("Failed to load site: " + siteName);
+        //}
         //loadedObj.transform.Translate((float)loc.Latitude, (float)loc.Longitude, 1);
         return loadedObj;
     }
