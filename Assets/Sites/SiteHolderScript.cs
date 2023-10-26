@@ -16,7 +16,10 @@ public class SiteHolderScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        GCS uL = userLocation.getLocation();
+        foreach (GameObject s in sites) {
+            s.GetComponent<SiteScript>().setInScene(uL);
+        }
     }
     
     public void addSite(GameObject siteModel, string title, GCS location) {
@@ -28,7 +31,7 @@ public class SiteHolderScript : MonoBehaviour
         // Set location
         var siteScript = site.GetComponent<SiteScript>();
         siteScript.setGCSLocation(location);
-        siteScript.setSceneLocation(userLocation.getLocation());
+        siteScript.setInScene(userLocation.getLocation());
         // Put the parent in the site list
         sites.Add(site);
     }

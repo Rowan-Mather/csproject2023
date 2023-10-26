@@ -43,7 +43,7 @@ public class ImporterScript : MonoBehaviour
     public GCS readLocation(string siteName) {
         // Get the raw string data
         string locURL = repoURL + siteName + "/" + metadataFile;
-        Debug.Log(locURL);
+        //Debug.Log(locURL);
         var metadataURL = new WWW(locURL);
         while (!metadataURL.isDone) System.Threading.Thread.Sleep(1);
         var metadataStream = new MemoryStream(Encoding.UTF8.GetBytes(metadataURL.text));
@@ -60,7 +60,6 @@ public class ImporterScript : MonoBehaviour
             CultureInfo.InvariantCulture.NumberFormat);
         float z = float.Parse(metadata.Substring(12,5),
             CultureInfo.InvariantCulture.NumberFormat);*/
-
     }
 
     // Reads a model, (it's texture), and location from the webserver and

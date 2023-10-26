@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,12 @@ using UnityEngine;
 public class SiteScript : MonoBehaviour
 {
     public double GCSscaler = 1;
+    public double sceneRange = 5;
     private GCS GCSlocation = new GCS();
     private float sceneX = 0;
     private float sceneY = 0;
     private float sceneZ = 0;
+    bool inRange = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,15 +27,17 @@ public class SiteScript : MonoBehaviour
 
     public void setGCSLocation(GCS loc) {
         GCSlocation = loc;
-        //loadedObj.transform.Translate((float)location.Latitude, (float)location.Longitude, 1);
     }
 
-    public void setSceneLocation(GCS relativeOrigin) {
-        sceneX = (float)
-            ((relativeOrigin.Latitude - GCSlocation.Latitude) * GCSscaler);
+    public void setInScene(GCS relativeOrigin) {
+        double latDiff = (relativeOrigin.Latitude - GCSlocation.Latitude) * GCSscaler;
+        double lonDiff = (relativeOrigin.Longitude - GCSlocation.Longitude) * GCSscaler;
+        sceneX = (float) latDiff;
         sceneY = 0;
-        sceneZ = (float)
-            ((relativeOrigin.Longitude - GCSlocation.Longitude) * GCSscaler);
-        this.transform.Translate(sceneX, sceneY, sceneZ);
+        sceneZ = (float) lonDiff;
+        //this.transform.Translate(sceneX, sceneY, sceneZ);
+        this.transform.position = new Vector3(sceneX,sceneY,sceneZ);
+        inRange = Math.Sqrt(Math.Pow(latDiff,2) + Math.Pow(lonDiff,2)) < sceneRange;
+        gameObject.SetActive(inRange); 
     }
 }

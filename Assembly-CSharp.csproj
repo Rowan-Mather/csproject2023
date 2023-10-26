@@ -54,6 +54,7 @@
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\TGALoader.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\MTLLoader.cs" />
      <Compile Include="Assets\Location\GCS.cs" />
+     <Compile Include="Assets\CameraScript.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\StringExtensions.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\ImageLoader.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\ImageUtils.cs" />
