@@ -4,6 +4,7 @@ public class GCS
 {
     private double longitude;
     private double latitude;
+    private double altitude;
     public double Longitude
     {
         get { return longitude; }
@@ -14,13 +15,20 @@ public class GCS
         get { return latitude; }
         set { latitude = value; }
     }
+    public double Altitude
+    {
+        get { return altitude; }
+        set { altitude = value; }
+    }
     public GCS() {
         this.latitude = 0;
         this.longitude = 0;
+        this.altitude = 0;
     }
-    public GCS(double lon, double lat) {
+    public GCS(double lon, double lat, double alt) {
         this.latitude = lat;
         this.longitude = lon;
+        this.altitude = alt;
     }
     public string toString() {
         string longLet = "S, ";
