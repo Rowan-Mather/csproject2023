@@ -8,48 +8,57 @@ using UnityEngine.UI;
 public class UserLocationScript : MonoBehaviour
 {
     private GCS userLoc = new GCS();
+    private bool liveLocation = false;
     public LocationDisplayScript locDisplay;
-    private Gyroscope gyro;
     private Quaternion sceneRotation = new Quaternion(0,0,0,0);
-    private bool livePossible = false;
-    public bool liveMode;
+    private bool liveRotation = false;
+    private Gyroscope gyro;
     private float manualSpeed = 100;
+    public bool liveMode;
     void Start()
     {
         locDisplay.updateDisplay(userLoc);
-        if (!Input.location.isEnabledByUser || !SystemInfo.supportsGyroscope)
-        {
-            if (!Input.location.isEnabledByUser)
-                Debug.LogError("Location services not enabled on device");
-            if (!SystemInfo.supportsGyroscope)
-                Debug.LogError("Device does not support gyroscope.");
-            return;
+
+        // Live location
+        if (Input.location.isEnabledByUser) {
+            // Start location services
+            Input.location.Start();
+            // Set the desired accuracy for GPS data to 1m
+            Input.location.Start(1f, 1f);
+            livePosition = true;
+        } else {
+            Debug.LogError("Location services not enabled on device.");
         }
-        // Start location services
-        Input.location.Start();
-        // Set the desired accuracy for GPS data to 1m
-        Input.location.Start(1f, 1f);
-        // Initialise the gyroscope
-        gyro = Input.gyro;
-        gyro.enabled = true;
-        livePossible = true;
+        // Live orientation
+        if (SystemInfo.supportsGyroscope)
+        {
+            // Initialise the gyroscope
+            gyro = Input.gyro;
+            gyro.enabled = true;
+            livePossible = true;
+
+        } else {
+            Debug.LogError("Device does not support gyroscope.");
+        }
     }
 
     private void Update() {
-        // maybe set the altitude much less frequently than the longitude & lat since it should change less generally
-        // Check if GPS data is available & live mode is enabled
-        if (livePossible & liveMode) {
-            //if (Input.location.status == LocationServiceStatus.Running)
-            setLocation(
-                Input.location.lastData.longitude, 
-                Input.location.lastData.latitude, 
-                Input.location.lastData.altitude);
-            sceneRotation = GyroToUnity(gyro.attitude);            
+        if (liveMode) {
+            if (liveLocation) {
+                setLocation(
+                    Input.location.lastData.longitude, 
+                    Input.location.lastData.latitude, 
+                    Input.location.lastData.altitude
+                );
+            }
+            if (liveRotation) {
+                sceneRotation = GyroToUnity(gyro.attitude); 
+            } else {
+                float leftright = Input.GetAxis("Vertical") * manualSpeed * Time.deltaTime;
+                float updown = Input.GetAxis("Horizontal") * manualSpeed * Time.deltaTime;
+            }
         }
-        else {
-            float leftright = Input.GetAxis("Vertical") * manualSpeed * Time.deltaTime;
-            float updown = Input.GetAxis("Horizontal") * manualSpeed * Time.deltaTime;
-        }
+        // note: maybe set the altitude much less frequently than the longitude & lat since it should change less generally
     }
 
     private static Quaternion GyroToUnity(Quaternion q)
