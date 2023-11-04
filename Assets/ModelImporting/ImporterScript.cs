@@ -39,7 +39,7 @@ public class ImporterScript : MonoBehaviour
             StringSplitOptions.None
         );
     }
-
+    //todo: read alt too
     public GCS readLocation(string siteName) {
         // Get the raw string data
         string locURL = repoURL + siteName + "/" + metadataFile;
@@ -52,7 +52,7 @@ public class ImporterScript : MonoBehaviour
         string[] metavalues = metadata.Split(",");
         double lon = Double.Parse(metavalues[0]);
         double lat = Double.Parse(metavalues[1]);
-        return new GCS(lon, lat);
+        return new GCS(lon, lat, 0);
         // Places the object in the read location
         /*float x = float.Parse(metadata.Substring(0,5), 
             CultureInfo.InvariantCulture.NumberFormat);
