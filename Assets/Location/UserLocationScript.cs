@@ -11,13 +11,22 @@ public class UserLocationScript : MonoBehaviour
     private bool liveLocation = false;
     public LocationDisplayScript locDisplay;
     private Quaternion sceneRotation = new Quaternion(0,0,0,0);
+    public Quaternion SceneRotation { get { return sceneRotation; } }
     private bool liveRotation = false;
-    private Gyroscope gyro;
+    //private Gyroscope myGyro;
     private float manualSpeed = 100;
     public bool liveMode;
     void Start()
     {
         locDisplay.updateDisplay(userLoc);
+
+        /*
+        if (UnityEngine.InputSystem.Gyroscope.current != null) {
+            InputSystem.EnableDevice(UnityEngine.InputSystem.Gyroscope.current);
+        }
+        if (AttitudeSensor.current != null) {
+                InputSystem.EnableDevice(AttitudeSensor.current);
+        }*/
 
         // Live location
         if (Input.location.isEnabledByUser) {
@@ -25,7 +34,8 @@ public class UserLocationScript : MonoBehaviour
             Input.location.Start();
             // Set the desired accuracy for GPS data to 1m
             Input.location.Start(1f, 1f);
-            livePosition = true;
+            liveLocation = true;
+            Debug.LogError("Location enabled.");
         } else {
             Debug.LogError("Location services not enabled on device.");
         }
@@ -33,13 +43,15 @@ public class UserLocationScript : MonoBehaviour
         if (SystemInfo.supportsGyroscope)
         {
             // Initialise the gyroscope
-            gyro = Input.gyro;
-            gyro.enabled = true;
-            livePossible = true;
+            //Input.gyro.enabled = true;
+            //myGyro = Input.gyro;
+            liveRotation = false;
+            Debug.LogError("Rotation enabled.");
 
         } else {
             Debug.LogError("Device does not support gyroscope.");
         }
+        if (liveLocation && liveRotation) liveMode = true;
     }
 
     private void Update() {
@@ -51,12 +63,14 @@ public class UserLocationScript : MonoBehaviour
                     Input.location.lastData.altitude
                 );
             }
-            if (liveRotation) {
-                sceneRotation = GyroToUnity(gyro.attitude); 
-            } else {
-                float leftright = Input.GetAxis("Vertical") * manualSpeed * Time.deltaTime;
-                float updown = Input.GetAxis("Horizontal") * manualSpeed * Time.deltaTime;
-            }
+        }
+        if (liveRotation) {
+            sceneRotation = GyroToUnity(Input.gyro.attitude); 
+        } else {
+            float leftright = Input.GetAxis("Vertical") * manualSpeed * Time.deltaTime;
+            float updown = Input.GetAxis("Horizontal") * manualSpeed * Time.deltaTime;
+            sceneRotation.eulerAngles += new Vector3(-leftright, updown, 0);
+            //Quaternion.Euler(-leftright, updown, 0);
         }
         // note: maybe set the altitude much less frequently than the longitude & lat since it should change less generally
     }
@@ -74,7 +88,7 @@ public class UserLocationScript : MonoBehaviour
     }
 
     public GCS getLocation() { return userLoc; }
-    public Quaternion getRotation() { return sceneRotation; }
+    //public Quaternion getRotation() { return sceneRotation; }
 
     // Setting the location from the editor for testing
     public double tempLong = 0;
