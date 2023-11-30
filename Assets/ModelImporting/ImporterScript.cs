@@ -69,13 +69,26 @@ public class ImporterScript : MonoBehaviour
         Debug.Log("Loading site: " + siteName);
         GCS loc = readLocation(siteName);
 
+        // Get the texture (.mtl)
+        string mtlurl = repoURL + siteName + "/" + siteName + ".mtl";
+        var mtlURL = new WWW(mtlurl);
+        while (!mtlURL.isDone) System.Threading.Thread.Sleep(1);
+        var mtlStream = new MemoryStream(Encoding.UTF8.GetBytes(mtlURL.text));
+
         // Load the object
         string objurl = repoURL + siteName + "/" + siteName + ".obj";
         var objectURL = new WWW(objurl);
         while (!objectURL.isDone) System.Threading.Thread.Sleep(1);
         var objStream = new MemoryStream(Encoding.UTF8.GetBytes(objectURL.text));
-        var loadedObj = new OBJLoader().Load(objStream);
-        
+        GameObject loadedObj;
+        if (mtlStream == null) {
+            loadedObj = new OBJLoader().Load(objStream);
+            Debug.Log("cannot load texture for: " + siteName);
+        }
+        else {
+            loadedObj = new OBJLoader().Load(objStream, mtlStream);
+            Debug.Log("loaded texture for: " + siteName);
+        }
         // ooh you can also specify an mtl path!!! yay in Load its overwridden
         // Load the texture (todo)
         // You can specify an mtl path also using the OBJLoader().Load(obj,mtl);
