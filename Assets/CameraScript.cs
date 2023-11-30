@@ -10,7 +10,7 @@ using Gyroscope = UnityEngine.InputSystem.Gyroscope;
 // ripped off here https://www.youtube.com/watch?v=W70n_bXp7Dc
 public class CameraScript : MonoBehaviour
 {
-    private AttitudeSensor _attitudeSensor;
+    //private AttitudeSensor _attitudeSensor;
 
     void Start() {}
 
@@ -22,14 +22,35 @@ public class CameraScript : MonoBehaviour
     private void UpdateGyro() {
         var gyro = GetRemoteDevice<Gyroscope>();
         var attitude = GetRemoteDevice<AttitudeSensor>();
-        var gravity = GetRemoteDevice<GravitySensor>();
         var acceleration = GetRemoteDevice<LinearAccelerationSensor>();
+        EnableDeviceIfNeeded(gyro);
+        EnableDeviceIfNeeded(attitude);
+        if (gyro != null) {
+            var rot = gyro.angularVelocity.ReadValue();
+            gameObject.transform.eulerAngles += new Vector3(-rot.x, -rot.y, -rot.z);
+        }
+        if (attitude != null) {        
+            if (attitude.attitude.ReadValue().eulerAngles != new Vector3(0,0,0)) {
+                Debug.Log(attitude.attitude.ReadValue());
+            }
+        }
+        if (acceleration != null) {        
+            if (acceleration.acceleration.ReadValue() != new Vector3(0,0,0)) {
+                Debug.Log(acceleration.acceleration.ReadValue());
+            }
+        }
+        
+        /*
+        var gyro = GetRemoteDevice<Gyroscope>();
+        //var attitude = GetRemoteDevice<AttitudeSensor>();
+        //var gravity = GetRemoteDevice<GravitySensor>();
+        //var acceleration = GetRemoteDevice<LinearAccelerationSensor>();
 
         // Enable gyro from remote, if needed.
         EnableDeviceIfNeeded(gyro);
-        EnableDeviceIfNeeded(attitude);
-        EnableDeviceIfNeeded(gravity);
-        EnableDeviceIfNeeded(acceleration);
+        //EnableDeviceIfNeeded(attitude);
+        //EnableDeviceIfNeeded(gravity);
+        //EnableDeviceIfNeeded(acceleration);
 
         string text;
         if (gyro == null && attitude == null && gravity == null && acceleration == null)
@@ -76,6 +97,7 @@ public class CameraScript : MonoBehaviour
         }
 
         //gyroInputText.text = text;
+        */
     }
 
    private static void EnableDeviceIfNeeded(InputDevice device)
@@ -86,7 +108,7 @@ public class CameraScript : MonoBehaviour
 
     // Make sure we're not thrown off track by locally having sensors on the device. Instead
     // explicitly grab the remote ones.
-    private static TDevice GetRemoteDevice<TDevice>() 
+    private static TDevice GetRemoteDevice<TDevice>()
         where TDevice : InputDevice
     {
         foreach (var device in InputSystem.devices)
@@ -94,4 +116,5 @@ public class CameraScript : MonoBehaviour
                 return deviceOfType;
         return default;
     }
+
 }

@@ -27,7 +27,7 @@ public class UserLocationScript : MonoBehaviour
         if (AttitudeSensor.current != null) {
                 InputSystem.EnableDevice(AttitudeSensor.current);
         }*/
-
+        /*
         // Live location
         if (Input.location.isEnabledByUser) {
             // Start location services
@@ -52,9 +52,11 @@ public class UserLocationScript : MonoBehaviour
             Debug.LogError("Device does not support gyroscope.");
         }
         if (liveLocation && liveRotation) liveMode = true;
+        */
     }
 
     private void Update() {
+        /*
         if (liveMode) {
             if (liveLocation) {
                 setLocation(
@@ -72,6 +74,7 @@ public class UserLocationScript : MonoBehaviour
             sceneRotation.eulerAngles += new Vector3(-leftright, updown, 0);
             //Quaternion.Euler(-leftright, updown, 0);
         }
+        */
         // note: maybe set the altitude much less frequently than the longitude & lat since it should change less generally
     }
 
