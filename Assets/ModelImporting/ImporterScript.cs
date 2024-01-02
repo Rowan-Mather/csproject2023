@@ -102,5 +102,4 @@ public class ImporterScript : MonoBehaviour
         //loadedObj.transform.Translate((float)loc.Latitude, (float)loc.Longitude, 1);
         return loadedObj;
     }
-
 }

@@ -14,7 +14,7 @@ public class UserLocationScript : MonoBehaviour
     public Quaternion SceneRotation { get { return sceneRotation; } }
     private bool liveRotation = false;
     //private Gyroscope myGyro;
-    private float manualSpeed = 100;
+    private double manualSpeed = 0.1;
     public bool liveMode;
     void Start()
     {
@@ -88,6 +88,18 @@ public class UserLocationScript : MonoBehaviour
         userLoc.Latitude = lat;
         userLoc.Altitude = alt;
         locDisplay.updateDisplay(userLoc);
+    }
+
+    public void moveForward() {
+        var rot = sceneRotation.eulerAngles.y;
+        userLoc.Longitude -= Mathf.Cos(Mathf.Deg2Rad * rot) * manualSpeed;
+        userLoc.Latitude -= Mathf.Sin(Mathf.Deg2Rad * rot) * manualSpeed;
+        locDisplay.updateDisplay(userLoc);
+    }
+
+    [ContextMenu("Rot.")]
+    public void rotate(float x, float y) {
+        sceneRotation.eulerAngles += new Vector3(x,y,0);
     }
 
     public GCS getLocation() { return userLoc; }

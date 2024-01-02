@@ -62,8 +62,10 @@
      <Compile Include="Assets\Location\UserLocationScript.cs" />
      <Compile Include="Assets\ModelImporting\ImporterScript.cs" />
      <Compile Include="Assets\Sites\SiteScript.cs" />
+     <Compile Include="Assets\Location\Buttons\ArrowKeyScript.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\ImageLoaderHelper.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\OBJLoaderHelper.cs" />
+     <Compile Include="Assets\Location\Buttons\ScrollSphere.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.9f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

@@ -10,13 +10,16 @@ using Gyroscope = UnityEngine.InputSystem.Gyroscope;
 // ripped off here https://www.youtube.com/watch?v=W70n_bXp7Dc
 public class CameraScript : MonoBehaviour
 {
+    public UserLocationScript loc;
     //private AttitudeSensor _attitudeSensor;
 
     void Start() {}
 
     private void Update()
     {
-        UpdateGyro();
+        //gameObject.transform.position = loc.getLocation();
+        gameObject.transform.rotation = loc.SceneRotation;
+        //UpdateGyro();
     }    
 
     private void UpdateGyro() {
