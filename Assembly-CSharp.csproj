@@ -45,7 +45,6 @@
      <Compile Include="Assets\ModelImporting\OBJImport\CharWordReader.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\OBJObjectBuilder.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\Samples\ObjFromFile.cs" />
-     <Compile Include="Assets\Location\LocationDisplayScript.cs" />
      <Compile Include="Assets\Sites\SiteHolderScript.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\OBJLoader.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\BinaryExtensions.cs" />
@@ -53,6 +52,7 @@
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\BMPLoader.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\TGALoader.cs" />
      <Compile Include="Assets\Samples\Input System\1.7.0\Unity Remote\UnityRemoteTestScript.cs" />
+     <Compile Include="Assets\Location\UI\MovementButtonsScript.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\MTLLoader.cs" />
      <Compile Include="Assets\Location\GCS.cs" />
      <Compile Include="Assets\CameraScript.cs" />
@@ -60,12 +60,11 @@
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\ImageLoader.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\ImageUtils.cs" />
      <Compile Include="Assets\Location\UserLocationScript.cs" />
+     <Compile Include="Assets\Location\UI\LocationDisplayScript.cs" />
      <Compile Include="Assets\ModelImporting\ImporterScript.cs" />
      <Compile Include="Assets\Sites\SiteScript.cs" />
-     <Compile Include="Assets\Location\Buttons\ArrowKeyScript.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\ImageLoaderHelper.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\OBJLoaderHelper.cs" />
-     <Compile Include="Assets\Location\Buttons\ScrollSphere.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.9f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

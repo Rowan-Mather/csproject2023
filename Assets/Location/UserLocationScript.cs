@@ -12,10 +12,13 @@ public class UserLocationScript : MonoBehaviour
     public LocationDisplayScript locDisplay;
     private Quaternion sceneRotation = new Quaternion(0,0,0,0);
     public Quaternion SceneRotation { get { return sceneRotation; } }
-    private bool liveRotation = false;
-    //private Gyroscope myGyro;
     private double manualSpeed = 0.1;
-    public bool liveMode;
+    private bool liveMode = false;
+    public bool LiveMode {
+        get { return liveMode; }
+        set { liveMode = value; }
+    };
+
     void Start()
     {
         locDisplay.updateDisplay(userLoc);
@@ -82,7 +85,8 @@ public class UserLocationScript : MonoBehaviour
     {
         return Quaternion.Euler(90, 0, 0) * new Quaternion(q.x, q.y, -q.z, -q.w);
     }
-    
+
+    // Manual location set
     public void setLocation(double lon, double lat, double alt) {
         userLoc.Longitude = lon;
         userLoc.Latitude = lat;
@@ -90,6 +94,7 @@ public class UserLocationScript : MonoBehaviour
         locDisplay.updateDisplay(userLoc);
     }
 
+    // Manual location adjust
     public void moveForward() {
         var rot = sceneRotation.eulerAngles.y;
         userLoc.Longitude -= Mathf.Cos(Mathf.Deg2Rad * rot) * manualSpeed;
@@ -97,7 +102,7 @@ public class UserLocationScript : MonoBehaviour
         locDisplay.updateDisplay(userLoc);
     }
 
-    [ContextMenu("Rot.")]
+    // Manual rotation adjust
     public void rotate(float x, float y) {
         sceneRotation.eulerAngles += new Vector3(x,y,0);
     }
