@@ -60,6 +60,7 @@
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\ImageLoader.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\ImageUtils.cs" />
      <Compile Include="Assets\Location\UserLocationScript.cs" />
+     <Compile Include="Assets\Location\IOHandler.cs" />
      <Compile Include="Assets\Location\UI\LocationDisplayScript.cs" />
      <Compile Include="Assets\ModelImporting\ImporterScript.cs" />
      <Compile Include="Assets\Sites\SiteScript.cs" />

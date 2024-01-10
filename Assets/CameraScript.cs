@@ -103,7 +103,7 @@ public class CameraScript : MonoBehaviour
         */
     }
 
-   private static void EnableDeviceIfNeeded(InputDevice device)
+    private static void EnableDeviceIfNeeded(InputDevice device)
     {
         if (device != null && !device.enabled)
             InputSystem.EnableDevice(device);

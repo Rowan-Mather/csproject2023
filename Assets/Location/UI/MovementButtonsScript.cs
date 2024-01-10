@@ -9,14 +9,20 @@ public class MovementButtonsScript : MonoBehaviour
     // Rotation
     public GameObject pointer;
     public GameObject ball;
+    private Camera camera;
     private bool pointerHeld = false;
-    private Vector3 pointerOrigin;
+    private Vector3 pointerOrigin = new Vector3();
     // Position
     public GameObject forwardButton;
     private bool moveForward = false;
 
     void Start() {
-        pointerOrigin = ball.transform.position;
+        camera = Camera.main;
+        pointerOrigin.x = ball.transform.position.x;
+        pointerOrigin.y = ball.transform.position.y;
+        pointerOrigin.z = ball.transform.position.z;
+        Debug.Log("Pointer origin " + pointerOrigin.ToString());
+        pointerHeld = false;
     }
 
     void Update()
@@ -31,15 +37,15 @@ public class MovementButtonsScript : MonoBehaviour
                 dir *= Mathf.Deg2Rad;
 
                 float dist = Vector3.Distance(pointerOrigin, Input.mousePosition);
-                float cap = Mathf.Min(35, dist);
+                float cap = Mathf.Min(80, dist);
                 float capCos = Mathf.Cos(dir) * cap;
                 float capSin = Mathf.Sin(dir) * cap;
                 pointer.transform.position = new Vector3(
                     pointerOrigin.x + capCos, 
                     pointerOrigin.y + capSin,
                     0);
-
-                loc.rotate(-0.01f*capSin, 0.01f*capCos);
+                float tScale = Time.deltaTime;
+                loc.rotate(-tScale*capSin, tScale*capCos);
             }
             else {
                 pointer.transform.position = pointerOrigin;
@@ -49,6 +55,24 @@ public class MovementButtonsScript : MonoBehaviour
 
     public void enableForward() { moveForward = true; }
     public void disableForward() { moveForward = false; }
+
+    // private bool clicking = false;
+    // private bool hovering = false;
+    // public void OnMouseDown() {
+    //     clicking = true;
+    // }
+
+    // public void OnMouseUp() {
+    //     clicking = false;
+    // }
+
+    // public void OnMouseEnter() {
+    //     hovering = true;
+    // }
+
+    // public void OnMouseExit() {
+    //     hovering = false;
+    // }
 
     public void movePointer() { pointerHeld = true; }
 

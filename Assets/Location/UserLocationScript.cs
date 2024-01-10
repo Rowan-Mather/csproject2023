@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class UserLocationScript : MonoBehaviour
 {
     private GCS userLoc = new GCS();
-    private bool liveLocation = false;
+    private IOHandler device;
     public LocationDisplayScript locDisplay;
     private Quaternion sceneRotation = new Quaternion(0,0,0,0);
     public Quaternion SceneRotation { get { return sceneRotation; } }
@@ -17,10 +17,12 @@ public class UserLocationScript : MonoBehaviour
     public bool LiveMode {
         get { return liveMode; }
         set { liveMode = value; }
-    };
+    }
 
     void Start()
     {
+        device = new IOHandler();
+        StartCoroutine(device.StartLocation());
         locDisplay.updateDisplay(userLoc);
 
         /*
@@ -59,6 +61,11 @@ public class UserLocationScript : MonoBehaviour
     }
 
     private void Update() {
+        if (liveMode) {
+            setLiveLocation();
+            setLiveRotation();
+        }
+
         /*
         if (liveMode) {
             if (liveLocation) {
@@ -81,10 +88,12 @@ public class UserLocationScript : MonoBehaviour
         // note: maybe set the altitude much less frequently than the longitude & lat since it should change less generally
     }
 
-    private static Quaternion GyroToUnity(Quaternion q)
+    /*private static Quaternion GyroToUnity(Quaternion q)
     {
         return Quaternion.Euler(90, 0, 0) * new Quaternion(q.x, q.y, -q.z, -q.w);
-    }
+    }*/
+
+    public GCS getLocation() { return userLoc; }
 
     // Manual location set
     public void setLocation(double lon, double lat, double alt) {
@@ -102,12 +111,28 @@ public class UserLocationScript : MonoBehaviour
         locDisplay.updateDisplay(userLoc);
     }
 
+    public void setLiveLocation() {
+        GCS gps = device.getLocation();
+        if (gps != null) {
+            //userLoc.Longitude = gps.Longitude;
+            //userLoc.Latitude = gps.Latitude;
+            //userLoc.Altitude = gps.Altitude;
+            locDisplay.updateDisplay(gps);
+        }
+    }
+
     // Manual rotation adjust
     public void rotate(float x, float y) {
         sceneRotation.eulerAngles += new Vector3(x,y,0);
     }
 
-    public GCS getLocation() { return userLoc; }
+    public void setLiveRotation() {
+        Vector3 rotChange = device.getGyro();
+        if (rotChange != null) {
+            sceneRotation.eulerAngles += device.getGyro();
+        }
+    }
+
     //public Quaternion getRotation() { return sceneRotation; }
 
     // Setting the location from the editor for testing
