@@ -114,6 +114,7 @@ public class UserLocationScript : MonoBehaviour
     public void setLiveLocation() {
         GCS gps = device.getLocation();
         if (gps != null) {
+            Debug.Log("Lon: "+ gps.Longitude.ToString() + " Lat: "+ gps.Latitude);
             //userLoc.Longitude = gps.Longitude;
             //userLoc.Latitude = gps.Latitude;
             //userLoc.Altitude = gps.Altitude;

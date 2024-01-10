@@ -35,8 +35,8 @@ public class GCS
         string latLet = "W";
         if (longitude >= 0) longLet = "N, ";
         if (latitude >= 0) latLet = "E";
-        return splitDegree(Math.Abs(longitude)) + longLet 
-            + splitDegree(Math.Abs(latitude)) + latLet;
+        return splitDegree(Math.Abs(latitude)) + latLet + 
+                splitDegree(Math.Abs(longitude)) + longLet; 
     }
 
     private string splitDegree(double coord) {

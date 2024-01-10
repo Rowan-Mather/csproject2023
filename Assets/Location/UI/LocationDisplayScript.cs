@@ -9,6 +9,6 @@ public class LocationDisplayScript : MonoBehaviour {
     void Start() {}
 
     public void updateDisplay(GCS loc) {
-        textLoc.text = loc.toString();
+        textLoc.text = "GPS: " + loc.toString();
     }
 }

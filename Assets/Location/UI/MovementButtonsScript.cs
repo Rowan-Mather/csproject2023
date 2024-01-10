@@ -21,7 +21,6 @@ public class MovementButtonsScript : MonoBehaviour
         pointerOrigin.x = ball.transform.position.x;
         pointerOrigin.y = ball.transform.position.y;
         pointerOrigin.z = ball.transform.position.z;
-        Debug.Log("Pointer origin " + pointerOrigin.ToString());
         pointerHeld = false;
     }
 
