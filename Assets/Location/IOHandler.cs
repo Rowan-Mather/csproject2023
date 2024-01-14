@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Android;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Android;
@@ -276,5 +277,38 @@ public class IOHandler
 
         // Stops the location service if there is no need to query location updates continuously.
         //Input.location.Stop();
+    }
+
+
+
+    // Camera tutorial
+    // https://www.youtube.com/watch?v=c6NXkZWXHnc
+    /*private bool camAvailable;
+    private WebCamTexture backCam;
+    private Texture defaultBackground;
+    public RawImage background;
+    public AspectRatioFitter fit;*/
+    public WebCamTexture startCamera() {
+        //defaultBackground = background.texture;
+        WebCamDevice[] devices = WebCamTexture.devices;
+        if (devices.Length == 0) {
+            // No camera available
+            return null;
+        }
+        else {
+            for (int i = 0; i < devices.Length; i++) {
+                if (!devices[i].isFrontFacing) {
+                    // Found a camera on the back of the device
+                    WebCamTexture backCam = new WebCamTexture(devices[i].name, Screen.width, Screen.height);
+                    backCam.Play();
+                    return backCam;
+                }
+            }
+            //No backcam but frontcam
+            WebCamTexture otherCam = new WebCamTexture(devices[0].name, Screen.width, Screen.height);
+            otherCam.Play();
+            return otherCam;	
+        }
+        return null;
     }
 }

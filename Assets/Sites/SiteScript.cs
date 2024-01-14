@@ -6,7 +6,7 @@ using UnityEngine;
 public class SiteScript : MonoBehaviour
 {
     public double GCSscaler = 1;
-    private double sceneRange = 50;
+    private double sceneRange = 0.01;
     private GCS GCSlocation = new GCS();
     private float sceneX = 0;
     private float sceneY = 0;

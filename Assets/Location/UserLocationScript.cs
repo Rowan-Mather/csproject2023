@@ -93,6 +93,8 @@ public class UserLocationScript : MonoBehaviour
         return Quaternion.Euler(90, 0, 0) * new Quaternion(q.x, q.y, -q.z, -q.w);
     }*/
 
+    public IOHandler getIO() { return device; }
+
     public GCS getLocation() { return userLoc; }
 
     // Manual location set
@@ -114,10 +116,10 @@ public class UserLocationScript : MonoBehaviour
     public void setLiveLocation() {
         GCS gps = device.getLocation();
         if (gps != null) {
-            Debug.Log("Lon: "+ gps.Longitude.ToString() + " Lat: "+ gps.Latitude);
-            //userLoc.Longitude = gps.Longitude;
-            //userLoc.Latitude = gps.Latitude;
-            //userLoc.Altitude = gps.Altitude;
+            //TO SHOW LOCATION Debug.Log("Lon: "+ gps.Longitude.ToString() + " Lat: "+ gps.Latitude);
+            userLoc.Longitude = gps.Longitude;
+            userLoc.Latitude = gps.Latitude;
+            userLoc.Altitude = gps.Altitude;
             locDisplay.updateDisplay(gps);
         }
     }

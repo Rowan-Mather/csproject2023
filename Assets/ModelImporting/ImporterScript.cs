@@ -53,7 +53,7 @@ public class ImporterScript : MonoBehaviour
         double lon = Double.Parse(metavalues[0]);
         double lat = Double.Parse(metavalues[1]);
         double alt = Double.Parse(metavalues[2]);
-        return new GCS(-lon, -lat, -alt);
+        return new GCS(lon, lat, alt);
         // Places the object in the read location
         /*float x = float.Parse(metadata.Substring(0,5), 
             CultureInfo.InvariantCulture.NumberFormat);

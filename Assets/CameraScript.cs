@@ -1,123 +1,69 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Android;
+using UnityEngine.UI;
 
-using Gyroscope = UnityEngine.InputSystem.Gyroscope;
-
-//using Gyroscope = UnityEngine.InputSystem.Gyroscope;
-// ripped off here https://www.youtube.com/watch?v=W70n_bXp7Dc
 public class CameraScript : MonoBehaviour
 {
     public UserLocationScript loc;
-    //private AttitudeSensor _attitudeSensor;
+    private IOHandler device;
+    private bool realCamAvailable = false;
+    private WebCamTexture realCam;
+    //private Texture defaultBackground;
+    public GameObject virtualPlane;
+    public RawImage realBackground;
+    public AspectRatioFitter fit;
 
-    void Start() {}
+    private Vector3 showVec = new Vector3(1f,1f,1f);
+    private Vector3 hideVec = new Vector3(0f,0f,0f);
+
+    void Start() {
+        //while (device == null) 
+        startCamera();
+
+    }
+
+    private void startCamera() {
+        device = loc.getIO();
+        realCam = device.startCamera();
+        if (realCam != null) {
+            realCamAvailable = true;
+            Debug.Log("Camera available.");
+        }
+        else {
+            Debug.Log("Camera unavailable");
+            realCamAvailable = false;
+        }
+    }
 
     private void Update()
     {
+        if (device == null) {
+            startCamera();
+        }
+
         //gameObject.transform.position = loc.getLocation();
         gameObject.transform.rotation = loc.SceneRotation;
-        //UpdateGyro();
-    }    
 
-    private void UpdateGyro() {
-        var gyro = GetRemoteDevice<Gyroscope>();
-        var attitude = GetRemoteDevice<AttitudeSensor>();
-        var acceleration = GetRemoteDevice<LinearAccelerationSensor>();
-        EnableDeviceIfNeeded(gyro);
-        EnableDeviceIfNeeded(attitude);
-        if (gyro != null) {
-            var rot = gyro.angularVelocity.ReadValue();
-            gameObject.transform.eulerAngles += new Vector3(-rot.x, -rot.y, -rot.z);
+        if (loc.LiveMode && realCamAvailable) {
+            // grab the camera input
+            virtualPlane.transform.localScale = hideVec;
+            realBackground.transform.localScale = showVec;
+            realBackground.texture = realCam;
+
+            // Update camera angles
+            float ratio = (float)realCam.width / (float)realCam.height;
+            fit.aspectRatio = ratio;
+            float scaleY = realCam.videoVerticallyMirrored ? -1f: 1f;
+            realBackground.rectTransform.localScale = new Vector3(1f, scaleY, 1f);
+            int orient = -realCam.videoRotationAngle;
+            realBackground.rectTransform.localEulerAngles = new Vector3(0,0,orient);
         }
-        if (attitude != null) {        
-            if (attitude.attitude.ReadValue().eulerAngles != new Vector3(0,0,0)) {
-                Debug.Log(attitude.attitude.ReadValue());
-            }
+        else {
+            virtualPlane.transform.localScale = showVec;
+            realBackground.transform.localScale = hideVec;
+            //plane.show();
         }
-        if (acceleration != null) {        
-            if (acceleration.acceleration.ReadValue() != new Vector3(0,0,0)) {
-                Debug.Log(acceleration.acceleration.ReadValue());
-            }
-        }
-        
-        /*
-        var gyro = GetRemoteDevice<Gyroscope>();
-        //var attitude = GetRemoteDevice<AttitudeSensor>();
-        //var gravity = GetRemoteDevice<GravitySensor>();
-        //var acceleration = GetRemoteDevice<LinearAccelerationSensor>();
-
-        // Enable gyro from remote, if needed.
-        EnableDeviceIfNeeded(gyro);
-        //EnableDeviceIfNeeded(attitude);
-        //EnableDeviceIfNeeded(gravity);
-        //EnableDeviceIfNeeded(acceleration);
-
-        string text;
-        if (gyro == null && attitude == null && gravity == null && acceleration == null)
-        {
-            text = "No remote gyro found.";
-        }
-        else
-        {
-            string gyroText = null;
-            string attitudeText = null;
-            string gravityText = null;
-            string accelerationText = null;
-
-            if (gyro != null)
-            {
-                var rotation = gyro.angularVelocity.ReadValue();
-                gyroText = $"Rotation: x={rotation.x} y={rotation.y} z={rotation.z}";
-
-                // Update rotation of cube.
-                //m_Rotation += rotation;
-                //rotatingCube.localEulerAngles = m_Rotation;
-            }
-
-            if (attitude != null)
-            {
-                var attitudeValue = attitude.attitude.ReadValue();
-                attitudeText = $"Attitude: x={attitudeValue.x} y={attitudeValue.y} z={attitudeValue.z} w={attitudeValue.w}";
-            }
-
-            if (gravity != null)
-            {
-                var gravityValue = gravity.gravity.ReadValue();
-                gravityText = $"Gravity: x={gravityValue.x} y={gravityValue.y} z={gravityValue.z}";
-            }
-
-            if (acceleration != null)
-            {
-                var accelerationValue = acceleration.acceleration.ReadValue();
-                accelerationText = $"Acceleration: x={accelerationValue.x} y={accelerationValue.y} z={accelerationValue.z}";
-            }
-
-            text = string.Join("\n", gyroText, attitudeText, gravityText, accelerationText);
-            Debug.Log(text);
-        }
-
-        //gyroInputText.text = text;
-        */
-    }
-
-    private static void EnableDeviceIfNeeded(InputDevice device)
-    {
-        if (device != null && !device.enabled)
-            InputSystem.EnableDevice(device);
-    }
-
-    // Make sure we're not thrown off track by locally having sensors on the device. Instead
-    // explicitly grab the remote ones.
-    private static TDevice GetRemoteDevice<TDevice>()
-        where TDevice : InputDevice
-    {
-        foreach (var device in InputSystem.devices)
-            if (device.remote && device is TDevice deviceOfType)
-                return deviceOfType;
-        return default;
     }
 
 }
