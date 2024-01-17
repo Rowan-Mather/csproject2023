@@ -6,7 +6,7 @@ using UnityEngine;
 public class SiteScript : MonoBehaviour
 {
     public double GCSscaler = 1;
-    private double sceneRange = 0.01;
+    private double sceneRange = Math.Pow(0.01,2);
     private GCS GCSlocation = new GCS();
     private float sceneX = 0;
     private float sceneY = 0;
@@ -30,7 +30,14 @@ public class SiteScript : MonoBehaviour
         sceneZ = (float) lonDiff;
         this.transform.position = new Vector3(sceneX,sceneY,sceneZ);
         // Only render the object if it is within a certain distance
-        inRange = Math.Sqrt(Math.Pow(latDiff,2) + Math.Pow(lonDiff,2)) < sceneRange;
+        inRange = Math.Pow(latDiff,2) + Math.Pow(lonDiff,2) < sceneRange;
+        /*Debug.Log(" userlat: " + relativeOrigin.Latitude.ToString() + 
+            " userlong: " + relativeOrigin.Longitude.ToString() +
+            " useralt: " + relativeOrigin.Altitude.ToString() +
+            " objlat: " + GCSlocation.Latitude.ToString() + 
+            " objlong: " + GCSlocation.Longitude.ToString() +
+            " objalt: " + GCSlocation.Altitude.ToString());*/
+
         gameObject.SetActive(inRange); 
     }
 }

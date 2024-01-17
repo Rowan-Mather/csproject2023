@@ -119,7 +119,7 @@ public class UserLocationScript : MonoBehaviour
             //TO SHOW LOCATION Debug.Log("Lon: "+ gps.Longitude.ToString() + " Lat: "+ gps.Latitude);
             userLoc.Longitude = gps.Longitude;
             userLoc.Latitude = gps.Latitude;
-            userLoc.Altitude = gps.Altitude;
+            userLoc.Altitude = 0; ///gps.Altitude;
             locDisplay.updateDisplay(gps);
         }
     }
