@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SiteScript : MonoBehaviour
 {
-    public double GCSscaler = 1;
+    public const double GCSscaler = 111139;
     private double sceneRange = Math.Pow(0.01,2);
     private GCS GCSlocation = new GCS();
     private float sceneX = 0;
@@ -22,21 +22,21 @@ public class SiteScript : MonoBehaviour
 
     public void setInScene(GCS relativeOrigin) {
         // Set the position of the object relative to the user
-        double latDiff = (relativeOrigin.Latitude - GCSlocation.Latitude) * GCSscaler;
-        double lonDiff = (relativeOrigin.Longitude - GCSlocation.Longitude) * GCSscaler;
-        double altDiff = (relativeOrigin.Altitude - GCSlocation.Altitude) * GCSscaler;
-        sceneX = (float) latDiff;
-        sceneY = (float) altDiff;
-        sceneZ = (float) lonDiff;
+        double latDiff = (relativeOrigin.Latitude - GCSlocation.Latitude);
+        double lonDiff = (relativeOrigin.Longitude - GCSlocation.Longitude);
+        double altDiff = (relativeOrigin.Altitude - GCSlocation.Altitude);
+        sceneX = (float) (latDiff * GCSscaler);
+        sceneY = (float) (altDiff * GCSscaler);
+        sceneZ = (float) (lonDiff * GCSscaler);
         this.transform.position = new Vector3(sceneX,sceneY,sceneZ);
         // Only render the object if it is within a certain distance
         inRange = Math.Pow(latDiff,2) + Math.Pow(lonDiff,2) < sceneRange;
-        /*Debug.Log(" userlat: " + relativeOrigin.Latitude.ToString() + 
+        Debug.Log(" userlat: " + relativeOrigin.Latitude.ToString() + 
             " userlong: " + relativeOrigin.Longitude.ToString() +
             " useralt: " + relativeOrigin.Altitude.ToString() +
             " objlat: " + GCSlocation.Latitude.ToString() + 
             " objlong: " + GCSlocation.Longitude.ToString() +
-            " objalt: " + GCSlocation.Altitude.ToString());*/
+            " objalt: " + GCSlocation.Altitude.ToString());
 
         gameObject.SetActive(inRange); 
     }

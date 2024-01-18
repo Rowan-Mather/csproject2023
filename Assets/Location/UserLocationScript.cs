@@ -12,7 +12,7 @@ public class UserLocationScript : MonoBehaviour
     public LocationDisplayScript locDisplay;
     private Quaternion sceneRotation = new Quaternion(0,0,0,0);
     public Quaternion SceneRotation { get { return sceneRotation; } }
-    private double manualSpeed = 0.1;
+    private const double manualSpeed = 1f/111139f;
     private bool liveMode = false;
     public bool LiveMode {
         get { return liveMode; }
@@ -119,7 +119,7 @@ public class UserLocationScript : MonoBehaviour
             //TO SHOW LOCATION Debug.Log("Lon: "+ gps.Longitude.ToString() + " Lat: "+ gps.Latitude);
             userLoc.Longitude = gps.Longitude;
             userLoc.Latitude = gps.Latitude;
-            userLoc.Altitude = 0; ///gps.Altitude;
+            userLoc.Altitude = gps.Altitude;
             locDisplay.updateDisplay(gps);
         }
     }

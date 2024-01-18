@@ -50,12 +50,9 @@ public class ImporterScript : MonoBehaviour
         string metadata = Encoding.ASCII.GetString(metadataStream.ToArray());
         
         string[] metavalues = metadata.Split(",");
-        double lon = Double.Parse(metavalues[0]);
-        double lat = Double.Parse(metavalues[1]);
+        double lat = Double.Parse(metavalues[0]);
+        double lon = Double.Parse(metavalues[1]);
         double alt = Double.Parse(metavalues[2]);
-        
-        lat = 52.379378009744535;
-        lon = -1.5604757047899998;
         return new GCS(lon, lat, alt);
         // Places the object in the read location
         /*float x = float.Parse(metadata.Substring(0,5), 
