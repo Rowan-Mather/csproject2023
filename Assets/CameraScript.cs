@@ -25,6 +25,7 @@ public class CameraScript : MonoBehaviour
 
     private void startCamera() {
         device = loc.getIO();
+        if (device == null) return;
         realCam = device.startCamera();
         if (realCam != null) {
             realCamAvailable = true;

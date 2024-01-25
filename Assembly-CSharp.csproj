@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\ColorExtensions.cs" />
+     <Compile Include="Assets\Sites\HistoricalSiteScript.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\Samples\ObjFromStream.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\CharWordReader.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\OBJObjectBuilder.cs" />
@@ -54,6 +55,8 @@
      <Compile Include="Assets\Samples\Input System\1.7.0\Unity Remote\UnityRemoteTestScript.cs" />
      <Compile Include="Assets\Location\UI\MovementButtonsScript.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\MTLLoader.cs" />
+     <Compile Include="Assets\Sites\TagScript.cs" />
+     <Compile Include="Assets\Sites\SiteTimeComponentScript.cs" />
      <Compile Include="Assets\Location\GCS.cs" />
      <Compile Include="Assets\CameraScript.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\StringExtensions.cs" />
@@ -63,7 +66,7 @@
      <Compile Include="Assets\Location\IOHandler.cs" />
      <Compile Include="Assets\Location\UI\LocationDisplayScript.cs" />
      <Compile Include="Assets\ModelImporting\ImporterScript.cs" />
-     <Compile Include="Assets\Sites\SiteScript.cs" />
+     <Compile Include="Assets\rec.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\ImageLoaderHelper.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\OBJLoaderHelper.cs" />
     <Reference Include="UnityEngine">
