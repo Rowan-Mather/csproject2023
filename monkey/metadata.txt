@@ -1,2 +1,2 @@
-0,-3,2.000
- 52.38274 -1.5635 135.1
+model_name:monkey|date:1050|tag:room,2,2,3|tag:moreroom,-5,-4,4;
+location: 52.38274,-1.5635,135.1
