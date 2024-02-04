@@ -7,7 +7,7 @@ public class SiteHolderScript : MonoBehaviour
     public UserLocationScript userLocation;
     public GameObject siteTemplate;
     public List<GameObject> sites = new List<GameObject>();
-    private SortedSet<int> availableDates;
+    private SortedSet<int> availableDates = new SortedSet<int>();
     public SortedSet<int> AvailableDates
     {
         get { return availableDates; }

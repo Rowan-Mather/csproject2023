@@ -10,7 +10,7 @@ public class HistoricalSiteScript : MonoBehaviour
     // These can optionally have a particular time period allocated.
     public GameObject timeComponentTemplate;
     private List<GameObject> timeComponents = new List<GameObject>();
-    private SortedSet<int> specifiedTimes;
+    private SortedSet<int> specifiedTimes = new SortedSet<int>();
     public SortedSet<int> SpecifiedTimes
     {
         get { return specifiedTimes; }
