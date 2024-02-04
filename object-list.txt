@@ -1,3 +1,1 @@
-cov-cathedral
-test-house
 dated
