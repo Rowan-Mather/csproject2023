@@ -1,24 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TagScript : MonoBehaviour
 {
- private float siteX;
+    private float siteX;
     private float siteY;
     private float siteZ;
-    public Text textChild;
+    private TMP_Text text;
 
     public void setRelativePosition(float x, float y, float z) {
         siteX = x;
         siteY = y;
         siteZ = z;
-        textChild.transform.position = new Vector3(x,y,z);
+        gameObject.transform.position = new Vector3(0,0,0);
+        
     }
 
     public void setText(string t) {
-        textChild.text = t;
+        //GetComponent<TextMesh>().text = t;
+        text.text = t;
     }
     
 //     GameObject CreateText(Transform canvas_transform, float x, float y, string text_to_print, int font_size, Color text_color)
@@ -37,8 +41,21 @@ public class TagScript : MonoBehaviour
 //     return UItextGO;
 // }
     //https://gamedev.stackexchange.com/questions/116177/how-to-dynamically-create-an-ui-text-object-in-unity-5
-    void Start()
-    {
-        textChild = gameObject.GetComponentInChildren<Text>();        
+    void Start() {
+        text = this.gameObject.GetComponent<TextMeshPro>();
+    }
+
+    void Update() {
+        transform.localEulerAngles = Quaternion.LookRotation(
+            Camera.main.transform.position - transform.position, Vector3.up).eulerAngles;
+        transform.Rotate(0.0f, 180.0f, 0.0f, Space.Self);
+        //Vector3 point = Quaternion.LookRotation(Camera.main.transform.eulerAngles).eulerAngles;
+        //Debug.Log(point);
+        //gameObject.transform.LookAt(Camera.main.transform);
+        /*gameObject.transform.localEulerAngles = new Vector3(
+            gameObject.transform.localEulerAngles.x,
+            point.y + 180,
+            gameObject.transform.localEulerAngles.z
+        );*/
     }
 }

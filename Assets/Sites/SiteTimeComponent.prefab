@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ff69c2a5aad1d458bb999764181d0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GCSscaler: 1
+  tagTemplate: {fileID: 8369517383599477024, guid: cee6447d83c21b044bbb357411c4d202, type: 3}
+  tags: []

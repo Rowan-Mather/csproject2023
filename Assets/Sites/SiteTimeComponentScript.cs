@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class SiteTimeComponentScript : MonoBehaviour
 {
-    private string date = ""; 
-    public string Date
+    private int? date;
+    public int? Date
     {
         get { return date; }
         set { date = value; }
     }
-    GameObject tagTemplate;
+    public GameObject tagTemplate;
     public List<GameObject> tags = new List<GameObject>();
 
     // Start is called before the first frame update
@@ -24,5 +24,13 @@ public class SiteTimeComponentScript : MonoBehaviour
         tagScript.setRelativePosition(x,y,z);
         tagScript.setText(text);
         tags.Add(tag);
+    }
+
+    public void showInTime(int? currentSelectedDate) {
+        if (date == null || currentSelectedDate == null) {
+            gameObject.SetActive(true);
+            return;
+        }
+        gameObject.SetActive(currentSelectedDate == date);
     }
 }

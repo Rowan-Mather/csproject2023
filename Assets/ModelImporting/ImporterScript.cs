@@ -79,16 +79,15 @@ public class ImporterScript : MonoBehaviour
                 loadLocation(siteScript, modelMeta);
             }
             else {
+                // Create a new time component and add it to the site.
+                GameObject tc = siteScript.addEmptyTimeComponent();
+                SiteTimeComponentScript tcScript 
+                    = tc.GetComponent<SiteTimeComponentScript>();
                 foreach (string datum in modelMeta.Split("|")) {
-                    // Create a new time component and add it to the site.
-                    GameObject tc = siteScript.addEmptyTimeComponent();
-                    SiteTimeComponentScript tcScript 
-                        = tc.GetComponent<SiteTimeComponentScript>();
-
                     var subDatum = datum.Split(":");
                     switch (subDatum[0]) {
                         case "model_name":
-                            tc.name = subDatum[1];
+                            tc.name = "Time: " + subDatum[1];
                             var model = loadObject(siteName, subDatum[1]);
                             model.transform.SetParent(tc.transform);
                             break;
@@ -99,19 +98,21 @@ public class ImporterScript : MonoBehaviour
                             loadTag(tcScript, subDatum[1]);
                             break;
                         default:
-                            break;                
+                            break;        
                     }
                 }
             }
         }
+        siteScript.updateSpecifiedTimes();
     }
 
     private void loadLocation(HistoricalSiteScript site, string locationData) {
-        var locationValues = locationData.Split(",");
+        var locationValues = locationData.Substring(9).Split(",");
+        Debug.Log(locationValues[0] + " " + locationValues[1] + " " + locationValues[2]);
         try {
             double lat = Double.Parse(locationValues[0]);
             double lon = Double.Parse(locationValues[1]);
-            double alt = Double.Parse(locationValues[2]);
+            double alt = 0; //Double.Parse(locationValues[2]);
             site.setGCSLocation(new GCS(lon, lat, alt));
         }
         catch {
@@ -120,7 +121,30 @@ public class ImporterScript : MonoBehaviour
     }
 
     private void loadDate(SiteTimeComponentScript tc, string dateData) {
-        tc.Date = dateData;
+        try {
+            if (dateData.Length >= 3) {
+                string prefix = dateData.Substring(0,dateData.Length-2);
+                string suffix = dateData.Substring(dateData.Length-2);
+                switch (suffix) {
+                    case "BC":
+                        tc.Date = -1*Int32.Parse(prefix);
+                        return;
+                    case "AD":
+                        tc.Date = Int32.Parse(prefix);
+                        return;
+                    case "CE":
+                        if (dateData[dateData.Length-3] == 'B')
+                            tc.Date = -1*Int32.Parse(dateData.Substring(0,dateData.Length-3));
+                        else
+                            tc.Date = Int32.Parse(prefix);
+                        return;
+                }
+            }
+            tc.Date = Int32.Parse(dateData);
+        }
+        catch {
+            tc.Date = null;
+        }
     }
 
     private void loadTag(SiteTimeComponentScript tc, string tagData) {
