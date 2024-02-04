@@ -1,1 +1,4 @@
- 52.38376325702578 -1.56010987359313
+location: 52.38376325702578,-1.56010987359313,131.299987792969;
+model_name:cube|date:100;
+model_name:cone|date:200;
+model_name:ico|date:300;
