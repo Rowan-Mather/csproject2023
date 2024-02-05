@@ -1,4 +1,4 @@
 location:52.37367,-1.548844,138.1;
-model_name:cube|date:100;
-model_name:cone|date:200;
-model_name:ico|date:300;
+model_name:cube|date:100|tag:cube,2,2,2;
+model_name:cone|date:200|tag:cone,-2,2,2;
+model_name:ico|date:300|tag:ball,-2,2,2;
