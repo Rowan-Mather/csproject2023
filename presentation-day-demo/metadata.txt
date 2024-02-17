@@ -1,4 +1,4 @@
-location:52.37369,-1.548778,138.6;
+location:52.37363,-1.548723,146.4819;
 model_name:computer|date:1980AD|tag:computer,3,0,0;
 model_name:decimated_train|date:1830AD;
 model_name:temple|date:750AD;
