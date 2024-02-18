@@ -7,9 +7,12 @@ using System.IO;
 using System.Text;
 using UnityEngine.Networking;
 using System.Globalization;
+using UnityEngine.UI;
 
 public class ImporterScript : MonoBehaviour
 {
+    public Text testFeedback;
+
     public GameObject siteTemplate;
     public SiteHolderScript siteHolderScript;
     private string repoURL = 
@@ -19,6 +22,8 @@ public class ImporterScript : MonoBehaviour
     private string[] siteArray;
     void Start()
     {
+        testFeedback.text += "1.";
+
         // Determine list of objects to load
         loadSiteArray();
         // Loads in each one in turn
@@ -27,6 +32,31 @@ public class ImporterScript : MonoBehaviour
                 loadSite(name);
             }
         }
+
+        testFeedback.text += "2.";
+
+        // Test cube
+        var objectURL = new WWW("https://raw.githubusercontent.com/Rowan-Mather/csproject2023/sites/dated/cone.obj");
+        while (!objectURL.isDone) System.Threading.Thread.Sleep(1);
+        var objStream = new MemoryStream(Encoding.UTF8.GetBytes(objectURL.text));
+        GameObject loadedObj = new OBJLoader().Load(objStream);
+
+        string mtlurl = "https://raw.githubusercontent.com/Rowan-Mather/csproject2023/sites/test-house/test-house.mtl";
+        var mtlURL = new WWW(mtlurl);
+        while (!mtlURL.isDone) System.Threading.Thread.Sleep(1);
+        var mtlStream = new MemoryStream(Encoding.UTF8.GetBytes(mtlURL.text));
+
+        var objectURL2 = new WWW("https://raw.githubusercontent.com/Rowan-Mather/csproject2023/sites/test-house/test-house.obj");
+        while (!objectURL2.isDone) System.Threading.Thread.Sleep(1);
+        var objStream2 = new MemoryStream(Encoding.UTF8.GetBytes(objectURL2.text));
+        GameObject loadedObj2 = new OBJLoader().Load(objStream2, mtlStream);
+        loadedObj2.transform.position += new Vector3(4,0,0);
+
+        testFeedback.text = "testing import";
+        if (objStream == null) testFeedback.text += "; stream null";
+        else { testFeedback.text += "; stream imported"; }
+        if (loadedObj == null) testFeedback.text += "; object null";
+        else { testFeedback.text += "; object imported"; }
     }
 
     // Reads the string array of names of objects from the webserver which are 

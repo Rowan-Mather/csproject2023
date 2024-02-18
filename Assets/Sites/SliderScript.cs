@@ -11,6 +11,7 @@ public class SliderScript : MonoBehaviour
     public GameObject labelTemplate;
     private SortedSet<int> dateSet = new SortedSet<int>();
     private List<GameObject> labels = new List<GameObject>();
+    public LocationDisplayScript locDisplay;
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +41,9 @@ public class SliderScript : MonoBehaviour
             generateLabels();
         }
         // Update slider position store.
-        sitesScript.SelectedDate = (int)slide.value;            
+        int date = (int)slide.value;
+        sitesScript.SelectedDate = date;   
+        locDisplay.updateDateDisplay(date); 
     }
 
     void setDate(int date) {
@@ -60,7 +63,10 @@ public class SliderScript : MonoBehaviour
             timeLabel.transform.SetParent(this.transform);
             float x = (date - slide.minValue) / (slide.maxValue - slide.minValue) * 500 - 250;
             timeLabel.transform.position += new Vector3(x,-200f,0f);
-            timeLabel.GetComponent<TMP_Text>().text = date.ToString();
+            if (date < 0)
+                timeLabel.GetComponent<TMP_Text>().text = date.ToString().Substring(1) + "BCE";
+            else 
+                timeLabel.GetComponent<TMP_Text>().text = date.ToString() + "CE";
             labels.Add(timeLabel);
         }
     }

@@ -37,6 +37,10 @@ public class CameraScript : MonoBehaviour
         }
     }
 
+    float X;
+    float Y;
+    float speed = 5;
+
     private void Update()
     {
         if (device == null) {

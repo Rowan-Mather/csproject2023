@@ -12,7 +12,7 @@ public class UserLocationScript : MonoBehaviour
     public LocationDisplayScript locDisplay;
     private Quaternion sceneRotation = new Quaternion(0,0,0,0);
     public Quaternion SceneRotation { get { return sceneRotation; } }
-    private const double manualSpeed = 1f/111139f;
+    private const double manualSpeed = 1f/111139f * 5;
     private bool liveMode = false;
     public bool LiveMode {
         get { return liveMode; }
@@ -23,7 +23,7 @@ public class UserLocationScript : MonoBehaviour
     {
         device = new IOHandler();
         StartCoroutine(device.StartLocation());
-        locDisplay.updateDisplay(userLoc);
+        locDisplay.updateLocationDisplay(userLoc);
 
         /*
         if (UnityEngine.InputSystem.Gyroscope.current != null) {
@@ -102,15 +102,15 @@ public class UserLocationScript : MonoBehaviour
         userLoc.Longitude = lon;
         userLoc.Latitude = lat;
         userLoc.Altitude = alt;
-        locDisplay.updateDisplay(userLoc);
+        locDisplay.updateLocationDisplay(userLoc);
     }
 
     // Manual location adjust
-    public void moveForward() {
-        var rot = sceneRotation.eulerAngles.y;
-        userLoc.Longitude -= Mathf.Cos(Mathf.Deg2Rad * rot) * manualSpeed;
-        userLoc.Latitude -= Mathf.Sin(Mathf.Deg2Rad * rot) * manualSpeed;
-        locDisplay.updateDisplay(userLoc);
+    public void move(int angle = 0) {
+        var rot = sceneRotation.eulerAngles.y + angle;
+        userLoc.Longitude -= Mathf.Cos(Mathf.Deg2Rad * rot) * manualSpeed * Time.deltaTime;
+        userLoc.Latitude -= Mathf.Sin(Mathf.Deg2Rad * rot) * manualSpeed * Time.deltaTime;
+        locDisplay.updateLocationDisplay(userLoc);
     }
 
     public void setLiveLocation() {
@@ -120,7 +120,7 @@ public class UserLocationScript : MonoBehaviour
             userLoc.Longitude = gps.Longitude;
             userLoc.Latitude = gps.Latitude;
             userLoc.Altitude = 0; //gps.Altitude;
-            locDisplay.updateDisplay(gps);
+            locDisplay.updateLocationDisplay(gps);
         }
     }
 

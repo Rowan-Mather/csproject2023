@@ -31,10 +31,10 @@ public class GCS
         this.altitude = alt;
     }
     public string toString() {
-        string longLet = "S, ";
-        string latLet = "W";
-        if (longitude >= 0) longLet = "N, ";
-        if (latitude >= 0) latLet = "E";
+        string longLet = "S";
+        string latLet = "W, ";
+        if (longitude >= 0) longLet = "N";
+        if (latitude >= 0) latLet = "E, ";
         return splitDegree(Math.Abs(latitude)) + latLet + 
                 splitDegree(Math.Abs(longitude)) + longLet; 
     }

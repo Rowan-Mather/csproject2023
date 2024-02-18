@@ -7,16 +7,13 @@ using TMPro;
 
 public class TagScript : MonoBehaviour
 {
-    private float siteX;
-    private float siteY;
-    private float siteZ;
-    private TMP_Text text;
+    // private float siteX;
+    // private float siteY;
+    // private float siteZ;
+    public TMP_Text text;
 
     public void setRelativePosition(float x, float y, float z) {
-        siteX = x;
-        siteY = y;
-        siteZ = z;
-        gameObject.transform.position = new Vector3(0,0,0);
+        gameObject.transform.position += new Vector3(x,y,z);
         
     }
 
