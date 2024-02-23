@@ -61,8 +61,8 @@ public class SliderScript : MonoBehaviour
         foreach (var date in dateSet) {
             GameObject timeLabel = Instantiate(labelTemplate, this.transform);
             timeLabel.transform.SetParent(this.transform);
-            float x = (date - slide.minValue) / (slide.maxValue - slide.minValue) * 500 - 250;
-            timeLabel.transform.position += new Vector3(x,-200f,0f);
+            float x = ((date - slide.minValue) / (slide.maxValue - slide.minValue) * 600 - 300);
+            timeLabel.transform.position += new Vector3(x,180f,0f);
             if (date < 0)
                 timeLabel.GetComponent<TMP_Text>().text = date.ToString().Substring(1) + "BCE";
             else 

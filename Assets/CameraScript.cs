@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class CameraScript : MonoBehaviour
 {
+    public Camera thisCam;
     public UserLocationScript loc;
     private IOHandler device;
     private bool realCamAvailable = false;

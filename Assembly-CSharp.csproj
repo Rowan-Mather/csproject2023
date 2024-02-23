@@ -86,6 +86,7 @@
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+     <None Include="Assets\Assets\Simple Side-Menu\Shaders\Blur.shader" />
      <None Include="Assets\take2text.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
      <None Include="Assets\TextInPlace.shader" />
@@ -715,6 +716,42 @@
     <Reference Include="System.Xml.Serialization">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.9f1\Editor\Data\NetStandard\compat\2.1.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.EditorCoroutines.Editor">
+        <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.PlasticSCM.Editor">
+        <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Timeline.Editor">
+        <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Shared.Editor">
+        <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualStudio.Editor">
+        <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.UI">
+        <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Core">
+        <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+        <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Core.Editor">
+        <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Rider.Editor">
+        <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Flow">
+        <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Flow.Editor">
+        <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Timeline">
         <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
     </Reference>
@@ -726,12 +763,6 @@
     </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
         <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-        <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.EditorCoroutines.Editor">
-        <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
         <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
@@ -745,38 +776,14 @@
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Model">
         <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Model.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.PlasticSCM.Editor">
-        <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VisualScripting.State.Editor">
         <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Timeline.Editor">
-        <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Shared.Editor">
-        <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualStudio.Editor">
-        <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
         <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Core">
-        <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
         <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.UI">
-        <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Core.Editor">
-        <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Rider.Editor">
-        <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
         <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
@@ -784,14 +791,36 @@
     <Reference Include="Unity.VSCode.Editor">
         <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Flow">
-        <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Flow.Editor">
-        <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="UtilitiesEditor.csproj">
+      <Project>{916b2afa-fe66-3f1e-fa7f-fee40aba9e3c}</Project>
+      <Name>UtilitiesEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="SimpleSideMenu.csproj">
+      <Project>{769c7e10-7eaa-c984-9620-748d2df2b56a}</Project>
+      <Name>SimpleSideMenu</Name>
+    </ProjectReference>
+    <ProjectReference Include="Utilities.csproj">
+      <Project>{380e0054-ffb8-3688-9413-28aa5e5e0217}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="CopyrightNoticeEditor.csproj">
+      <Project>{8da4b606-5e64-206f-b470-b5891ba48d94}</Project>
+      <Name>CopyrightNoticeEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="SimpleSideMenuEditor.csproj">
+      <Project>{ea441c86-9cb9-f37d-f3a6-976e6c3acb9c}</Project>
+      <Name>SimpleSideMenuEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="SimpleInspectorAttributesEditor.csproj">
+      <Project>{61f59bf4-83c7-182c-50c2-5643dd811eba}</Project>
+      <Name>SimpleInspectorAttributesEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="SimpleInspectorAttributes.csproj">
+      <Project>{f262c98b-7187-c01f-4cb9-5f301047b9ef}</Project>
+      <Name>SimpleInspectorAttributes</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

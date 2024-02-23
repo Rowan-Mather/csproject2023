@@ -11,6 +11,10 @@ using UnityEngine.UI;
 
 public class ImporterScript : MonoBehaviour
 {
+    public GameObject computer;
+    public GameObject train;
+    public GameObject temple;
+    public GameObject stone;
     public Text testFeedback;
 
     public GameObject siteTemplate;
@@ -22,6 +26,51 @@ public class ImporterScript : MonoBehaviour
     private string[] siteArray;
     void Start()
     {
+        /* HARD CODED TEST SITE *//////////
+        GameObject site1 = siteHolderScript.addEmptySite("Demo");
+        HistoricalSiteScript siteScript1 = site1.GetComponent<HistoricalSiteScript>();
+        //siteScript1.setGCSLocation(new GCS(-1.548796, 52.37359, 0));
+        siteScript1.setGCSLocation(new GCS(-1.560364, 52.38356, 0));
+        //52.3737 -1.548767 139.9 48
+        //52.37359 -1.548796 139.4
+        //52.38356 -1.560355 131.5 20
+        // 52.38356 -1.56035 131.5
+        //52.38371 -1.560281 135.5 39.6
+
+        //Computer
+        GameObject tc1_1 = siteScript1.addEmptyTimeComponent();
+        SiteTimeComponentScript tc1_1Script 
+            = tc1_1.GetComponent<SiteTimeComponentScript>();
+        tc1_1.name = "Time: Modern Build";
+        computer.transform.SetParent(tc1_1.transform);
+        tc1_1Script.Date = 1980;
+
+        //Train
+        GameObject tc1_2 = siteScript1.addEmptyTimeComponent();
+        SiteTimeComponentScript tc1_2Script 
+            = tc1_2.GetComponent<SiteTimeComponentScript>();
+        tc1_2.name = "Time: Industrial Steam Train";
+        train.transform.SetParent(tc1_2.transform);
+        tc1_2Script.Date = 1830;
+
+        //Temple
+        GameObject tc1_3 = siteScript1.addEmptyTimeComponent();
+        SiteTimeComponentScript tc1_3Script 
+            = tc1_3.GetComponent<SiteTimeComponentScript>();
+        tc1_3.name = "Time: Mayan Temple";
+        temple.transform.SetParent(tc1_3.transform);
+        tc1_3Script.Date = 750;
+
+        //Stone
+        GameObject tc1_4 = siteScript1.addEmptyTimeComponent();
+        SiteTimeComponentScript tc1_4Script 
+            = tc1_4.GetComponent<SiteTimeComponentScript>();
+        tc1_4.name = "Time: Monolith";
+        stone.transform.SetParent(tc1_4.transform);
+        tc1_4Script.Date = -3000;
+
+        siteScript1.updateSpecifiedTimes();
+
         testFeedback.text += "1.";
 
         // Determine list of objects to load
@@ -35,6 +84,7 @@ public class ImporterScript : MonoBehaviour
 
         testFeedback.text += "2.";
 
+        /*
         // Test cube
         var objectURL = new WWW("https://raw.githubusercontent.com/Rowan-Mather/csproject2023/sites/dated/cone.obj");
         while (!objectURL.isDone) System.Threading.Thread.Sleep(1);
@@ -56,7 +106,7 @@ public class ImporterScript : MonoBehaviour
         if (objStream == null) testFeedback.text += "; stream null";
         else { testFeedback.text += "; stream imported"; }
         if (loadedObj == null) testFeedback.text += "; object null";
-        else { testFeedback.text += "; object imported"; }
+        else { testFeedback.text += "; object imported"; }*/
     }
 
     // Reads the string array of names of objects from the webserver which are 
@@ -128,7 +178,7 @@ public class ImporterScript : MonoBehaviour
                             loadTag(tcScript, subDatum[1]);
                             break;
                         default:
-                            break;        
+                            break;
                     }
                 }
             }

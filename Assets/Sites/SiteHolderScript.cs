@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class SiteHolderScript : MonoBehaviour
 {
@@ -19,6 +21,8 @@ public class SiteHolderScript : MonoBehaviour
         set { selectedDate = value; }
     }
 
+    public TMP_Text siteListText;
+
     // Update is called once per frame
     void Update()
     {
@@ -32,13 +36,13 @@ public class SiteHolderScript : MonoBehaviour
                 availableDates.UnionWith(siteScript.SpecifiedTimes);
             }
         }
-
     }
     
     public GameObject addEmptySite(string title) {
         // Create a new site parent for the model, set its name.
         GameObject site = Instantiate(siteTemplate, this.transform);
         site.name = "Site: " + title;
+        siteListText.text += title + "\n";
         /*
         // Add the model as a child
         siteModel.transform.SetParent(site.transform);
@@ -54,5 +58,9 @@ public class SiteHolderScript : MonoBehaviour
     public void removeSite(GameObject site) {
         sites.Remove(site);
         Destroy(site);
+        siteListText.text = "";
+        foreach (GameObject s in sites) {
+            siteListText.text += site.name.Substring(6) + "\n";
+        }
     }
 }

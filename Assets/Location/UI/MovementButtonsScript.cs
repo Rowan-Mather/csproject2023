@@ -13,6 +13,7 @@ public class MovementButtonsScript : MonoBehaviour
     private bool pointerHeld = false;
     private Vector3 pointerOrigin = new Vector3();
     // Position
+    public GameObject arrowImage;
     public GameObject forwardButton;
     public GameObject backwardButton;
     public GameObject leftButton;
@@ -34,7 +35,7 @@ public class MovementButtonsScript : MonoBehaviour
 
     void Update()
     {
-        if (!liveMode) {
+        //if (!liveMode) {
             // Touch rotation
             if (Input.touchSupported && Application.platform != RuntimePlatform.WebGLPlayer) {
                 HandleTouch();
@@ -80,7 +81,7 @@ public class MovementButtonsScript : MonoBehaviour
             else {
                 pointer.transform.position = pointerOrigin;
             }*/
-        }
+        //}
     }
 
     public void enableForward() { moveForward = true; }
@@ -159,6 +160,7 @@ public class MovementButtonsScript : MonoBehaviour
         float scale = liveMode ? 0f : 1f;
         //pointer.transform.localScale = new Vector3(scale,scale,scale);
         //ball.transform.localScale = new Vector3(scale,scale,scale);
+        arrowImage.transform.localScale = new Vector3(scale,scale,scale);
         //forwardButton.transform.localScale = new Vector3(scale,scale,scale);
         loc.LiveMode = liveMode;
     }

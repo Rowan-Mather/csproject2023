@@ -101,7 +101,7 @@ public class UserLocationScript : MonoBehaviour
     public void setLocation(double lon, double lat, double alt) {
         userLoc.Longitude = lon;
         userLoc.Latitude = lat;
-        userLoc.Altitude = alt;
+        userLoc.Altitude = 0; //alt;
         locDisplay.updateLocationDisplay(userLoc);
     }
 
@@ -132,7 +132,7 @@ public class UserLocationScript : MonoBehaviour
     public void setLiveRotation() {
         Vector3 rotChange = device.getGyro();
         if (rotChange != null) {
-            sceneRotation.eulerAngles += device.getGyro();
+            //sceneRotation.eulerAngles += device.getGyro();
         }
     }
 
