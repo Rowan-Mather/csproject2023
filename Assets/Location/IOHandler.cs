@@ -12,6 +12,8 @@ public class IOHandler
     private int gyroAttempts = 0;
     private int gpsAttempts = 0;
 
+    private Gyroscope gyro = null;
+
     // Enables a new unity input system device.
     private static void EnableDeviceIfNeeded(InputDevice device)
     {
@@ -32,8 +34,9 @@ public class IOHandler
     // Attempts to get the current gyroscope input. If there are more than 5
     // unsuccessful attempts made, the empty vector will always be returned.
     public Vector3 getGyro() {
-        if (gyroAttempts > 5) return new Vector3(0, 0, 0);
-        var gyro = GetRemoteDevice<Gyroscope>();
+        if (gyro == null) gyro = GetRemoteDevice<Gyroscope>();
+        //if (gyroAttempts > 5) return new Vector3(0, 0, 0);
+        //var gyro = GetRemoteDevice<Gyroscope>();
         //var attitude = GetRemoteDevice<AttitudeSensor>();
         //var acceleration = GetRemoteDevice<LinearAccelerationSensor>();
         //EnableDeviceIfNeeded(attitude);
@@ -48,16 +51,6 @@ public class IOHandler
             gyroAttempts ++;
             return new Vector3(0, 0, 0);
         }
-        //if (attitude != null) {        
-        //    if (attitude.attitude.ReadValue().eulerAngles != new Vector3(0,0,0)) {
-        //        Debug.Log(attitude.attitude.ReadValue());
-        //    }
-        //}
-        //if (acceleration != null) {        
-        //    if (acceleration.acceleration.ReadValue() != new Vector3(0,0,0)) {
-        //        Debug.Log(acceleration.acceleration.ReadValue());
-        //    }
-        //}
     }
 
     // Rounds a double to 2dp in float.

@@ -7,8 +7,10 @@ using UnityEngine.UI;
 // rotation https://stackoverflow.com/questions/42141056/how-to-detect-android-phone-rotation-in-unity
 public class UserLocationScript : MonoBehaviour
 {
+    public Text testText;
     private GCS userLoc = new GCS();
     private IOHandler device;
+    public InputHandler2Script ioHandler;
     public LocationDisplayScript locDisplay;
     private Quaternion sceneRotation = new Quaternion(0,0,0,0);
     public Quaternion SceneRotation { get { return sceneRotation; } }
@@ -21,8 +23,8 @@ public class UserLocationScript : MonoBehaviour
 
     void Start()
     {
-        device = new IOHandler();
-        StartCoroutine(device.StartLocation());
+        //device = new IOHandler();
+        //StartCoroutine(device.StartLocation());
         locDisplay.updateLocationDisplay(userLoc);
 
         /*
@@ -93,7 +95,7 @@ public class UserLocationScript : MonoBehaviour
         return Quaternion.Euler(90, 0, 0) * new Quaternion(q.x, q.y, -q.z, -q.w);
     }*/
 
-    public IOHandler getIO() { return device; }
+    //public IOHandler getIO() { return device; }
 
     public GCS getLocation() { return userLoc; }
 
@@ -114,7 +116,8 @@ public class UserLocationScript : MonoBehaviour
     }
 
     public void setLiveLocation() {
-        GCS gps = device.getLocation();
+        GCS gps = ioHandler.getLocation();
+        //GCS gps = device.getLocation();
         if (gps != null) {
             //TO SHOW LOCATION Debug.Log("Lon: "+ gps.Longitude.ToString() + " Lat: "+ gps.Latitude);
             userLoc.Longitude = gps.Longitude;
@@ -130,9 +133,12 @@ public class UserLocationScript : MonoBehaviour
     }
 
     public void setLiveRotation() {
-        Vector3 rotChange = device.getGyro();
+        Vector3 rotChange = ioHandler.getGyro();
         if (rotChange != null) {
-            //sceneRotation.eulerAngles += device.getGyro();
+            sceneRotation.eulerAngles += rotChange;
+            if (testText.text.Length < 1000 && rotChange == new Vector3(0,0,0)) {
+                testText.text += "zerorot";
+            }
         }
     }
 

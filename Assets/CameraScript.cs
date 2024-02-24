@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class CameraScript : MonoBehaviour
 {
-    public Camera thisCam;
     public UserLocationScript loc;
     private IOHandler device;
+    public InputHandler2Script ioHandler;
     private bool realCamAvailable = false;
     private WebCamTexture realCam;
     //private Texture defaultBackground;
@@ -25,9 +25,9 @@ public class CameraScript : MonoBehaviour
     }
 
     private void startCamera() {
-        device = loc.getIO();
-        if (device == null) return;
-        realCam = device.startCamera();
+        //device = loc.getIO();
+        //if (device == null) return;
+        realCam = ioHandler.startCamera();
         if (realCam != null) {
             realCamAvailable = true;
             Debug.Log("Camera available.");
@@ -44,9 +44,9 @@ public class CameraScript : MonoBehaviour
 
     private void Update()
     {
-        if (device == null) {
-            startCamera();
-        }
+        //if (device == null) {
+        //    startCamera();
+        //}
 
         //gameObject.transform.position = loc.getLocation();
         gameObject.transform.rotation = loc.SceneRotation;

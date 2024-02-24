@@ -43,6 +43,7 @@
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\ColorExtensions.cs" />
      <Compile Include="Assets\Sites\HistoricalSiteScript.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\Samples\ObjFromStream.cs" />
+     <Compile Include="Assets\InputHandler2Script.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\CharWordReader.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\OBJObjectBuilder.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\Samples\ObjFromFile.cs" />

@@ -35,7 +35,7 @@ public class MovementButtonsScript : MonoBehaviour
 
     void Update()
     {
-        //if (!liveMode) {
+        if (!liveMode) {
             // Touch rotation
             if (Input.touchSupported && Application.platform != RuntimePlatform.WebGLPlayer) {
                 HandleTouch();
@@ -81,7 +81,7 @@ public class MovementButtonsScript : MonoBehaviour
             else {
                 pointer.transform.position = pointerOrigin;
             }*/
-        //}
+        }
     }
 
     public void enableForward() { moveForward = true; }
