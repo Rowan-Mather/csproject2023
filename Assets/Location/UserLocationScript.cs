@@ -133,13 +133,15 @@ public class UserLocationScript : MonoBehaviour
     }
 
     public void setLiveRotation() {
-        Vector3 rotChange = ioHandler.getGyro();
-        if (rotChange != null) {
-            sceneRotation.eulerAngles += rotChange;
-            if (testText.text.Length < 1000 && rotChange == new Vector3(0,0,0)) {
-                testText.text += "zerorot";
-            }
-        }
+        sceneRotation.eulerAngles = ioHandler.getGyro();
+        
+        //Vector3 rotChange = ioHandler.getGyro();
+        //if (rotChange != null) {
+        //   sceneRotation.eulerAngles += rotChange;
+        //    if (testText.text.Length < 1000 && rotChange == new Vector3(0,0,0)) {
+        //        testText.text += "zerorot";
+        //    }
+        //}
     }
 
     //public Quaternion getRotation() { return sceneRotation; }

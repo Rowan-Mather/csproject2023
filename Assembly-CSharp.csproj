@@ -53,7 +53,6 @@
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\DDSLoader.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\BMPLoader.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\TGALoader.cs" />
-     <Compile Include="Assets\Samples\Input System\1.7.0\Unity Remote\UnityRemoteTestScript.cs" />
      <Compile Include="Assets\Location\UI\MovementButtonsScript.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\MTLLoader.cs" />
      <Compile Include="Assets\Sites\TagScript.cs" />
@@ -755,12 +754,6 @@
     </Reference>
     <Reference Include="Unity.Timeline">
         <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.InputSystem">
-        <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.InputSystem.ForUI">
-        <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
         <HintPath>C:\Users\rowan\Documents\Rowan\warwickyr3\project\ARchae\Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>

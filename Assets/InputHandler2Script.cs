@@ -3,90 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Android;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Android;
-using Gyroscope = UnityEngine.InputSystem.Gyroscope;
+//using UnityEngine.InputSystem.Android;
 
 public class InputHandler2Script : MonoBehaviour
 {
-    private int gyroAttempts = 0;
-    private int gpsAttempts = 0;
-    private Gyroscope gyro = null;
-    private Gyroscope m_Gyro;
 
-
-    void Awake()
-    {
-        //Set up and enable the gyroscope (check your device has one)
-        m_Gyro = Input.gyro;
-        m_Gyro.enabled = false;
-
-        m_Gyro.enabled = true;
-    }
+    Vector3 gyroRotation = new Vector3(0,0,0);
 
     // Start is called before the first frame update
     void Start()
     {
+        startGyro();
         StartCoroutine(StartLocation());
-        StartCoroutine(StartRotation());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        updateGyro();
     }
 
-    // Enables a new unity input system device.
-    private static void EnableDeviceIfNeeded(InputDevice device)
-    {
-        if (device != null && !device.enabled) {
-            InputSystem.EnableDevice(device);
-            Debug.Log("Enabling gyro");
-        }
+    private void startGyro() {
+        Input.gyro.enabled = true;
     }
 
-    // Attempts to find an input sensor of the specified type and returns it.
-    private static TDevice GetRemoteDevice<TDevice>()
-        where TDevice : InputDevice
-    {
-        foreach (var device in InputSystem.devices)
-            if (device.remote && device is TDevice deviceOfType)
-                return deviceOfType;
-        return default;
+    private void updateGyro() {
+        Vector3 gyroRate = Input.gyro.rotationRateUnbiased;
+        gyroRotation += new Vector3(-gyroRate.x, -gyroRate.y,  0);
     }
 
-    // Attempts to get the current gyroscope input. If there are more than 5
-    // unsuccessful attempts made, the empty vector will always be returned.
     public Vector3 getGyro() {
-        EnableDeviceIfNeeded(gyro);
-        if (gyro == null || !gyro.enabled) {
-            return new Vector3(0, 0, 0);
-        }
-        var rot = gyro.angularVelocity.ReadValue();
-        Debug.Log(rot);
-        return new Vector3(-round(rot.x), -round(rot.y), 0);
-        //}
-        // else {
-        //     // Todo: change this to an impossible angle
-        //     Debug.LogError("Gyroscope unavailable.");
-        //     gyroAttempts ++;
-        //     return new Vector3(0, 0, 0);
-        // }
-    }
-
-    public IEnumerator StartRotation()
-    {
-        Debug.Log("Starting rotation...");
-        gyro = GetRemoteDevice<Gyroscope>();
-        if ( gyro == null ) {
-            new WaitForSeconds(5);
-            gyro = GetRemoteDevice<Gyroscope>();
-            if ( gyro == null ) {
-                yield break;
-            }
-        }
-        EnableDeviceIfNeeded(gyro);
+        return gyroRotation;
     }
 
     // Rounds a double to 2dp in float.
@@ -131,6 +78,8 @@ public class InputHandler2Script : MonoBehaviour
             return false;
         }
     }
+
+    int gpsAttempts = 0;
 
     // Gets the users current device location if possible and returns it as a 
     // GCS co-ordinate. If more than 5 attempts are made unsuccessfully, the 
@@ -238,29 +187,4 @@ public class InputHandler2Script : MonoBehaviour
         return null;
     }
 
-
-
-
-    Gyroscope m_Gyro;
-
-    void Start()
-    {
-        //Set up and enable the gyroscope (check your device has one)
-        m_Gyro = Input.gyro;
-        m_Gyro.enabled = true;
-    }
-
-    void Update() {
-        Debug.Log(m_Gyro.attitude);
-        Debug.Log(m_Gyro.angularVelocity.ReadValue());
-    }
-
-//This is a legacy function, check out the UI section for other ways to create your UI
-    void OnGUI()
-    {
-        //Output the rotation rate, attitude and the enabled state of the gyroscope as a Label
-        GUI.Label(new Rect(500, 300, 200, 40), "Gyro rotation rate " + m_Gyro.rotationRate);
-        GUI.Label(new Rect(500, 350, 200, 40), "Gyro attitude" + m_Gyro.attitude);
-        GUI.Label(new Rect(500, 400, 200, 40), "Gyro enabled : " + m_Gyro.enabled);
-    }
 }

@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Android;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Android;
-using Gyroscope = UnityEngine.InputSystem.Gyroscope;
+//using UnityEngine.UI;
+//using UnityEngine.Android;
+//using UnityEngine.InputSystem;
+//using UnityEngine.InputSystem.Android;
+//using Gyroscope = UnityEngine.InputSystem.Gyroscope;
 
 public class IOHandler
 {
+    /*
     private int gyroAttempts = 0;
     private int gpsAttempts = 0;
 
@@ -200,5 +201,5 @@ public class IOHandler
             return otherCam;	
         }
         return null;
-    }
+    }*/
 }
