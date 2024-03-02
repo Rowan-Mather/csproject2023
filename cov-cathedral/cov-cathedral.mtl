@@ -1,4 +1,4 @@
-# Blender MTL File: 'cov_cathedral.blend'
+# Blender MTL File: 'cov-cathedral.blend'
 # Material Count: 2
 
 newmtl Material
@@ -20,4 +20,4 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd covcathedraltexture.PNG
+map_Kd C:\\Users\\rowan\\Documents\\Rowan\\warwickyr3\\project\\testobj\\covcathedraltexture.PNG
