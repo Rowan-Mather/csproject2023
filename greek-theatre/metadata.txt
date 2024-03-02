@@ -1,0 +1,2 @@
+location:52.37901548034326, -1.5609412257743212, 140;
+model_name:greek-theatre|date:340BC;
