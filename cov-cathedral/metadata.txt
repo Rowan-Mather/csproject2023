@@ -1,2 +1,2 @@
-model_name:cov-cathedral|date:1050|tag:room,2,2,3|tag:moreroom,-5,-4,4;
-location: 52.38376325702578,-1.56010987359313,131.299987792969
+location:52.3837449,-1.5603326,142.2;
+model_name:cov-cathedral|date:1500AD|tag:pillars,3,0,0;
