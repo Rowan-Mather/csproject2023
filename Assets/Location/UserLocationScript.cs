@@ -130,6 +130,7 @@ public class UserLocationScript : MonoBehaviour
     // Manual rotation adjust
     public void rotate(float x, float y) {
         sceneRotation.eulerAngles += new Vector3(x,y,0);
+        ioHandler.setGyro(sceneRotation.eulerAngles);
     }
 
     public void setLiveRotation() {

@@ -36,6 +36,10 @@ public class InputHandler2Script : MonoBehaviour
         return gyroRotation;
     }
 
+    public void setGyro(Vector3 rot) {
+        gyroRotation = rot;
+    }
+
     // Rounds a double to 2dp in float.
     private float round(float val) {
         return Mathf.Round(val * 100) / 100;

@@ -28,7 +28,7 @@ public class SliderScript : MonoBehaviour
         if (!dateSet.Equals(sitesScript.AvailableDates)) {
             if (sitesScript.AvailableDates.Count > 0) {
                 slide.minValue = sitesScript.AvailableDates.Min;
-                slide.maxValue = sitesScript.AvailableDates.Max;
+                slide.maxValue = sitesScript.AvailableDates.Max+1;
             } else {
                 slide.minValue = 0;
                 slide.maxValue = 0;

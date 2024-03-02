@@ -11,6 +11,7 @@ using UnityEngine.UI;
 
 public class ImporterScript : MonoBehaviour
 {
+    public GameObject coventryCathedral;
     public GameObject computer;
     public GameObject train;
     public GameObject temple;
@@ -24,13 +25,16 @@ public class ImporterScript : MonoBehaviour
     private string objectListFile = "object-list.txt";
     private string metadataFile = "metadata.txt";
     private string[] siteArray;
+
+
     void Start()
     {
         /* HARD CODED TEST SITE *//////////
+        /*
         GameObject site1 = siteHolderScript.addEmptySite("Demo");
         HistoricalSiteScript siteScript1 = site1.GetComponent<HistoricalSiteScript>();
         //siteScript1.setGCSLocation(new GCS(-1.548796, 52.37359, 0));
-        siteScript1.setGCSLocation(new GCS(-1.560364, 52.38356, 0));
+        siteScript1.setGCSLocation(new GCS(-1.552912, 52.37531, 0));
         //52.3737 -1.548767 139.9 48
         //52.37359 -1.548796 139.4
         //52.38356 -1.560355 131.5 20
@@ -67,11 +71,28 @@ public class ImporterScript : MonoBehaviour
             = tc1_4.GetComponent<SiteTimeComponentScript>();
         tc1_4.name = "Time: Monolith";
         stone.transform.SetParent(tc1_4.transform);
-        tc1_4Script.Date = -3000;
+        tc1_4Script.Date = -3000;*/
+
+        GameObject site1 = siteHolderScript.addEmptySite("Coventry Cathedral");
+        HistoricalSiteScript siteScript1 = site1.GetComponent<HistoricalSiteScript>();
+        //siteScript1.setGCSLocation(new GCS(-1.548796, 52.37359, 0));
+        siteScript1.setGCSLocation(new GCS(-1.548739, 52.40795814, 0));
+        // home  52.37374 -1.548739 138
+        // cov 52.40795814693444, -1.5074476429870276
+
+        GameObject tc1_4 = siteScript1.addEmptyTimeComponent();
+        SiteTimeComponentScript tc1_4Script 
+            = tc1_4.GetComponent<SiteTimeComponentScript>();
+        tc1_4.name = "Time: Before bombing";
+        coventryCathedral.transform.SetParent(tc1_4.transform);
+        tc1_4Script.Date = 1500;
+
+        tc1_4Script.addTag("Columns", -13.0f, 1.4f, 0f);
+        tc1_4Script.addTag("Spire", -7.0f, 1.0f, -10.0f);
 
         siteScript1.updateSpecifiedTimes();
 
-        testFeedback.text += "1.";
+        //testFeedback.text += "1.";
 
         // Determine list of objects to load
         loadSiteArray();

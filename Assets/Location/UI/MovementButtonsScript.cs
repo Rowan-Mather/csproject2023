@@ -158,6 +158,7 @@ public class MovementButtonsScript : MonoBehaviour
     public void toggleLive () {
         liveMode = !liveMode;
         float scale = liveMode ? 0f : 1f;
+        
         //pointer.transform.localScale = new Vector3(scale,scale,scale);
         //ball.transform.localScale = new Vector3(scale,scale,scale);
         arrowImage.transform.localScale = new Vector3(scale,scale,scale);
