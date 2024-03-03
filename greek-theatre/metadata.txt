@@ -1,2 +1,7 @@
 location:52.37901548034326, -1.5609412257743212, 140;
-model_name:greek-theatre|date:340BC;
+model_name:greek-theatre |
+  date:340BC |
+  tag:Theatron, -23,1.5,0 |
+  tag:Skene, 7,1,0 | 
+  tag:Orchestra, -9,-1.4,0 | 
+  tag:Parodos, -8.7,-0.2,-23;
