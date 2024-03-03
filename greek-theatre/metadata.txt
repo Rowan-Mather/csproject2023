@@ -5,3 +5,4 @@ model_name:greek-theatre |
   tag:Skene, 7,1,0 | 
   tag:Orchestra, -9,-1.4,0 | 
   tag:Parodos, -8.7,-0.2,-23;
+model_name:greek-theatre-broken | date:10CE;
