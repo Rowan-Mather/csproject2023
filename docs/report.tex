@@ -1,0 +1,1084 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[margin=1in]{geometry}
+\usepackage[table,xcdraw, dvipsnames]{xcolor}
+\usepackage{hyperref}
+\usepackage{parskip}
+\usepackage[acronym]{glossaries}
+\usepackage{float}
+\usepackage{verbatim}
+\usepackage{listings}
+\usepackage[]{mdframed}
+\usepackage{gensymb}
+\usepackage[shortlabels]{enumitem}
+\usepackage{multicol}
+
+\newcommand{\light}[1]{\textcolor{gray}{#1}}
+
+\newcommand{\must}[1]{\textcolor{red}{#1}}
+\newcommand{\should}[1]{\textcolor{orange}{#1}}
+\newcommand{\could}[1]{\textcolor{green}{#1}}
+
+\bibliographystyle{ieeetr}
+
+\makeglossaries
+
+\newglossaryentry{VR}
+{
+        name=Virtual Reality (VR),
+        description={“A computer-generated simulation of a lifelike environment that can be interacted with in a seemingly real or physical way”\cite{oed:virtualreality}}
+}  
+
+\newglossaryentry{AR}
+{
+        name=Augmented Reality (AR),
+        description={“The addition of computer generated output … to a person's view or experience of … physical surroundings by means of any of various electronic devices”\cite{3dmodel}}
+}  
+
+\newglossaryentry{3dmodel}
+{
+        name=3D Model,
+        description={“A numerical description of an object that can be used to render images of the object”\cite{oed:augmentedreality}}
+}  
+
+\newglossaryentry{site}
+{
+        name=Site,
+        description={A collection of 3D models tied to the same geographic location}
+}  
+
+\newglossaryentry{live}
+{
+        name=Manual/Live,
+        description={Moving around the virtual world with arrow keys / actively using the mobile device’s camera, GPS location, and orientation for this}
+}  
+
+\title{the report to end all reports}
+\author{Rowan Mather \\
+Supervisor: Claire Rocks}
+\date{\parbox{\linewidth}{\centering%
+  March 2024 \endgraf\medskip \hspace{1cm} Keywords: Graphics, Unity, Augmented Reality, Education, Mobile, GPS} }
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{Glossary}
+
+\printglossary
+
+\section{Resources}
+A reader may find it useful to refer directly to the below resources in synergy with the descriptions of this report.
+
+Code Repository: \url{https://github.com/Rowan-Mather/csproject2023/tree/archaev1.1} \cite{tools:repo}
+
+Site Repository: \url{https://github.com/Rowan-Mather/csproject2023/tree/sites} \cite{tools:repo}
+
+ARchae Demo Video: \url{https://www.youtube.com/watch?v=xtoHQ3a2LKU} \cite{design:videodemo}
+
+Project Presentation Slides: \\
+\url{https://docs.google.com/presentation/d/1n2Qd-FJX9IeHvG05MpUy42vssR4PQ2IRw_TUOAio5jk/}
+
+\section{Introduction}
+
+\subsection{Abstract}
+Overcoming the dissonance between a modern day landscape and its historical counterpart can be challenging if it has long gone to ruin. To aid visitors, many popular historical sites provide an immersive series of images showing our best guess as to how it would have looked. Sketches on notice boards are commonplace, but we are increasingly seeing additional \gls{VR} or \gls{AR} experiences. 
+
+In the last year, dissertation work has been dedicated 
+to creating a tool that simplifies this process. Users are able to input their own \gls{3dmodel}s corresponding to a certain time periods, label them, and view them in their real-world location. Now, archaeological researchers and curators of lesser-known historical sites can make the subject of their study accessible on a mobile device with our app: 
+\verb|ARchae|. 
+
+\subsection{Project Selection}
+Having formulated many different ideas for a third year project, this was initially rejected on the grounds that it would already exist. Upon further research, this turned out to be a completely false assumption. There are several applications of a somewhat similar nature, detailed in Existing Work, but such a generalist tool is yet to be published. This indicates at the utility of this project - it was genuinely surprising to find it was a gap in the market.
+
+Knowing that motivation the downfall of most previous student projects, this task was therefore chosen for its exciting interdisciplinary nature with the knowledge that the drive to contribute something meaningful to a primarily non-technical industry would be sufficient to complete it.
+
+\subsection{Justification: Augmented Reality in Education}
+Studies show that use of augmented reality in education, when combined with more typical learning styles, significantly benefits: \cite{education:ARlit}
+
+\begin{itemize}
+    \item Motivation
+    \item Attention
+    \item Memory
+    \item Accessibility
+    \item Collaboration
+    \item Satisfaction
+\end{itemize}
+It is ideal for students that struggle with the written word \cite{education:class}, or cannot reach certain locations or materials \cite{education:placespotentials}.
+
+However, when attempting to utilise a system with over-complicated interfaces without proper teacher training, the opposite effect is inevitable. Absorbing many new digital skills on top of the main teaching material may lead to students being “cognitively overwhelmed” \cite{education:overwhelm}. 
+
+There is clearly a keenness to make use of this technology, but a lack of understanding. A goal of this project is to progress the inclusion of such AR tools in general education, by making set-up and customisation as generally accessible as possible. 
+
+
+\subsection{Initial Interviews}
+To refine the scope, several professionals with historical backgrounds were sought out. 
+
+Firstly, within the computer science department, Dr Rosella Suma, spoke about the work she had done within reconstruction. She recommended looking at photogrammetric techniques for model construction \cite{interviews:rosellapaper}, which would be ideal for a curator initially to make the model to put into the app, but is not the focus of this project. 
+
+In addition, an ex-archaeologist gave her opinion on the proposal, saying "this is just the kind of thing we would have wanted to have". In the industry it is quite typical to visualise smaller table-top items, but she emphasised the importance of presenting the bigger picture.
+
+Finally, a current secondary history teacher was also interviewed about how the project should progress, describing features like the the tags and timelines (see objectives) as a useful extension to the scope which makes it more tailored to education. 
+
+\subsection{Existing Work}
+\label{existingwork}
+The primary use case for this project is in archaeological research and education. However, it is not limited to this - one can place any model anywhere in the real world. In researching the existing work, applications for visualising construction sites were also considered, such as Morpholio Sketchwalk (Figure \ref{fig:morpholio}). These are already successful in mitigating construction errors and enabling collaboration on design \cite{existing:ardesign}. 
+
+Within academia, there have been an array of different projects for the visualisation of particular sites. The conference paper ``A Review on Augmented Reality for Virtual Heritage System" \cite{existing:virtualhertitagereview} neatly details several including a virtual Hagia Sophia \cite{existing:hagia} (Turkish Mosque), Pompeii \cite{existing:pompeii} (Ancient Italian city), and Campeche 
+\cite{existing:campeche} (Mexican city), the latter of which has been optimised with certain techniques detailed in \ref{further work optimisation}. The concept of digitally recreating the past is nothing new, but so far left predominantly in the hands of experts.
+
+Considering tools which are more commercialised than research oriented, the details are even less well documented and lack customisation. As before, specific sites are available such as Tamworth Castle or the Colosseum (in Rome MVR shown in Figure \ref{fig:romemvr}). To correct this, we could look at highly generalised applications such as Google Earth which has a feature to display a 3D model in the photographed world, but since the Google Earth views are pre-captured image data, it is difficult to work with this in an augmented reality sense, or to share one's creations with other users. A summary of some of these applications and their limitations in the context of this project is given below in Table \ref{table:existingwork}.
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.89\linewidth]{figures/introduction/morpholio.png}
+  \caption{Morpholio Trace Sketch Walk \cite{existing:morpholio}}
+  \label{fig:morpholio}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.7\linewidth]{figures/introduction/romemvr.PNG}
+  \caption{RomeMVR - Time Window \cite{existing:romemvr}}
+  \label{fig:romemvr}
+\end{minipage}
+\end{figure}
+
+% Please add the following required packages to your document preamble:
+% \usepackage[table,xcdraw]{xcolor}
+% Beamer presentation requires \usepackage{colortbl} instead of \usepackage[table,xcdraw]{xcolor}
+\begin{table}[H]
+\begin{tabular}{|l|l|l|}
+\hline
+\rowcolor[HTML]{EFEFEF} 
+\textbf{Technology}   & \textbf{Description}                    & \textbf{Issues (for this application)} \\ \hline
+Timelooper \cite{existing:timelooper}     & Viewing reproduced historical moments.  & Fixed in place.                        \\ \hline
+Google Earth \cite{existing:googleearth}   & Puts 3D models in a world-view.         & Not live, cannot be widely shared.     \\ \hline
+Historik \cite{existing:historik}       & Sites tagged with information.          & Mostly still images of sites.          \\ \hline
+Arki \cite{existing:arki}           & Models for construction demo on site.   & Marker-based, built-in 3D editor.      \\ \hline
+Morpholio Sketch Walk \cite{existing:morpholio} & Construction layout pulled up into 3D.  & Marker-based, local sharing only.      \\ \hline
+Historic VR \cite{existing:historicvr}          & 3D dynamic environments.                & Fixed on LCD screens and bespoke.      \\ \hline
+RomeMVR \cite{existing:romemvr}              & Viewing 3D reconstructions over Rome.   & Bespoke, limited movement.             \\ \hline
+Tamworth Castle Trail \cite{existing:tamworth} & Virtual people/objects explaining site. & Small-scale, marker-based.             \\ \hline
+\end{tabular}
+\label{table:existingwork}
+\caption{A summary of some of the complete existing work applications.}
+\end{table}
+
+\subsection{Originality}
+This project has three crucial distinguishing features which separate it from the existing work:
+\begin{enumerate}
+    \item It uses augmented reality. \\
+    Visualising locations is mostly done on a standard monitor or in virtual reality (see Figure \ref{fig:VRvsAR}). For the most part this is sufficient, but to truly get a grasp of what life was like in the past, it is best to place the structures in situ.
+    \item It is general-purpose. \\
+    Most augmented reality applications are bespoke, made by an external company to suit the exact needs and layout of the site. This project is not as tailored, but usable anywhere in the world for any model. Often smaller locations/projects will not have the resources to develop their own system, but can use ARchae freely instead.
+    \item It is GPS location-based. \\
+    Augmented reality applications that require the virtual object to be placed in a specific position often use some form of image `anchor' or `marker', such as a table (see Figure \ref{fig:ARmarker}). As you move your phone, the app tracks the relative position of the table and keeps the virtual object still. Since this project operates on on a much larger scale, markers are not as suitable. It uses the geographic position instead.
+
+\end{enumerate}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.93\linewidth]{figures/introduction/VRvsAR.jpg}
+  \caption{Graphic showing the difference between \\ VR, AR, and MR. \cite{originality:arvrmr}}
+  \label{fig:VRvsAR}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.7\linewidth]{figures/introduction/example-of-marker-based-AR.jpg}
+  \caption{An example of a typical AR marker \\ (which this project will be not be using). \cite{originality:armarker}}
+  \label{fig:ARmarker}
+\end{minipage}
+\end{figure}
+
+This project in effect combines many of the most useful aspects of all these systems into a single immersive application.
+
+\section{Project Statement}
+\subsection{Outline}
+Create a mobile app which imports 3D models from a web-server which pertain to certain historical sites. These can be assigned location and time information, and labelled with additional information about the site. Users will be able to walk around the site in the present day and experience in augmented reality how the site used to look.
+
+\subsection{Objectives}
+\label{Objectives}
+Set out in the specification, the objectives have remained unchanged throughout the project. They are broken down firstly by priority: 
+\begin{itemize}
+    \item Must-Have \must{(M)}
+    \item Should-Have \should{(S)}
+    \item Could-Have \could{(C)}
+\end{itemize}
+
+They are also broken down by area. The three main overarching categories of work set out in the methodology correspond as such:
+\begin{itemize}
+    \item \ref{modelimporting} `Model Importing': Objectives I and II 
+    \item \ref{movement} `Movement': Objective III 
+    \item \ref{augmentedrealitysynthesis} `Augmented Reality Synthesis': Objective III (final points) and Objective IV 
+\end{itemize}
+
+The aim was the have a Minimum Viable Product (the Must-Haves by the Christmas break), and to iterate from there, as further detailed in \ref{methodology}. This roughly corresponds to Objectives I-III.
+
+\begin{enumerate}[label=\Roman*.]
+\item \textbf{User may upload a model to a remote server.}
+    \begin{enumerate}[label=\arabic*.]
+    \item \must{(M)} Models will be in the wavefront (.obj) form.
+    \item \could{(C)} Models can be uploaded in additional common formats e.g. .fbx, .dae, .blend
+    \item \must{(M)} User may upload a texture and other metadata to pair with the model.
+    \item \should{(S)} A subset of the server models can be externally selected to be available in app.
+    \item \could{(C)} Users cannot upload without submitting a review request.
+    \end{enumerate}
+    
+\item \textbf{User may download models from the server into their local app.}
+    \begin{enumerate}[label=\arabic*.]
+    \item \must{(M)} Models can be imported from the server in their pure object form.
+    \item \should{(S)} They can be coloured/textured according to an accompanying texture file (.mtl).
+    \item \should{(S)} Users can select a subset of the server models to import locally.
+    \item \should{(S)} Models will render with their textures and metadata.
+    \item \must{(M)} Models will render with reasonable latency, generally a maximum of 2 seconds per model.
+    \end{enumerate}
+
+\item \textbf{User will be able to set their location and move around the models.}
+    \begin{enumerate}[label=\arabic*.]
+    \item \must{(M)} User has a manually configurable geo-location (latitude \& longitude).
+    \item \must{(M)} User has a manually configurable orientation.
+    \item \must{(M)} Models can be placed in a geo-location relative to the user.
+    \item \should{(S)} Models will render only when within a certain distance to the user.
+    \item \should{(S)} User can change the render distance.
+    \item \could{(C)} User can change the scaling of the whole scene.
+    \item \should{(S)} User location can be set to their actual mobile device's geo-location.
+    \item \should{(S)} User can move freely while the app tracks their geo-location.
+    \item \should{(S)} Compass direction can be set to that of device.
+    \item \should{(S)} Tilt can be set to the spirit level of device.
+    \item \should{(S)} User can switch between manual and device modes.
+    \item \should{(S)} Add camera input as background for the scene.
+    \item \could{(C)} Have a slider for model transparency.
+    \end{enumerate}
+    
+\item \textbf{Additional information about the sites will be accessible.}
+    \begin{enumerate}[label=\arabic*.]
+    \item \could{(C)} Models can be tagged with information in a specific relative location to the model.
+    \item \could{(C)} Tags can be clicked to view further information/photos.
+    \item \could{(C)} Tags can be shown/hidden in scene.
+    \item \could{(C)} A date (range) will be in the corner corresponding to the age of the site you are viewing.
+    \item \could{(C)} A timeline scroll will be at the bottom of the screen.
+    \item \could{(C)} Models can be attached to a specific time period and will only be visible when this is selected.
+    \end{enumerate}
+
+\item \textbf{The app will be intuitive and guided.}
+    \begin{enumerate}[label=\arabic*.]
+    \item \could{(C)} Include a menu with an app tutorial.
+    \item \could{(C)} Most information can be hidden so the user is not overloaded.
+    \item \should{(S)} The default view will be a simple drop-down list of available models and device mode.
+    \end{enumerate}
+\end{enumerate}
+
+\section{Project Management}
+\subsection{Tracking Progress}
+Each work session and its timings was noted in a Google Doc. This has been helpful in tracking bugs, returning to different focuses, and remembering what areas were the most time consuming.
+
+More formally, tasks were layed out in a custom Gantt Chart. This was created for the specification in week 2 (Figure \ref{fig:gantt1}), then updated after Christmas with additional details for the specifics of the AR synthesis for Term 2 (Figure \ref{fig:gantt2}). 
+
+The planning was closely adhered to, especially in Term 1 since that was dedicated to building the core functionality. There was a little more freedom for experimentation in Term 2, since work was towards additional features. In particular, the tags and timelines were worked on earlier (Figure \ref{fig:gantt3}) due to the date of Evaluation Day (see Section \ref{evaluation}), which was not made available until after the term had been planned.
+
+\textbf{Gantt Chart Key}: 
+\begin{itemize}
+    \item \light{Grey}: scheduled work period
+    \item \textcolor{ForestGreen}{Dark green}: work on schedule
+    \item \textcolor{YellowGreen}{Pale green}: work off schedule
+\end{itemize}
+
+\begin{figure}
+    \includegraphics[width=650pt, angle=90]{figures/projectmanagement/gantt3.pdf}
+        \caption{Initial Specification Gantt Chart}
+        \label{fig:gantt1}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=650pt, angle=90]{figures/projectmanagement/ganttpanic.pdf}
+        \caption{Updated Term 2 Gantt Chart}
+        \label{fig:gantt2}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=650pt, angle=90]{figures/projectmanagement/ganttendt3.pdf}
+        \caption{Gantt Chart showing progress by the end of Term 3.}
+        \label{fig:gantt3}
+\end{figure}
+
+\subsection{Methodology}
+As evident from the waterfall-like structure of the Gantt chart, the methodology is for this project is a similar one. Specifically, an agile version of the \textit{Incremental Method} \cite{management:incremental} was selected as the most appropriate. 
+
+The incremental method sets out the development of a project in distinct stages, or increments. Each stage as follows:
+\begin{enumerate}
+    \item Requirements analysis
+    \item Design
+    \item Code 
+    \item Test
+\end{enumerate}
+In the standard model the requirements are fixed for the duration of the increment, and one only considers one increment at a time. This makes it ideal for creating a basic but complete version of the product quickly and for ensuring robustness from the ongoing testing. 
+
+In the case of this project, a slight adaptation had to be made since a plan spanning the whole development period was required. In addition, some change to the requirements in an increment as it was being developed would be permitted where the exact techniques were unknown, but this was kept to a minimum.  
+
+\subsubsection{Increment 1 Specification}
+The aim was to have a Minimum Viable Product by the Christmas holidays (the Must-Haves in Section \ref{Objectives} Objectives). This involved:
+
+\begin{itemize}
+    \item Completing all initial research necessary research to set up the Unity project.
+    \item Import models from a server.
+    \item Display the models in the virtual world.
+    \item Move around the virtual world manually. 
+\end{itemize} 
+
+\subsubsection{Increment 2 Specification}
+Having completed Increment 1 a little early, most of Increment 2 was intended for the end of term and the holidays. The aim was to have a fully functional \textit{virtual reality} app: 
+\begin{itemize}
+    \item Build the app onto a mobile device.
+    \item Get the device's GPS location.
+    \item Get the device's orientation. 
+    \item Correspond these measurements to the virtual world.
+    \item Switch between the live and manual movement.
+\end{itemize} 
+
+\subsubsection{Increment 3 Specification}
+\label{increment3}
+Finally, Increment 3 was completed during Term 2 and involved converting the app to one working with \textit{Augmented Reality}, and adding as many extra features as possible. There were two directions that this project could take as extension: either focusing on the UI, or adding optimisations. It was decided that since the intention was accessibility and the system was coping well with load in testing so far, the priority should be to have a clean layout:
+\begin{itemize}
+    \item Add the camera input as the background.
+    \item Add tags for additional labelling information.
+    \item Add a timeline to switch between periods. 
+    \item Add a main menu.
+    \item Add a side menu for selecting a subset of models
+    \item Add a tutorial.
+\end{itemize} 
+
+\subsection{Meetings}
+Weekly meetings during term time were held with Dr Claire Rocks. These were useful for selecting the direction of this project at each increment, adhering to the plans and discussing the general organisation and marking of the third year project. Having something to present at meetings has been strongly motivating every week, and Claire's advice has been invaluable.
+
+\section{Design}
+\subsection{Tools}
+\subsubsection{Unity}
+This project has been mostly constructed using the Unity game engine \cite{design:unity}, which uses scripts in C\#. 
+
+Platforms designed specifically for mobile app development such as Android Studio \cite{design:android} were also considered, however due to the graphical nature of this project, a game engine which is built for handling 3D models was the appropriate choice. With a basic little experience in Unity, it was chosen above alternatives such as Unreal \cite{design:unreal}, but these also could have been used to much the same effect.
+
+\textbf{Advantages of Unity}:
+\begin{itemize}
+    \item Designed for mobile game development.
+    \item Designed for handling heavy graphics.
+    \item Can interpret .blend, .obj, and other 3D model files implicitly.
+    \item Has built-in support for certain mobile sensors.
+    \item Has a quick run feature for mobile so the project does not have to be fully built for each test. 
+    \item Has a vast array of libraries, assets and contributors.
+\end{itemize}
+
+\textbf{Disadvantages of Unity}:
+\begin{itemize}
+    \item Steep learning curve for understanding the interface.
+    \item Cannot work easily with files outside its project scope (see Section \ref{initiallocalattempt}).
+    \item Requires large amounts of memory to store and run a project.
+\end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/design/unitylogo.png}
+        \caption{The Unity logo.}
+        \label{fig:unitylogo}
+\end{figure}
+
+\subsubsection{Git \& GitHub}
+\label{gitandgithub}
+As a widely used tool, Git was selected for version control of the source code. 
+
+In addition, the GitHub repository serves as the web-server for storing the 3D models. This was the simplest method for creating an easily modifiable online storage location for the files, and since web-dev was not the focus of this project, it more than sufficed. However, in a full release of the app, it would be wise to create a custom website to upload files to, and in the code it is elementary to change the location to download from.
+
+The web-server is available here: \url{https://github.com/Rowan-Mather/csproject2023/tree/sites} \cite{tools:repo}
+
+\subsection{System Overview}
+The extended ARchae system is not simply comprised of the mobile app, as shown in Figure \ref{fig:systemoverview}. As mentioned in Section \ref{gitandgithub}, it pulls in the uploaded 3D models from the GitHub server. The app also takes input directly from the mobile device, namely the camera for AR purposes, the gyroscope for determining rotation, and the GPS co-ordinates for location.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/design/systemoverview.png}
+        \caption{Context model-like diagram showing the interactions of the ARchae system.}
+        \label{fig:systemoverview}
+\end{figure}
+
+\could{?!?!? add some images of the system to complement}
+
+\subsection{UI Design}
+\label{uidesign}
+In Increment 3 (see \ref{increment3}), involving most the UI design, the mock-up shown in Figure \ref{fig:uimockup} was drawn up. Some modifications were made in the final design, shown in Figure \could{!?!?!}.
+
+The final design is shown on a mobile in portrait instead of landscape, but many of the features and relative positioning remain the same, with the main modification being the removal of the scroll wheel. In the final version of the app this was replaced by simply dragging the screen to rotate.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/design/labelleduidesign.png}
+        \caption{Mock-up of the Application User Interface with functionality labels.}
+        \label{fig:uimockup}
+\end{figure}
+
+\could{?!?!? add view of final UI and some more detailing of the implementation of the buttons, side bar etc all that potentially could go in implementations too}
+
+\subsubsection{Neilson's Design Principles}
+Where possible the interface has been designed in line with the well-known heuristics: Neilson's Design Principles \cite{design:neilsons}:
+
+\begin{enumerate}
+    \item \textit{Visibility of system status} \\
+    The system is informs you of your location in live mode, and the live toggle changes colour depending on the mode.
+    \item \textit{Match between system and the real world} \\
+    There aren't too many technical terms in the interface, so as long as the user understands the premise of the app, they should be able to work it out. At present, the only language available is English, but this could be easily extended in a full release of the app. 
+    \item \textit{User control and freedom} \\
+    Every action taken is immediately undo-able with no lasting effect.
+    \item \textit{Consistency and standards} \\
+    The language is minimal, but consistent throughout. The GPS co-ordinates are converted into the standard degree form.
+    \item \textit{Error prevention} \\
+    If data is entered incorrectly on the server side, it will not be pulled into the app. Otherwise there is little room for error which cannot be corrected straight away.
+    \item \textit{Recognition rather than recall} \\
+    The arrow keys and timeline are well known symbols, and the left arrow is also a common indicator of an extensible side bar.
+    \item \textit{Flexibility and efficiency of use} \\
+    The side-bar does not ever need to be accessed for basic functionality of the app, neither does the timeline if only one model is available. The app always defaults to manual mode (with just the arrow keys) so is at first a simple open-world style explorer.
+    \item \textit{Aesthetic and minimalist design} \\
+    The UI is fairly simple, and all additional information not intrinsic to the currently viewed model is hidden in the sidebar.
+    \item \textit{Help users recognize, diagnose, and recover from errors} \\
+    There is little error diagnosis at present since all error messages should be dealt with behind the scenes.
+    \item \textit{Help and documentation} \\
+    There is a tutorial/video demo. \cite{design:videodemo}
+\end{enumerate}
+
+\section{Implementation}
+
+\subsection{Model Importing}
+\label{modelimporting}
+
+\subsubsection{Initial Local Attempt}
+\label{initiallocalattempt}
+Before introducing the web-server, it was attempted to import models more directly from the local memory. With code being written in C\#, all the runtime read/write functionality is available such as StreamReader \cite{models:streamreader}. As expected, within the scope of the Unity project (the collection of files that the Unity Editor interacts with) one can read and write text files.
+
+However, using the standard tooling outside of the Unity project, as we would want to for externally created model files, causes an error. External access such as this cannot be built neatly into a self-contained application, so it is highly unusual to attempt such a thing in a game engine. 
+
+The first attempt to tackle this was with the SimpleFileBrowser, which for Android uses the Storage Access Framework, and this successfully manages to import files to the project at runtime. Next, an issue is that simply importing a raw model file will not allow it to be shown in the virtual world. Unity performs a series of pre-processing functions when you import a model normally at compile time, and by doing it at runtime this is by-passed. With further work, these functions could have been called at runtime. But, there exists another asset that simplifies the whole process - the Runtime OBJ Importer \cite{models:objimporter}.
+
+\subsubsection{Using OBJ Files}
+The Runtime OBJ Importer assists with downloading .obj files into the project from either the local memory or the web. It also applies this aforementioned pre-processing so is ideal for our purposes. 
+
+As suggested by the name, without modification, the asset only works with object files. This is not to be confused with the machine code or bytecode term - it is one of the oldest and most widely used type of 3D model file. Most pieces of 3D modelling software will export to it, so this was decided to be sufficiently general on its own. Inherently, the object files only describe the vertices of a model, so to add a colour/texture, they must be accompanied by a material file (.mtl). Again, Blender which was used for this project and other such modelling software will export the two file types together automatically. The Runtime OBJ Importer also has some support for adding material files.
+
+\subsubsection{Server Creation}
+After experimenting with the importer asset locally, it was tested on some online repositories of 3D models such as the samples from Florida State University \cite{models:samplemodels} shown in Figure \ref{fig:basicico}. 
+
+\begin{figure}[]
+    \centering
+    \includegraphics[width=0.4\textwidth]{figures/implementation/importing/basicico.jpg}
+        \caption{Initial experimentation with object importing on a icosahedron.}
+        \label{fig:basicico}
+\end{figure}
+
+Next, the GitHub web-server was created \cite{tools:repo}. It was decided that the most intuitive method was to create a folder for each site available in the app. This would contain any object and material files for it, as well as the special \verb|metadata.txt| file which would describe its location, date, and other such information about the site not intrinsic to the model. There is also a master file that contains all the names of the folders to be considered, so when you first add a folder to the server its data is not immediately pulled into the app. 
+
+It is important to note that the URL of the server is unimportant - in a full release of the app the GitHub server could be replaced with a completely bespoke one, but this was outside the scope of this project and comes with its own set of security issues as to how one is allowed to upload models. A completely accessible system could be open to attack by flooding and so forth.
+
+To read this information, the WWW utility \cite{models:www} was used which gets the content from a URL. The metadata is then manually parsed. There is support for different amounts and ordering of the information, and different date formats. For example, the location and date are technically optional, but it wouldn't be useful to not include them. 
+
+\subsubsection{Introducing the Hierarchy}
+Returning to the C\#, naturally it was not sufficient to simply use the imported .obj file directly as our site. This lead to the design of the main object hierarchy shown in Figure \ref{fig:initialhirearchy}. All the Sites are contained in the SiteHolder, and each \gls{site} contains a WavefrontObject which contains the .obj. Once the obj is imported, its transform is childed to that of its site parent.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/implementation/importing/hirearchywhite.png}
+        \caption{The early Unity hierarchy for model importing where all models are wrapped directly into sites.}
+        \label{fig:initialhirearchy}
+\end{figure}
+
+As such, the system is capable of importing single models with textures for each site, as shown in Figure \ref{fig:earlyimportedscene}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/implementation/importing/examplescene.png}
+        \caption{Tests from Increment 1 showing two simple models imported as sites into the virtual world.}
+        \label{fig:earlyimportedscene}
+\end{figure}
+
+\subsubsection{Extending to Multiple Time Periods}
+The system in the form described so far has little specificity with regard to its historical use-case. To improve upon this, the tags (text labels on the model) and timeline was added. This is was planned under the AR Synthesis heading in the gantt chart (Figure \ref{fig:gantt3}) but is detailed here since it required a heavy re-working of the import system and Site hierarchy. Each site has a number of \verb|TimeComponents| which are individually dated and represent the site at different periods. A time component has its own model, material and set of tags. The updated hierarchy is shown in Figure \ref{fig:hierarchydiagram}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\textwidth]{figures/implementation/importing/objectclassdiagram.png}
+        \caption{Simplified class diagram of the Site hierarchy.}
+        \label{fig:hierarchydiagram}
+\end{figure}
+
+In the web-server, this corresponds to more files in the site folder and an updated \verb|metadata.txt|. For clarity, an example metadata file may look like the following: 
+\par
+\verb|           metadata.txt|
+\begin{mdframed}[leftmargin=50pt, rightmargin=50pt]
+    \begin{verbatim}
+location:52.37901548034326, -1.5609412257743212, 140;
+model_name: greek-theatre | date:340BC      |
+    tag: Theatron,          -23,1.5,0       |
+    tag: Skene,             7,1,0           | 
+    tag: Orchestra,         -9,-1.4,0       | 
+    tag: Parodos,           -8.7,-0.2,-23   ;
+model_name: greek-theatre-broken | date:10CE;\end{verbatim}
+\end{mdframed}
+
+The tags are all instantiated from a \verb|prefab| (like a Unity object template) which has a C\# script and a \verb|TextMesh|, that is a 3D model which appears as text. This is called from the appropriate \verb|TimeComponent| script with \verb|addTag|.
+
+When first adding the text component, a slightly different version of the prefab was created. This was not using a 3D model as text but rendering it as part of the UI, which meant that there was no sense of depth. Text would appear in a different relative position to its corresponding site 3D model depending on the perspective. You can write custom shaders to change this behaviour, for which a method was discovered with much investigating of the default shaders, but eventually the model form was discovered instead which was far easier to work with. 
+
+In addition, to be able to always read the text, it was modified to always rotate towards the camera using \verb|Quaternion.LookRotation| with the camera transform as input. Some initial testing for the tags is shown in Figure 
+\ref{fig:ballconetag}.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/implementation/importing/ballandconelabelled.jpg}
+        \caption{Testing adding one tag each to two simple `sites'.}
+        \label{fig:ballconetag}
+\end{figure}
+
+The timeline had two main challenges:
+\begin{enumerate}
+    \item Identify the available dates given the current loaded sites. Show these and distribute them along the timeline.
+    \item For the selected available date $x$ and its successor $y$, display only the time components with a date $x \leq t < y$.
+\end{enumerate}
+
+Each site has a sorted list of the dates from its time components. These are passed to the site holder which also checks whether the site should currently be rendered. If it should it takes the union of its master set with the site's set and proceeds. 
+
+Once all the valid dates are collected, they are passed to the script for the timeline. As with the tags, the labels on the timeline for each date are instantiated from prefabs and distributed with the lowest available date on the left and the highest on the right. The \verb|selectedDate| variable is then passed back to the site holder which in turn passes it back to the sites. Each site binary searches for either that exact date in its time components, or the nearest component above it, and the corresponding models are rendered. Tests on the timeline are shown in Figure \ref{fig:timelinetest}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{figures/implementation/importing/timelinetest.jpg}
+        \caption{A test site at three different arbitrary time periods with their own tags.}
+        \label{fig:timelinetest}
+\end{figure}
+
+\subsection{Movement}
+\label{movement}
+
+\subsubsection{The Co-Ordinate System}
+Within the Unity editor, everything has a global position, and child objects also have local positions relative to their parents. With this application however, we wish to work with the Geographic Coordinate System (GCS), made up of the latitude and longitude and measured by a mobile devices GPS receiver (GPS co-ordinates). 
+
+For \textbf{disambiguation} purposes, each of these will be referred to as such:
+\begin{itemize}
+    \item GPS: the real measured GCS co-ordinates of the user or site.
+    \item Global: where the object appears in the Unity editor using the app co-ordinates.
+    \item Local: the Unity co-ordinates using the parent of the object as the origin.
+\end{itemize}
+
+A class for representation of the GPS co-ordinates was created, also including altitude for the height above sea-level of the site. Latitude and longitude are measured in degrees and altitude in metres. The values are each stored as a double value, but latitude and longitude are commonly presented in the common form of degrees, minutes and seconds \cite{movement:latitudelongitude}. A display function was composed to convert the sign to the corresponding cardinal direction and repeatedly take the decimal part and convert it to the appropriate unit of that magnitude. This output is what is shown in the UI.
+
+Each site has GPS location, and as does the user. The positioning within the Unity editor was then designed such that one unit of distance is approximately equivalent to one metre in the real world. For a site, this is calculated as the real distance between the site and the user and then scaled by 111139 (which is approximately one degree in metres). Due to the curvature of the Earth, it is not an exact scalar in general, and this could be corrected by using the Haversine formula \cite{movement:haversine}. However, on this scale the difference is negligible so the additional computation time is not necessary.
+
+\subsubsection{Updating Positions}
+The GPS positions of the sites are loaded upon app start-up, but the globals are updated every frame. The global position of the camera (or user) is fixed and the other objects move relative to it to give the impression that the user is moving through the world. 
+
+\subsubsection{Render Distance}
+If there are too many vertices in one location, it is possible that the app could begin to struggle to render everything (although it has not so far in testing). To mitigate this, objects within a certain GPS distance of the user are the only ones rendered. Specifically, anything further than $0.01\degree$ ($\approx$ 1km) is hidden.
+
+\subsubsection{Manual Movement}
+In the early stages of the project, the location was updated through the editor \verb|ContextMenu|, which allows a developer to create tools to quickly call test functions. Indeed the ContextMenu was used throughout the project, but for this purpose it was quickly replaced with the UI on-screen arrow keys for manual movement (as shown in Figure \ref{fig:manualmovement}). Pressing the forward button updates the stored GPS locations with the following formula:
+
+\hspace{1cm} $longitude -= cos(\theta) \cdot speed \cdot deltaTime$
+
+\hspace{1cm} $latitude -= sin(\theta) \cdot speed \cdot deltaTime$
+
+where $\theta$ is the angle of the camera about the vertical axis.
+
+\begin{figure}[]
+    \centering
+    \includegraphics[width=0.3\textwidth]{figures/implementation/movementbuttonscene.PNG}
+        \caption{Arrow keys in the editor, showing where the hidden bounding box for each button is.}
+        \label{fig:manualmovement}
+\end{figure}
+
+The \verb|deltaTime| is a measure of the time between the previous frame and the current. The application is designed to run at 30fps, so the deltaTime will be approximately 1/30, but it is included to account for variation in hardware. Speed by default is set to $5/111139$, meaning the user will travel in manual mode at 5m/s (but this change is made in degrees of latitude and longitude). This speed was selected as it is typical for running \cite{movement:runningspeed}.
+
+As to the orientation of the camera, initially this was updated via a scroll circle. The direction of turn was controlled by the angle of the pointer on the circle relative to its origin and the speed of turn by the distance. This was part of the initial design (See Section \ref{uidesign}) and fully functional, but not as intuitive as the more standard approach of dragging on the screen so it was removed.
+
+Instead, upon movement of the user's finger, the amount to turn is calculated as using difference between the previous touch point and the current one. The type of touch is also checked for continuity so that a user cannot accidentally move the screen with the palm of their hand, for example \cite{movement:touchcontrol}. 
+
+\subsubsection{Live Movement}
+The \verb|LIVE| button in the top right of the UI switches between \gls{live} mode, where live is actively using the device's GPS to determine the location, and the gyroscope for the orientation. All of the live data collection is done via the \verb|InputHandler| class. 
+
+\subsubsection{Mobile Device GPS}
+The location is accessed via the Unity location services \cite{movement:locationservice}. At first, the returned latitude and longitude were returning only 0. This was for a series of reasons:
+
+\begin{enumerate}
+    \item By default, it is likely that a user has disabled access permissions to their location. \\ Functions were written to check for access and query it. Permissions are split into `coarse' and `fine', determining the level of precision allowed. For optimum functionality of the app the greatest level of precision is allowed so both must be requested separately.
+    \item The location service has been queried before it is initialised. \\ The location status is checked and waited on a fixed number of times before returning a null result.
+    \item The location service is not given sufficient time to initialise. \\ The start function is placed into a function returning an \verb|IEnumerator|. This means it can be activated as a co-routine and runs independently of the querying which can be as often as 30fps.
+\end{enumerate}
+
+Once the data is collected it is passed to the \verb|UserLocationScript| to update the stored GPS co-ordinates.
+
+\subsubsection{Gyroscope}
+Getting orientation data proved to be far more challenging than originally expected. Unity has multiple input systems, most importantly the default legacy system and the 2022 newer release version (\cite{movement:newinputsystem}). 
+
+Originally, the `attitude sensor' of the legacy system was investigated, as this is likely the most typical solution. However, this was returning a null output. Instead the newer input system was installed and tested on the same sensor, and this was still returning a null output. 
+
+As with the GPS service, the sensor needs to be specifically enabled and allocated time to begin collecting data. This was added and, whilst a crucial step, did not fully solve the problem.
+
+The device itself was tested in a separate application to check for the functionality of the gyroscope, and there were no problems so it had to be the specifics of Unity. Indeed, a bug report was discovered detailing the issue on the same device as the primary testing one (Samsung Galaxy Tab S10) \cite{movement:gyroissue}. 
+
+The gyroscope sensor has a multitude of different properties, so each was checked for output, and some was being generated, but simply not for the \verb|attitude| (Figure \ref{attitudezeros}). Instead the \verb|unbiasedRotationRate| was selected as an appropriate alternative. Where the attitude returns the relative orientation of the device directly, the rotation rate is the change in radians per second. Hence, one can calculate the attitude by continuously updating it by the rotation rate. The `unbiased' part comes from the post-processing applied by Unity to improve the accuracy of the raw hardware output \cite{movement:rotationrate}. 
+
+\begin{figure}[]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/implementation/attitudenoin.PNG}
+        \caption{Debug output showing no output from the attitude sensor despite the gyroscope being enabled and available output from the other sensors.}
+        \label{fig:attitudezeros}
+\end{figure}
+
+This approach seemed successful and lead to a smooth mapping from the movement of the device to the virtual camera in the editor. 
+
+However, upon finalising a full build of the app, the sensor was again returning null. Again, further devices were tested on to ensure it was not a compatibility issue of the primary one, but the issue persisted. It was determined to be a problem with the incompleteness of the new input system, so the legacy system was returned to, but still using the \verb|unbiasedRotationRate| attribute of the gyroscope. Since this is a more stable system, the fully built version worked. 
+
+\subsection{Augmented Reality Synthesis}
+\label{augmentedrealitysynthesis}
+
+\subsubsection{Camera Input}
+To turn the VR application into an AR one, the missing component was camera input. Again this is mostly done via the custom InputHandler class. This searches through available devices for a backward-facing camera and tries to activate it. Failing to find a `back-cam', it tries to use the first other camera available. The input from this device is then converted to a custom material texture and returned as shown in Figure \ref{fig:camerabackground} \cite{arsynthesis:cameratutorial}.
+
+\begin{figure}[]
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/implementation/realbackground.png}
+        \caption{The Unity Editor running a simulation of the app taking in the camera input from an external device and creating a custom texture for it.}
+        \label{fig:camerabackground}
+\end{figure}
+
+\subsubsection{Joining the Real and Virtual Cameras}
+The virtual camera script calls the InputHandler function and then when the app is in live mode, shows a plane at the back of the UI layer. This plane is textured with the real camera output so as to overlay the real world onto the virtual one.
+
+In early development of this feature, the camera display was very slow to update. Confusingly, there was also a quiet, persistent clicking coming from the device. Listening to the camera, it was discovered that the shutter was being repeatedly opened and closed. The camera was being reactivated every frame, so the initial call was placed in a start function and then the input was far smoother, as shown in Figure \ref{fig:camerainlab}.
+
+\begin{figure}[]
+    \centering
+    \includegraphics[width=0.4\textwidth]{figures/implementation/importing/camerainlab.jpg}
+        \caption{Testing the camera in the labs with the icosahedron model.}
+        \label{fig:camerainlab}
+\end{figure}
+
+Finally, the camera didn't fill the screen correctly. A Unity component was added called an `Aspect Ratio Fitter'. At first it was configured to fit in the parent - that is the camera input plane shrinks to match the size of the device screen (the canvas), maintaining its aspect ratio. However, this left gaps where there was just the virtual world visible. It was decided that it would be better to always cover the canvas even if some of the edges from the camera input spilled over, so `Envelop Parent' was selected instead and the textured plane was set to stretch over the whole canvas. This created the final seamless display.
+
+\section{building to mobile and nothing works}
+
+\section{but now it does yay}
+
+\section{Testing}
+
+\subsection{Incremental Testing}
+
+\subsubsection{Increment 1}
+Much of the testing for Increment 1 was done in a separate project to the main ARchae development one. This was due to several different experimental approaches being taken to model importing. Below it a dynamic test plan documenting the cases of model importing once the final strategy showed promise. 
+
+\begin{table}[H]
+\begin{tabular}{llll}
+\textbf{\#} & \textbf{Type} & \textbf{Test}                                               & \textbf{Result} \\
+1          & Normal        & Imports and displays package sample test case.              & Success.        \\
+2          & Normal        & Imports another model from the same server.                 & Success.        \\
+3          & Normal        & Imports 3 models from the same server simultaneously.       & Success.        \\
+4  & Normal    & Imports simple cube model from GitHub server link.                      & Failed ** \\
+5          & Normal        & Imports icosahedron from GitHub.                            & Success.        \\
+6          & Normal        & Imports 3 models from GitHub simultaneously.                & Success.        \\
+7          & Normal        & Reads metadata from GitHub server and outputs to terminal.  & Success.        \\
+8          & Normal        & Places 3 models in global co-ordinates defined by metadata. & Success.        \\
+9          & Boundary      & Imports only 1 model in master list when 3 are available.   & Success         \\
+10 & Boundary  & Imports only 3 truly available models when 4 are listed in master file. & Success                                                           \\
+11         & Erroneous     & Does not import model of the .fbx type and does not crash.  & Success         \\
+12 & Erroneous & Positions model at the origin given invalid metadata co-ordinates.      & Success 
+\end{tabular}
+\caption{Model importing tests using the OBJ Importer \\ ** Amended to the link to the raw data: successful.}
+\end{table}
+
+Once this success was established, the method was transferred to the ARchae project. The other component of this increment was the manual movement. This was tested first using unit tests on the position setting and orientation functions via the Unity Context menu. Then the arrow keys were added and the two were used in combination to check the virtual GPS location was changing correctly from different starting points.
+
+\subsubsection{Increment 2}
+Increment 2 was testing-heavy since it was where the specifics of the hardware became relevant - until this point the app worked only on the development computer. The iterative process of working with the sensors is detailed in Section \ref{movement}. Figure \could{fesihegshgrshgrh} shows the feedback from many of the different gyroscopic outputs.
+
+The GPS input was compared to estimates from Google Maps, and tested extensively across the University of Warwick campus and further around the West Midlands. However, as with most projects featuring specific location information, testing is lacking outside of this region. To confirm generality it would be beneficial to set up sites across the UK and beyond, but due to time and monetary restrictions this is not possible within the scope of this project.
+
+\subsubsection{Increment 3}
+Testing for the tags and timeline could be planned similarly to model importing in Increment 1, since they are an extension to it:
+\begin{table}[H]
+\begin{tabular}{llll}
+\textbf{\#} & \textbf{Type} & \textbf{Test}                                                              & \textbf{Result}                       \\
+1 & Normal   & Tag information is read from the server and can be outputted to the terminal. & Success.                                       \\
+2 & Normal   & A tag can be placed at the centre of a site.                                  & Success (a) \\
+3          & Normal        & A tag can be positioned using the global co-ordinate system of the site.   & Success.                              \\
+4          & Normal        & Multiple tags can be added likewise.                                       & Success.                              \\
+5          & Normal        & Tags always rotate to face the user in the full circuit of the site.       & Success.                              \\
+6          & Erroneous     & Tags with erroneous formatting are not included.                           & Success.                              \\
+7          & Normal        & Two sites can be added to the server with dates appearing on the timeline. & Success.                              \\
+8 & Boundary & One of two sites can have a date excluded.                                    & Success (b)     \\
+9          & Normal        & Several sites can be added with a date.                                    & Success                               \\
+10         & Boundary      & One site can be added with a date.                                         & Failed (c)                               \\
+11         & Erroneous     & Metadata can refer to sites not uploaded.                                  & Success (d) \\
+12         & Normal        & Different tags can be ascribed to different time periods.                  & Success                               \\
+13         & Normal        & Scrolling the timeline will change the selected period and visible sites.  & Success                               \\
+14         & Normal        & Multiple sites can have the same date and be selected together.            & Success                               \\
+15         & Boundary      & Selecting a date without a site will display the most recent site.         & Success                              
+\end{tabular}
+\caption{Testing the tags and timeline.}
+\end{table}
+\begin{enumerate}[(a)]
+    \item Adjustments to the cosmetics are made.
+    \item Note: Dateless sites are always visible.
+    \item The app threw an error since there was no way to evenly distribute one site across a range. An extra case was added to cover this.
+    \item No site appears, all errors escaped.
+\end{enumerate}
+
+The camera input itself has been tested on multiple devices, however as with the limitation of locations, there is an inherent limitation on the potential hardware to test on in this project. It would be ideal to access many further mobile devices of different generations to ensure compatibility.
+
+\subsection{Peer Review \& Acceptance Testing}
+
+\subsubsection{Evaluation Day}
+Project Evaluation Day was an opportunity to showcase the work to peers in its mostly complete form and gather feedback. 
+
+Due to the spatial constrictions of the presentation format it was not suitable to set up a full site showing the building's history. Instead toy examples were collected to demonstrate how the app could be used with any model in any arbitrary location. The models used are shown in Figure \ref{fig:evalmodels}. These were tagged and set to reasonable estimations of dates. 
+
+\begin{figure}
+    \includegraphics[width=\linewidth]{figures/testing/allnickedmodels.png}
+        \caption{Sample models used for evaluation day. In reading order: A Mayan Temple \cite{testing:mayantemple}, a 1970s PC \cite{testing:computer}, an early American locomotive \cite{testing:locomotive}, and a standing stone \cite{testing:standingstone}}.
+        \label{fig:evalmodels}
+\end{figure}
+
+Three different kinds of feedback were explicitly collected on the day. The most salient of these was based on the technology acceptance model which is a method of determining the success of a new piece of technology \cite{testing:acceptancemodel}. It identifies four factors:
+\begin{itemize}
+    \item Perceived of Usefulness
+    \item Perceived Ease of Use
+    \item User Satisfaction
+    \item Attribute of Usability
+\end{itemize}
+These were modified for simplicity and applicability to this project resulting in the four corresponding categories:
+\begin{itemize}
+    \item Usefulness
+    \item Intuition
+    \item Quality
+    \item Customisation Confidence
+\end{itemize}
+To maximise the amount of responses, these were ranked discretely by participants as shown in Figure \ref{fig:evalscan}, and this is summarised in the plot Figure \ref{fig:evalplot}. Overall, the feedback was positive, with no Strongly Disagree selected. In particular, respondents felt the application could be incredibly useful. The only area was to improve was the `Customisation Confidence'. This pertained to the ability to add ones own models to the app and customise them which was not the focus of the presentation. The tutorial/demo video created later aims to address this issue.
+
+In addition to this, written feedback was gathered in the form of both keywords and full sentences. Keyword descriptors of the project were as follows:
+\begin{multicols}{2}
+\begin{itemize}
+    \item Interesting
+    \item Cute
+    \item Intuitive
+    \item Helpful
+    \item Clever
+    \item Creative
+\end{itemize}
+\columnbreak
+\begin{itemize}
+    \item Good Interface
+    \item Exciting
+    \item Useful
+    \item Educational 
+    \item Innovative
+\end{itemize}
+\vfill\null
+\end{multicols}
+Again, these were all positive and described the aims of this project, especially to the be educational and helpful.
+
+And the long answers were as follows:
+\begin{itemize}
+    \item ``Disagreed on \#3 [Customisation Confidence] due to my technical incompetence! Maybe with a tutorial?''\\
+    \textit{This was addressed with the demo.}
+    \item ``Maybe overlay objects over modern ruins, highlighting overlapping edges!'' \\
+    \textit{This would be an excellent future work feature requiring computer vision techniques - highlighting the model edges to show exactly where it matches up to the remains as seen through the camera.}
+\end{itemize}
+
+\begin{figure}
+    \includegraphics[width=0.9\linewidth]{figures/testing/evalscan.pdf}
+        \caption{A scan of the primary feedback method from Evaluation Day.}.
+        \label{fig:evalscan}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=0.9\linewidth]{figures/testing/evalfeedbackchart.PNG}
+        \caption{A graph showing the app review categories against the number of respondents that voted for each level where strongly agree is the best.}.
+        \label{fig:evalplot}
+\end{figure}
+
+\subsubsection{BCS Lovelace Colloquium}
+The BCS Lovelace Colloquium is an annual event geared at women in Computer Science. They run an academic poster competition to which one can submit an abstract and later the complete poster on any idea of interest in the field. Many of the finalist competitors present their research and dissertation projects, and accordingly a poster on ARchae was put forward. 
+
+\textbf{Initial Abstract} \textit{Overcoming the dissonance between a modern day landscape and its historical counterpart can be challenging if it has long gone to ruin. To aid visitors, many popular historical sites provide an immersive series of images showing our best guess of how it would have looked. Sketches on notice boards are commonplace, but we are increasingly seeing virtual or augmented reality experiences as well. In the last year, I have been working on a dissertation project which facilitates exactly this, without creating a bespoke experience from scratch. Users are able to add their own 3D models corresponding to different time periods, label them, and view them in their real-world location. Enabling curators of lesser known historical sites and archaeological researchers, the subject of their interest can be made easily accessible on a mobile device.This poster will detail the benefits of augmented reality in such educational environments and how one could create a virtual experience with this tool. You will see it in action at various points of interest and hear from the public whether they believe learning in a digital environment will ever catch on.}
+
+This was reviewed by two members of the judging panel in order to give pointers for the final poster:
+\textbf{Reviewer 1}
+\textit{AR to support education is a great topic. I like that you set the scene well. Could you add some more detail of what viewers will see? (you mention 3D models but what about textures to add realism? Are the items annotated in some way too?) The last sentence is a bit out of context too: are you doing a user survey? For presentation, this is clearly very visual project so you should be able to get a lot of good images to illustrate your work.}
+
+\textbf{Reviewer 2}
+\textit{This is a fascinating poster topic. Have you read the article "How Virtual Reality is Bringing Historical Sites to Life"? It includes some really good examples of what is currently out there. When designing your poster it would be good to include the definitions of AR and VR and also some images of an historical site as it is and then how it would look in VR or with AR.}
+
+Having taken this feedback into account, a highly visual poster was created using much of the research cited in Section \ref{existingwork} to create the final poster shown in Figure \ref{fig:bcsposter}. 
+
+\begin{figure}
+\centering
+    \includegraphics[width=0.97\linewidth]{figures/testing/Rowan Mather - Lovelace Poster.pdf}
+        \caption{The final submission to the BCS Lovelace Colloquium.}.
+        \label{fig:bcsposter}
+\end{figure}
+
+\subsection{Complete System Testing}
+
+\subsubsection{Ancient Theatre of Epidaurus on the University Piazza}
+To put together a complete solution that could be easily tested, a site was selected on campus. The University of Warwick piazza has a bowl-shape highly reminiscent of that of an Ancient Greek theatre. Having previously modelled the Ancient Theatre of Epidaurus, this was ideal to set up. Although the piazza's history naturally does not date back to the 4th century BCE, it works well as a toy example as shown in Figures \ref{fig:epidaurus} and \ref{}.
+
+\begin{figure}
+\centering
+    \includegraphics[width=0.5\linewidth]{figures/testing/epidauruseditor.PNG}
+        \caption{3D model based on the Ancient Theatre of Epidaurus.}.
+        \label{fig:epidaurus}
+\end{figure}
+
+As expected, setting up this site required adjustments to the exact guessed GPS location and modification of the scaling. Due to inaccuracies in the GPS receiver, it can be a little off, but as demonstrated in the ARchae demo video, one can look around and walk about the site as required and the perspective will shift in the virtual world accordingly. The tags and timeline was also tested in this version, the tags labelling the different parts of the theatre. These were legible and all behaved as expected.
+
+\could{INSERT PHOTO OF PIAZZA}
+
+\subsubsection{Coventry Cathedral}
+why cov what happened to it why is it a good case
+Coventry Cathedral is a local historic site which was a perfect real-world test case. In 1940 it was heavily bombed by the Luftwaffe which, amongst other damage, completely brought down the roof \cite{testing:covhistory}. Instead of rebuilding the old Cathedral, the ruins were left as a memorial and the New Cathedral was constructed as an attachment. This means that a model of the old cathedral in the app can line up well with some of the remaining walls, and completely fill in the missing roof. 
+
+Having found a model in the atrium of the cathedral, the staff were reached out to to request its use, but unfortunately the original file has been lost. Constructing one from scratch instead, the model is shown in development in Figure \ref{fig:covdev}, and the demonstration version in Figure \ref{fig:covfinal}.
+
+\begin{figure}
+\centering
+    \includegraphics[width=0.5\linewidth]{figures/testing/covcathedraldev.png}
+        \caption{Modelling Coventry Cathedral in Blender.}
+        \label{fig:covdev}
+\end{figure}
+
+\begin{figure}
+\centering
+    \includegraphics[width=0.5\linewidth]{figures/testing/covcathedralfinal.PNG}
+        \caption{The demo version of the Coventry Cathedral Blender model which was used in the app.}
+        \label{fig:covfinal}
+\end{figure}
+
+Again, there were some issues with the alignment and the orientation of the virtual site was incorrect, but this is just a matter of changing the configuration. Having spoken to one of the curators, Adam, at the site he explained that often the Red Hollington sandstone of the cathedral can tamper with the GPS signal, so for general use it will require further adjustments to get it just right. However, you can see the app being used by a peer in Figures \ref{fig:covtest1} and \ref{fig:covtest2}, and Adam was highly encouraging saying, 
+
+``Once it’s passed its beta testing, please bring this back. It’s something we would really love to use.'' 
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth,angle=270]{figures/testing/covtest1.jpg}
+  \caption{ARchae at Coventry Cathedral.}
+  \label{fig:covtest1}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth,angle=270]{figures/testing/covtest2.jpg}
+  \caption{Looking at one of the ruined windows.}
+  \label{fig:covtest2}
+\end{minipage}
+\end{figure}
+
+It would be ideal to use the cathedral as the first generally available site in the app and this is the intention after the assessment of this project is complete.
+
+\subsection{Stress Testing}
+
+\subsubsection{One Complex Model}
+
+\subsubsection{Many Models}
+
+\section{Future Work}
+Throughout this report, smaller points of out-of-scope work has been detailed. Addressed below are major features which were not planned for this project and would require much more time than allowed, but would be beneficial for the app and interesting to consider.
+
+\subsection{Lightmapping}
+Lightmapping is a potential optimisation in the rendering of the sites. It involves `baking' the lighting state into the texture as shown in Figure \ref{fig:lightmapping}. Since the lighting on the models is always the same - the sun-like projection - it does not need to be continuously recomputed. By lightmapping the models, the computation is performed only once.
+
+\begin{figure}
+\centering
+    \includegraphics[width=0.5\linewidth]{figures/futurework/Lightmap.png}
+        \caption{Lightmapping a cube. The right-hand image shows the flattened texture including the lighting state. \cite{futurework:lightmapping}}
+        \label{fig:lightmapping}
+\end{figure}
+
+\subsection{Level-of-Detail}
+The level-of-detail pertains to how many vertices are currently being used to display a 3D model (Figure \ref{fig:levelofdetail}). In this project, the complete set of vertices is always used, however it could be optimal to reduce the number as the model gets further away from the user. The necessity to render it at full quality lessens. 
+
+\begin{figure}
+\centering
+    \includegraphics[width=0.5\linewidth]{figures/futurework/levelofdetail.png}
+        \caption{A model at two different levels of detail. More vertices are included in the left-hand side. \cite{futurework:levelofdetail}}
+        \label{fig:levelofdetail}
+\end{figure}
+
+Just as with model importing (see Section \ref{modelimporting}) this is a well-documented and fairly trivial process if the levels can be pre-computed in the 3D modelling software and imported into the project at compile time \cite{futurework:levelofdetail} \cite{futurework:LODbrackeys}. The difficulty arises from performing this at runtime since one has to compute the levels in Unity with no prior knowledge about the model.
+
+In researching this feature, an asset was found called NanoLOD \cite{futurework:nanoLOD}. Whilst still designed to work at compile time, this asset computes an \verb|LODGroup| in Unity automatically for a model, so with some adjustment it could be a viable strategy to attempt this with. 
+
+\subsection{Bluetooth Waypoints}
+As touched on in evaluation (Section \ref{Evaluation}), the best accuracy of GPS is achieved with two receivers, but this is typically only used in the military \cite{futurework:gpsaccuracy}. In the worst cases of some highly built-up areas or underground use it can be up to around 10m out. In general, this is not a serious issue, but to improve the accuracy of a mobile device's location sites could be able to add optional Bluetooth beacons. 
+
+Bluetooth beacons are low-energy devices that can be used to determine proximity, acting as way-points. With multiple beacons placed around a site, the location of the user (to about 1m accuracy \cite{futurework:beaconaccuracy}) can be calculated using trilateration, so the 3D models can be rendered correctly.  
+
+Since the goal of this project is to be a generalist application, and there is more specific (and expensive) technology required to set-up Bluetooth beacons, it was not included in the objectives, and should be strictly optional in future.
+
+\subsection{Time of Day and Weather}
+This expansion was from final peer feedback. They suggested adding the option to change the weather and time of day in the manual mode, purely for aesthetic purposes. This would add an additional level of alignment with the real world - and it could even be possible to match the time of day in live mode to the device's clock. It would likely not pose too great of a technical challenge, but would be time consuming to implement.
+
+Unity has a number of assets to assist with creating natural environments and simulating weather. In particular, the one created by Tobias Johansson could be suitable for this purpose \cite{futurework:weather} (sample project shown in Figure \ref{fig:weather}).
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{.44\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{figures/futurework/tobysunset.PNG}
+\end{minipage}%
+\begin{minipage}{.42\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{figures/futurework/tobynight.PNG}
+\end{minipage}
+\label{fig:weather}
+\caption{Unity asset for creating different times of day 
+and weather environments \cite{futurework:weather}.}
+\end{figure}
+
+\section{Evaluation}
+\label{Evaluation}
+Overall, this project has been successful. Everything required for the the minimum viable product has been completed and a full toy example is operational on the piazza, along with a solution at Coventry Cathedral. 
+
+\subsubsection{Objective Summary}
+As an overview, the objectives have been well covered. Despite initial speculation, over half of the extension work has been tackled as shown in Table \ref{table:objectivesummary}. Many of the incomplete extensions were initial conceptions which have proved unnecessary with further research.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+MVP (Must)          & 100\% \\ \hline
+Additional (Should) & 92\%  \\ \hline
+Extension (Could)   & 58\%  \\ \hline
+\end{tabular}
+\caption{Objective priority against completeness.}
+\label{table:objectivesummary}
+\end{table}
+
+\subsubsection{Objective Full Review}
+Below the objectives are listen again with those in \light{grey} being the completed ones. The reason for omission or method of completion are detailed.
+
+\begin{enumerate}[label=\Roman*.]
+\item \textbf{User may upload a model to a remote server.}
+\begin{table}[H]
+\begin{tabular}{| p{0.02\linewidth} | p{0.02\linewidth} | p{0.4\linewidth} | p{0.4\linewidth} | }
+\hline
+1 & M & \light{Models will be in the wavefront (.obj) form. }            & The importing method requires this. \\ \hline
+2 & C & Models can be uploaded in additional common formats e.g. .fbx, .dae, .blend & The package used worked specifically .obj types. This would be a simple but time-consuming job to expand, and most models can easily be converted to .obj. \\ \hline
+3 & M & \light{User may upload a texture and other metadata to pair with the model.} & A .mtl file can also be placed in the repository and this is used by the object importer in conjunction. All other information is in the metadata file. \\ \hline
+4 & S & \light{A subset of the server models can be externally selected to be available in app.} & The sire list file in the repo contains the names of all sites to be imported. \\ \hline
+5 & C & \light{Users cannot upload without submitting a review request.} & This would need to be modified for a different server set-up, but as such one can use the standard git functionality such as pull-requests to make reviewed changes to the server. \\ \hline
+\end{tabular}
+\end{table}
+    
+\item \textbf{User may download models from the server into their local app.}
+
+\begin{table}[H]
+\begin{tabular}{| p{0.02\linewidth} | p{0.02\linewidth} | p{0.4\linewidth} | p{0.4\linewidth} | }
+\hline
+1 & M & \light{Models can be imported from the server in their pure object form. } & Model files are imported but are wrapped into other Unity objects for cleanness. \\ \hline
+2 & S & \light{They can be coloured/textured according to an accompanying texture file (.mtl).} & The OBJ Importer makes use of the mtl file. \\ \hline
+3 & S &  Users can select a subset of the server models to import locally. & This objective was planned for term 3 but was not reached due to presentation work. It should not be difficult to add a checklist as designed. \\ \hline
+4 & S & \light{Models will render with their textures and metadata.} & In all tests so far models have rendered correctly. \\ \hline
+5 & M & \light{Models will render with reasonable latency, generally a maximum of 2 seconds per model.} & In all tests so far models render within a second, although the app itself can take up to 10 seconds to load. \\ \hline
+\end{tabular}
+\end{table}
+
+\item \textbf{User will be able to set their location and move around the models.}
+
+\begin{table}[H]
+\begin{tabular}{| p{0.02\linewidth} | p{0.02\linewidth} | p{0.4\linewidth} | p{0.4\linewidth} | }
+\hline
+1 & M & \light{User has a manually configurable geo-location (latitude \& longitude).} & Users can use the arrow-keys to explore the virtual world in manual mode. \\ \hline
+2 & M & \light{User has a manually configurable orientation.} & Users can touch the screen and drag to look around in manual mode. \\ \hline
+3 & M & \light{Models can be placed in a geo-location relative to the user.} & The virtual position of a site is calculated by the difference between its GPS position and the user's.\\ \hline
+4 & S & \light{Models will render only when within a certain distance to the user.} & Models further away than 0.01 degrees of latitude/longitude are not displayed. \\ \hline
+5 & S & User can change the render distance. & This was determined to be unnecessary and make the UI design overly complex. There should be very few use-cases where a user needs to see a model further than 1km away. \\ \hline
+6 & C & User can change the scaling of the whole scene. & This does not make sense as a feature in live mode. It would be simple but time-consuming to implement in manual mode and would further clutter the interface. \\ \hline
+7 & S & \light{User location can be set to their actual mobile device's geo-location.} & Accessed via the Unity input system, the virtual location is set to the GPS co-ordinates and altitude. \\ \hline
+8 & S & \light{User can move freely while the app tracks their geo-location.} & The GPS location is queried every frame at 30fps. \\ \hline
+9 & S & \light{Compass direction can be set to that of device.} & The compass is not used explicitly, but the gyroscope which determines the real change in rotation of the device. \\ \hline
+10 & S & \light{Tilt can be set to the spirit level of device.} & As above. \\ \hline
+11 & S & \light{User can switch between manual and device modes.} & This is manual and live mode which are toggleable via the button in the top right of the UI.  \\ \hline
+12 & S & \light{Add camera input as background for the scene.} & The camera input is placed as a custom texture onto a plane in the UI. It is not strictly a background, more a foreground, but appears the same. \\ \hline
+13 & C & \light{Have a slider for model transparency.} & The models can be hard to see as it is with the live input, so this was deemed unnecessary. They are always fully visible. \\ \hline
+\end{tabular}
+\end{table}
+
+\item \textbf{Additional information about the sites will be accessible.}
+
+\begin{table}[H]
+\begin{tabular}{| p{0.02\linewidth} | p{0.02\linewidth} | p{0.4\linewidth} | p{0.4\linewidth} | }
+\hline
+1 & C & \light{Models can be tagged with information in a specific relative location to the model.} & Tags placed in the metadata file with their relative location will display on the model and rotate to face the user. \\ \hline
+2 & C & Tags can be clicked to view further information/photos. & It was decided to keep the UI simple so the tags are more for labelling components than detailing full histories. \\ \hline
+3 & C & Tags can be shown/hidden in scene. & Since the tags are typically single phrases (as above) it is not neccersary to remove them for decluttering. \\ \hline
+4 & C & \light{A date (range) will be in the corner corresponding to the age of the site you are viewing.} & This is specified by the timeline. \\ \hline
+5 & C & \light{A timeline scroll will be at the bottom of the screen.} & The timeline is available with a pointer. \\ \hline
+6 & C & \light{Models can be attached to a specific time period and will only be visible when this is selected.} & The site holder object has a master set of all available times and the timeline script feeds back to it which one is currently selected. All models associated with a different time are hidden. \\ \hline
+\end{tabular}
+\end{table}
+
+\item \textbf{The app will be intuitive and guided.}
+
+\begin{table}[H]
+\begin{tabular}{| p{0.02\linewidth} | p{0.02\linewidth} | p{0.4\linewidth} | p{0.4\linewidth} | }
+\hline
+1 & C & Include a menu with an app tutorial. & There is a tutorial available but there was insufficient time to create a main menu. \\ \hline
+2 & C & \light{Most information can be hidden so the user is not overloaded.} & The side-bar with additional information can be slid away, and in live mode all manual functionality to avoid confusion. \\ \hline
+3 & C & \light{The default view will be a simple drop-down list of available models and device mode.} & The available models are listed in the side bar and by default the app is in manual mode. Switching into live mode first would be unwise since it can be harder to navigate. \\ \hline
+\end{tabular}
+\end{table}
+
+\end{enumerate}
+
+\subsection{Limitations}
+\subsection{Scalability and Practical Use}
+
+\section{Conclusion}
+In this project, development of an application for displaying historical sites in augmented reality has been created. 
+
+\section{Acknowledgments}
+This author would like to acknowledge my supervisor Claire Rocks for you ongoing support, guidance and general loveliness.
+
+To my parents for their extensive historical knowledge and early insights as to useful features of this project.
+
+Also to Rosella Suma for her archaeological knowledge.
+
+To the staff at Coventry cathedral for their support, input and provision of research material.
+
+And to my wonderful housemates for being my test subjects, ducks, and immaculate proof-readers.
+
+And finally thank you to my partner for keeping me sane and righting me again when absolutely nothing worked. 
+
+\section{TODO IN CODE}
+check if the tablet can read the metadata because t may just be the deprecated www thats the problem.
+Altitude should do something
+Add a reset orientation button
+Add a help button
+Tidy comments
+Delete dud class 
+Select subset of sites
+Nearest site display
+fully maually configurable geo location in app
+Change render distance
+dissapear timeline if only one model
+load in models in manual without switching to live first
+manual altitude change
+check erroneous tags
+metadata can refer to sites not uploaded
+should i have used the compass 
+
+\bibliography{bibliography}
+
+\appendix
+
+\section{How to Run ARchae}
+
+\end{document}
