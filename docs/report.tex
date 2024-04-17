@@ -84,18 +84,21 @@ Project Presentation Slides: \\
 \section{Introduction}
 
 \subsection{Abstract}
-Overcoming the dissonance between a modern day landscape and its historical counterpart can be challenging if it has long gone to ruin. To aid visitors, many popular historical sites provide an immersive series of images showing our best guess as to how it would have looked. Sketches on notice boards are commonplace, but we are increasingly seeing additional \gls{VR} or \gls{AR} experiences. 
+\could{summary}
+
+\subsection{Preface}
+Overcoming the dissonance between a modern day landscape and its historical counterpart can be challenging if it has long gone to ruin. To aid visitors, many popular historical sites provide an immersive series of images showing historians' best guesses as to how it would have looked. Sketches on notice boards are commonplace, but we are increasingly seeing additional \gls{VR} or \gls{AR} experiences. 
 
 In the last year, dissertation work has been dedicated 
-to creating a tool that simplifies this process. Users are able to input their own \gls{3dmodel}s corresponding to a certain time periods, label them, and view them in their real-world location. Now, archaeological researchers and curators of lesser-known historical sites can make the subject of their study accessible on a mobile device with our app: 
+to creating a tool that simplifies this process. Users are able to input their own \gls{3dmodel}s corresponding to a certain time periods, label them, and view them overlayed in their real-world location. Now, archaeological researchers and curators of lesser-known historical sites can make the subject of their study accessible on a mobile device with our app: 
 \verb|ARchae|. 
 
 \subsection{Project Selection}
-Having formulated many different ideas for a third year project, this was initially rejected on the grounds that it would already exist. Upon further research, this turned out to be a completely false assumption. There are several applications of a somewhat similar nature, detailed in Existing Work, but such a generalist tool is yet to be published. This indicates at the utility of this project - it was genuinely surprising to find it was a gap in the market.
+Having formulated many different ideas for a third year project, this was initially rejected on the grounds that it would already exist. Upon further research, this turned out to be a completely false assumption. There are several applications of a somewhat similar nature, detailed in \ref{existingwork}, but such a generalist tool is yet to be published. This indicates at the utility of this project - it was genuinely surprising to find it was a gap in the market.
 
-Knowing that motivation the downfall of most previous student projects, this task was therefore chosen for its exciting interdisciplinary nature with the knowledge that the drive to contribute something meaningful to a primarily non-technical industry would be sufficient to complete it.
+A lack of motivation is often the downfall of similar student projects. Countering this was a consideration right from the start of this project so this task was chosen in part for its exciting interdisciplinary nature that aligns well with this author's personal interests. The drive to contribute something meaningful to a primarily non-technical industry was highly self-motivating.
 
-\subsection{Justification: Augmented Reality in Education}
+\subsection{Augmented Reality in Education}
 Studies show that use of augmented reality in education, when combined with more typical learning styles, significantly benefits: \cite{education:ARlit}
 
 \begin{itemize}
@@ -106,30 +109,35 @@ Studies show that use of augmented reality in education, when combined with more
     \item Collaboration
     \item Satisfaction
 \end{itemize}
-It is ideal for students that struggle with the written word \cite{education:class}, or cannot reach certain locations or materials \cite{education:placespotentials}.
 
-However, when attempting to utilise a system with over-complicated interfaces without proper teacher training, the opposite effect is inevitable. Absorbing many new digital skills on top of the main teaching material may lead to students being “cognitively overwhelmed” \cite{education:overwhelm}. 
+\could{take out of bullet points and include fun psych - mishka}
 
-There is clearly a keenness to make use of this technology, but a lack of understanding. A goal of this project is to progress the inclusion of such AR tools in general education, by making set-up and customisation as generally accessible as possible. 
+It is ideal for students that struggle with the written word \cite{education:class} - it is innately visually oriented and a well-designed experience may include some text but should predominantly take advantage of the independent, exploratory possibilities. Exact details may be provided through a separate medium in the classroom, but a students should be able to grasp the basic concepts and ideas of the material with no trouble if they can discover it for themselves. In addition, AR can be an excellent substitute for inaccessible locations or materials \cite{education:placespotentials}. This could be virtually visiting museums or points-of-interest without significant monetary investment, or running simulations of experiments that would otherwise be deemed unsafe or too complex.
 
+However, when attempting to utilise a system with over-complicated interfaces without proper teacher training, the opposite effect is inevitable. Absorbing many new digital skills on top of the main teaching material may lead to students being “cognitively overwhelmed” \cite{education:overwhelm}. It is therefore crucial to design simple AR systems that progressively walk a user through more functionality as needed so that they do not immediately reject the technology. 
+
+There is clearly a keenness to try out such systems, but a lack of understanding. A goal of this project is to progress the inclusion of such AR tools in general education, by making set-up and customisation as generally accessible as possible. 
 
 \subsection{Initial Interviews}
 To refine the scope, several professionals with historical backgrounds were sought out. 
 
-Firstly, within the computer science department, Dr Rosella Suma, spoke about the work she had done within reconstruction. She recommended looking at photogrammetric techniques for model construction \cite{interviews:rosellapaper}, which would be ideal for a curator initially to make the model to put into the app, but is not the focus of this project. 
+Firstly, within the University of Warwick's computer science department, Dr Rosella Suma was interviewed. Dr Suma is an expert in image processing and VR, but also has a background in virtual reconstruction of small historical artefacts. Her research interests therefore aligned well with that of this project, and her technical insights were invaluable for approaching the initial research. She recommended looking at photogrammetric techniques for model construction \cite{interviews:rosellapaper}. Photogrammetry is ``the science of obtaining reliable information about the
+properties of surfaces and objects without physical contact with the objects'' \cite{interviews:photogrammetry}, involving image capture and often electromagnetic radiant energy. Since this is an already well-studied field, this project was focused on visualisation rather than generation. There are many available tools for generation of 3D models using photogrammetry, any of which would be suitable for a curator to use for input to ARchae.
 
-In addition, an ex-archaeologist gave her opinion on the proposal, saying "this is just the kind of thing we would have wanted to have". In the industry it is quite typical to visualise smaller table-top items, but she emphasised the importance of presenting the bigger picture.
+Seeking guidance from an intended user of the software, an archaeologist who worked for the University of Cambridge was approached. Her opinion of the proposal validated it, saying ``this is just the kind of thing we would have wanted to have''. In the industry it is typical to visualise smaller table-top items, in particular marine archaeologists will often take scans of their findings instead of collecting them for both reasons of natural conservation and the difficulty of bringing lodged items up from the sea bed. But she emphasised the importance of presenting the larger picture. For a general audience, contextualising the detailed objects is equally important. 
 
-Finally, a current secondary history teacher was also interviewed about how the project should progress, describing features like the the tags and timelines (see objectives) as a useful extension to the scope which makes it more tailored to education. 
+Finally, with the intention of ARchae to be used as an educational tool, the current Head of History from The Netherhall School in Cambridge was also interviewed. He described various extension features that would tailor it well to history education such as the the tags and timelines (see Objectives, Section \ref{Objectives}). His comments highlighted that a user should not simply see the change from some point in the past to the present, but be shown the story of how a site has continuously changed over time until it eventually becomes what they can see in front of them.
 
 \subsection{Existing Work}
 \label{existingwork}
-The primary use case for this project is in archaeological research and education. However, it is not limited to this - one can place any model anywhere in the real world. In researching the existing work, applications for visualising construction sites were also considered, such as Morpholio Sketchwalk (Figure \ref{fig:morpholio}). These are already successful in mitigating construction errors and enabling collaboration on design \cite{existing:ardesign}. 
-
 Within academia, there have been an array of different projects for the visualisation of particular sites. The conference paper ``A Review on Augmented Reality for Virtual Heritage System" \cite{existing:virtualhertitagereview} neatly details several including a virtual Hagia Sophia \cite{existing:hagia} (Turkish Mosque), Pompeii \cite{existing:pompeii} (Ancient Italian city), and Campeche 
-\cite{existing:campeche} (Mexican city), the latter of which has been optimised with certain techniques detailed in \ref{further work optimisation}. The concept of digitally recreating the past is nothing new, but so far left predominantly in the hands of experts.
+\cite{existing:campeche} (Mexican city), the latter of which has been optimised with certain techniques detailed in Section \ref{futurework}. Whilst there is some modification possible within their systems for non-programmers, the creation of such an experience is a highly technical undertaking. Each case is an experiment in the capabilities of the technology using a site as the case study, with the exception of the virtual Pompeii which is more educationally-oriented. Therefore, the concept of digitally recreating the past is nothing new, but so far left predominantly in the hands of experts. The goal of this project to simplify the pipeline of creating such an experience, not removing the technical component of modelling but entirely removing the programming component.
 
-Considering tools which are more commercialised than research oriented, the details are even less well documented and lack customisation. As before, specific sites are available such as Tamworth Castle or the Colosseum (in Rome MVR shown in Figure \ref{fig:romemvr}). To correct this, we could look at highly generalised applications such as Google Earth which has a feature to display a 3D model in the photographed world, but since the Google Earth views are pre-captured image data, it is difficult to work with this in an augmented reality sense, or to share one's creations with other users. A summary of some of these applications and their limitations in the context of this project is given below in Table \ref{table:existingwork}.
+Considering tools which are more commercialised than research oriented, the details are even less well documented and lack customisation. Most existing systems are only on the edge of what could be considered VR, such as Timelooper using projection, or Historic VR using large LCD screens. These are good educational tools in their own right although maintain a disconnect between visitor and experience. By using AR, exploration of a site is far more immersive. There are some sites that do this such as Tamworth Castle or the Colosseum (in Rome MVR shown in Figure \ref{fig:romemvr}). The quality of such applications is variable and they are rarely updated, but typically they are good representations of the structure and have a novelty that makes them appealing. The problem is that each application is built from scratch for that site so its difficult to extend the scope without continuous input from the initial developers. Instead consider international projects such as Google Earth, which has a feature to display a 3D model in the photographed world. This is more customisable but since the Google Earth views are pre-captured image data, it is difficult to work with this in an augmented reality sense, or to share one's creations with other users.
+
+Whilst the primary use case for this project is in archaeological research and education, it is not limited to this. Looking at existing applications with similar features in a different context such as construction, tools such as Morpholio Sketchwalk (Figure \ref{fig:morpholio}) and Arki are available. These are already successful in mitigating construction errors by showing workers precisely what the architect intended, complete with measurements and notes. In addition, they enable simple collaboration on design \cite{existing:ardesign} by showing a client what they can expect in situ before a single brick is laid, and even allowing them to make instant modifications. Indeed the functionality of the construction software is in many ways closer to that of this project, but it needs re-contextualisation.
+
+A summary of these applications and their limitations in the context of this project is given below in Table \ref{table:existingwork}.
 
 \begin{figure}[H]
 \centering
@@ -164,19 +172,19 @@ Historic VR \cite{existing:historicvr}          & 3D dynamic environments.      
 RomeMVR \cite{existing:romemvr}              & Viewing 3D reconstructions over Rome.   & Bespoke, limited movement.             \\ \hline
 Tamworth Castle Trail \cite{existing:tamworth} & Virtual people/objects explaining site. & Small-scale, marker-based.             \\ \hline
 \end{tabular}
+\caption{A summary of the non-academic existing work applications.}
 \label{table:existingwork}
-\caption{A summary of some of the complete existing work applications.}
 \end{table}
 
 \subsection{Originality}
 This project has three crucial distinguishing features which separate it from the existing work:
 \begin{enumerate}
     \item It uses augmented reality. \\
-    Visualising locations is mostly done on a standard monitor or in virtual reality (see Figure \ref{fig:VRvsAR}). For the most part this is sufficient, but to truly get a grasp of what life was like in the past, it is best to place the structures in situ.
+    Visualising locations is mostly done on a standard monitor or in virtual reality (see Figure \ref{fig:VRvsAR}). For the most part this is sufficient, but to truly get a grasp of what life was like in the past, it is best to place the structures in situ. As discussed in the interviews, context is crucial, especially if you are unfamiliar with the terrain.
     \item It is general-purpose. \\
     Most augmented reality applications are bespoke, made by an external company to suit the exact needs and layout of the site. This project is not as tailored, but usable anywhere in the world for any model. Often smaller locations/projects will not have the resources to develop their own system, but can use ARchae freely instead.
     \item It is GPS location-based. \\
-    Augmented reality applications that require the virtual object to be placed in a specific position often use some form of image `anchor' or `marker', such as a table (see Figure \ref{fig:ARmarker}). As you move your phone, the app tracks the relative position of the table and keeps the virtual object still. Since this project operates on on a much larger scale, markers are not as suitable. It uses the geographic position instead.
+    Augmented reality applications that require the virtual object to be placed in a specific position often use some form of image `anchor' or `marker', such as a table (see Figure \ref{fig:ARmarker}). As you move your phone, the app tracks the relative position of the table and keeps the virtual object still. This is an effective method of exact placing, but would require a permanent installation at the site. They are also best suited to applications where the user does not move too far from the anchor and keeps it permanently in their field-of-view. Since this project operates on on a much larger scale, markers are not as suitable. A little precision is sacrificed in favour of mobility - instead the the geographic position is used. This means the only hardware required for a user is a GPS (which are built into most mobile devices) and there are no required physical objects at the site for the curator to maintain. 
 
 \end{enumerate}
 
@@ -200,7 +208,7 @@ This project in effect combines many of the most useful aspects of all these sys
 
 \section{Project Statement}
 \subsection{Outline}
-Create a mobile app which imports 3D models from a web-server which pertain to certain historical sites. These can be assigned location and time information, and labelled with additional information about the site. Users will be able to walk around the site in the present day and experience in augmented reality how the site used to look.
+Create a mobile app which imports 3D models from a web-server which pertain to certain historical sites. These can be assigned location and time information, and labelled with additional information about the site. Users will be able to walk around the site and experience in augmented reality how the site used to look.
 
 \subsection{Objectives}
 \label{Objectives}
@@ -308,6 +316,7 @@ The planning was closely adhered to, especially in Term 1 since that was dedicat
 \end{figure}
 
 \subsection{Methodology}
+\label{methodology}
 As evident from the waterfall-like structure of the Gantt chart, the methodology is for this project is a similar one. Specifically, an agile version of the \textit{Incremental Method} \cite{management:incremental} was selected as the most appropriate. 
 
 The incremental method sets out the development of a project in distinct stages, or increments. Each stage as follows:
@@ -889,6 +898,7 @@ It would be ideal to use the cathedral as the first generally available site in 
 \subsubsection{Many Models}
 
 \section{Future Work}
+\label{futurework}
 Throughout this report, smaller points of out-of-scope work has been detailed. Addressed below are major features which were not planned for this project and would require much more time than allowed, but would be beneficial for the app and interesting to consider.
 
 \subsection{Lightmapping}
@@ -1042,7 +1052,14 @@ Below the objectives are listen again with those in \light{grey} being the compl
 \subsection{Scalability and Practical Use}
 
 \section{Conclusion}
-In this project, development of an application for displaying historical sites in augmented reality has been created. 
+In this project, an application for displaying historical sites in augmented reality has been developed. Via the upload point, a curator can set up a site with various 3D models and make it available for visitors to walk around with a mobile device. 
+
+The interface was designed from scratch and implemented using the Unity game engine, and all of the web access and location processing was written in C\# in the Unity project. 
+
+Models are displayed with texturing detail from the associated .mtl file and render with minimal latency even under high load. 
+
+Sites can be made visible at different time periods and each period can be labelled with tags to identify key features and highlight the changes in the structure over time.
+
 
 \section{Acknowledgments}
 This author would like to acknowledge my supervisor Claire Rocks for you ongoing support, guidance and general loveliness.
