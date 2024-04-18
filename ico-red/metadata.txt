@@ -1,2 +1,2 @@
-location:52.38379,-1.560089,131.4;
+location:52.38217,-1.561672,133;
 model_name:ico-red;
