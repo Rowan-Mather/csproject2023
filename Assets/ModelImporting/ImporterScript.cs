@@ -12,10 +12,13 @@ using UnityEngine.UI;
 public class ImporterScript : MonoBehaviour
 {
     public GameObject coventryCathedral;
+    public GameObject greekTheatre;
+    public GameObject brokenGreekTheatre;
     public GameObject computer;
     public GameObject train;
     public GameObject temple;
     public GameObject stone;
+    public GameObject ball;
     public Text testFeedback;
 
     public GameObject siteTemplate;
@@ -30,11 +33,12 @@ public class ImporterScript : MonoBehaviour
     void Start()
     {
         /* HARD CODED TEST SITE *//////////
-        /*
+        
         GameObject site1 = siteHolderScript.addEmptySite("Demo");
         HistoricalSiteScript siteScript1 = site1.GetComponent<HistoricalSiteScript>();
         //siteScript1.setGCSLocation(new GCS(-1.548796, 52.37359, 0));
-        siteScript1.setGCSLocation(new GCS(-1.552912, 52.37531, 0));
+        siteScript1.setGCSLocation(new GCS(-1.560396, 0, 0));
+        // presentation location by the door 52.38355 -1.560396
         //52.3737 -1.548767 139.9 48
         //52.37359 -1.548796 139.4
         //52.38356 -1.560355 131.5 20
@@ -71,12 +75,17 @@ public class ImporterScript : MonoBehaviour
             = tc1_4.GetComponent<SiteTimeComponentScript>();
         tc1_4.name = "Time: Monolith";
         stone.transform.SetParent(tc1_4.transform);
-        tc1_4Script.Date = -3000;*/
+        tc1_4Script.Date = -3000;
 
-        GameObject site1 = siteHolderScript.addEmptySite("Coventry Cathedral");
+        siteScript1.updateSpecifiedTimes();
+
+        // Coventry cathedral
+        /*
+        GameObject site1 = siteHolderScript.addEmptySite("cov-cathedral");
         HistoricalSiteScript siteScript1 = site1.GetComponent<HistoricalSiteScript>();
         //siteScript1.setGCSLocation(new GCS(-1.548796, 52.37359, 0));
-        siteScript1.setGCSLocation(new GCS(-1.548739, 52.40795814, 0));
+        siteScript1.setGCSLocation(new GCS(-1.507179, 52.40803, 0));
+        // actual cov 52.40803 -1.507179 162.408
         // home  52.37374 -1.548739 138
         // cov 52.40795814693444, -1.5074476429870276
 
@@ -92,6 +101,55 @@ public class ImporterScript : MonoBehaviour
 
         siteScript1.updateSpecifiedTimes();
 
+        // Greek theatre
+        GameObject site2 = siteHolderScript.addEmptySite("greek-theatre");
+        HistoricalSiteScript siteScript2 = site2.GetComponent<HistoricalSiteScript>();
+        //siteScript1.setGCSLocation(new GCS(-1.548796, 52.37359, 0));
+        siteScript2.setGCSLocation(new GCS(-1.560922, 52.37907, 0));
+        // piazza 52.37907 -1.560922 136.9 6.216
+
+        //complete theatre
+        GameObject tc1_5 = siteScript2.addEmptyTimeComponent();
+        SiteTimeComponentScript tc1_5Script 
+            = tc1_5.GetComponent<SiteTimeComponentScript>();
+        tc1_5.name = "Time: Initial";
+        greekTheatre.transform.SetParent(tc1_5.transform);
+        tc1_5Script.Date = -340;
+
+        tc1_5Script.addTag("Theatron", -23f, 1.5f, 0f);
+        tc1_5Script.addTag("Skene", 7f, 1f, 0f);
+        tc1_5Script.addTag("Orchestra", -9f, -1.4f, 0f);
+        tc1_5Script.addTag("Parodos", -8.7f, -0.2f, -23f);
+
+        //brokem theatre
+        GameObject tc1_6 = siteScript2.addEmptyTimeComponent();
+        SiteTimeComponentScript tc1_6Script 
+            = tc1_6.GetComponent<SiteTimeComponentScript>();
+        tc1_6.name = "Time: Broken";
+        brokenGreekTheatre.transform.SetParent(tc1_6.transform);
+        tc1_6Script.Date = 10;   
+        
+        siteScript2.updateSpecifiedTimes();
+        */
+
+        /*
+        GameObject site2 = siteHolderScript.addEmptySite("ball");
+        HistoricalSiteScript siteScript2 = site2.GetComponent<HistoricalSiteScript>();
+        //siteScript1.setGCSLocation(new GCS(-1.548796, 52.37359, 0));
+        siteScript2.setGCSLocation(new GCS(-1.560104, 52.3838, 0));
+        // piazza 52.37907 -1.560922 136.9 6.216
+
+        //complete theatre
+        GameObject tc1_5 = siteScript2.addEmptyTimeComponent();
+        SiteTimeComponentScript tc1_5Script 
+            = tc1_5.GetComponent<SiteTimeComponentScript>();
+        tc1_5.name = "Time: The_only_one";
+        ball.transform.SetParent(tc1_5.transform);
+        tc1_5Script.Date = 2024;
+
+        siteScript2.updateSpecifiedTimes();
+        */
+        
         //testFeedback.text += "1.";
 
         // Determine list of objects to load

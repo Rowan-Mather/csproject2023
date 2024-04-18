@@ -30,6 +30,12 @@ public class InputHandler2Script : MonoBehaviour
     private void updateGyro() {
         Vector3 gyroRate = Input.gyro.rotationRateUnbiased;
         gyroRotation += new Vector3(-gyroRate.x, -gyroRate.y,  0);
+        /*
+        Debug.Log("attitude: " + Input.gyro.attitude.ToString() + 
+            "\nenabled: " + Input.gyro.enabled.ToString() + 
+            "\nrotation_rate: " + Input.gyro.rotationRate.ToString() + 
+            "\nrotation_rate_unbiased: " + Input.gyro.rotationRateUnbiased.ToString() + 
+            "\nacceleration: " + Input.gyro.userAcceleration.ToString());*/
     }
 
     public Vector3 getGyro() {
