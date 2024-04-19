@@ -40,10 +40,10 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.9f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Assets\Simple Side-Menu\Scripts\Core\Runtime\Enums\State.cs" />
-     <Compile Include="Assets\Assets\Simple Side-Menu\Scripts\Core\Runtime\Enums\Placement.cs" />
-     <Compile Include="Assets\Assets\Simple Side-Menu\Scripts\Core\Runtime\Behaviours\SimpleSideMenu.cs" />
-     <None Include="Assets\Assets\Simple Side-Menu\Scripts\Core\SimpleSideMenu.asmdef" />
+     <Compile Include="Assets\Simple Side-Menu\Scripts\Core\Runtime\Enums\State.cs" />
+     <Compile Include="Assets\Simple Side-Menu\Scripts\Core\Runtime\Enums\Placement.cs" />
+     <Compile Include="Assets\Simple Side-Menu\Scripts\Core\Runtime\Behaviours\SimpleSideMenu.cs" />
+     <None Include="Assets\Simple Side-Menu\Scripts\Core\SimpleSideMenu.asmdef" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.9f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

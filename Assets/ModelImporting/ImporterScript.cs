@@ -9,149 +9,43 @@ using UnityEngine.Networking;
 using System.Globalization;
 using UnityEngine.UI;
 
+/*
+Responsible for importing all objects and text from the server and placing them 
+in the site hierarchy of 
+    SiteHolder -> HistoricalSite -> TimeComponent -> Tag 
+                                                 |-> Wavefront object (model)
+*/
 public class ImporterScript : MonoBehaviour
 {
-    public GameObject coventryCathedral;
-    public GameObject greekTheatre;
-    public GameObject brokenGreekTheatre;
-    public GameObject computer;
-    public GameObject train;
-    public GameObject temple;
-    public GameObject stone;
-    public GameObject ball;
-    public Text testFeedback;
-
-    public GameObject siteTemplate;
-    public SiteHolderScript siteHolderScript;
+    // The central online repository for all sites
     private string repoURL = 
         "https://raw.githubusercontent.com/Rowan-Mather/csproject2023/sites/";
+    // The name of the master list of sites to import from the repo
     private string objectListFile = "object-list.txt";
+    // Each site has a metadata file which contains all the non-model 
+    // information about it 
     private string metadataFile = "metadata.txt";
+    // Metadata should be of the form:
+    /*
+    location:1.04,284,343;
+    model_name:church0|
+        date:1560|
+        tag:myinformation,2.35,5.43,2.5|
+        tag:anotherthing,2.4,343,34;
+    model_name:castle4|date:1069|tag:ruined,2.35,3.43,2.5     
+    */
+
+    // Link to the site holder script
+    public SiteHolderScript siteHolderScript;
+    // The prefab (template) which all site objects are created from
+    public GameObject siteTemplate;
+    // The code version of the objectListFile - the names of all sites being
+    // imported into the app
     private string[] siteArray;
 
 
     void Start()
     {
-        /* HARD CODED TEST SITE *//////////
-        
-        GameObject site1 = siteHolderScript.addEmptySite("Demo");
-        HistoricalSiteScript siteScript1 = site1.GetComponent<HistoricalSiteScript>();
-        //siteScript1.setGCSLocation(new GCS(-1.548796, 52.37359, 0));
-        siteScript1.setGCSLocation(new GCS(-1.560396, 0, 0));
-        // presentation location by the door 52.38355 -1.560396
-        //52.3737 -1.548767 139.9 48
-        //52.37359 -1.548796 139.4
-        //52.38356 -1.560355 131.5 20
-        // 52.38356 -1.56035 131.5
-        //52.38371 -1.560281 135.5 39.6
-
-        //Computer
-        GameObject tc1_1 = siteScript1.addEmptyTimeComponent();
-        SiteTimeComponentScript tc1_1Script 
-            = tc1_1.GetComponent<SiteTimeComponentScript>();
-        tc1_1.name = "Time: Modern Build";
-        computer.transform.SetParent(tc1_1.transform);
-        tc1_1Script.Date = 1980;
-
-        //Train
-        GameObject tc1_2 = siteScript1.addEmptyTimeComponent();
-        SiteTimeComponentScript tc1_2Script 
-            = tc1_2.GetComponent<SiteTimeComponentScript>();
-        tc1_2.name = "Time: Industrial Steam Train";
-        train.transform.SetParent(tc1_2.transform);
-        tc1_2Script.Date = 1830;
-
-        //Temple
-        GameObject tc1_3 = siteScript1.addEmptyTimeComponent();
-        SiteTimeComponentScript tc1_3Script 
-            = tc1_3.GetComponent<SiteTimeComponentScript>();
-        tc1_3.name = "Time: Mayan Temple";
-        temple.transform.SetParent(tc1_3.transform);
-        tc1_3Script.Date = 750;
-
-        //Stone
-        GameObject tc1_4 = siteScript1.addEmptyTimeComponent();
-        SiteTimeComponentScript tc1_4Script 
-            = tc1_4.GetComponent<SiteTimeComponentScript>();
-        tc1_4.name = "Time: Monolith";
-        stone.transform.SetParent(tc1_4.transform);
-        tc1_4Script.Date = -3000;
-
-        siteScript1.updateSpecifiedTimes();
-
-        // Coventry cathedral
-        /*
-        GameObject site1 = siteHolderScript.addEmptySite("cov-cathedral");
-        HistoricalSiteScript siteScript1 = site1.GetComponent<HistoricalSiteScript>();
-        //siteScript1.setGCSLocation(new GCS(-1.548796, 52.37359, 0));
-        siteScript1.setGCSLocation(new GCS(-1.507179, 52.40803, 0));
-        // actual cov 52.40803 -1.507179 162.408
-        // home  52.37374 -1.548739 138
-        // cov 52.40795814693444, -1.5074476429870276
-
-        GameObject tc1_4 = siteScript1.addEmptyTimeComponent();
-        SiteTimeComponentScript tc1_4Script 
-            = tc1_4.GetComponent<SiteTimeComponentScript>();
-        tc1_4.name = "Time: Before bombing";
-        coventryCathedral.transform.SetParent(tc1_4.transform);
-        tc1_4Script.Date = 1500;
-
-        tc1_4Script.addTag("Columns", -13.0f, 1.4f, 0f);
-        tc1_4Script.addTag("Spire", -7.0f, 1.0f, -10.0f);
-
-        siteScript1.updateSpecifiedTimes();
-
-        // Greek theatre
-        GameObject site2 = siteHolderScript.addEmptySite("greek-theatre");
-        HistoricalSiteScript siteScript2 = site2.GetComponent<HistoricalSiteScript>();
-        //siteScript1.setGCSLocation(new GCS(-1.548796, 52.37359, 0));
-        siteScript2.setGCSLocation(new GCS(-1.560922, 52.37907, 0));
-        // piazza 52.37907 -1.560922 136.9 6.216
-
-        //complete theatre
-        GameObject tc1_5 = siteScript2.addEmptyTimeComponent();
-        SiteTimeComponentScript tc1_5Script 
-            = tc1_5.GetComponent<SiteTimeComponentScript>();
-        tc1_5.name = "Time: Initial";
-        greekTheatre.transform.SetParent(tc1_5.transform);
-        tc1_5Script.Date = -340;
-
-        tc1_5Script.addTag("Theatron", -23f, 1.5f, 0f);
-        tc1_5Script.addTag("Skene", 7f, 1f, 0f);
-        tc1_5Script.addTag("Orchestra", -9f, -1.4f, 0f);
-        tc1_5Script.addTag("Parodos", -8.7f, -0.2f, -23f);
-
-        //brokem theatre
-        GameObject tc1_6 = siteScript2.addEmptyTimeComponent();
-        SiteTimeComponentScript tc1_6Script 
-            = tc1_6.GetComponent<SiteTimeComponentScript>();
-        tc1_6.name = "Time: Broken";
-        brokenGreekTheatre.transform.SetParent(tc1_6.transform);
-        tc1_6Script.Date = 10;   
-        
-        siteScript2.updateSpecifiedTimes();
-        */
-
-        /*
-        GameObject site2 = siteHolderScript.addEmptySite("ball");
-        HistoricalSiteScript siteScript2 = site2.GetComponent<HistoricalSiteScript>();
-        //siteScript1.setGCSLocation(new GCS(-1.548796, 52.37359, 0));
-        siteScript2.setGCSLocation(new GCS(-1.560104, 52.3838, 0));
-        // piazza 52.37907 -1.560922 136.9 6.216
-
-        //complete theatre
-        GameObject tc1_5 = siteScript2.addEmptyTimeComponent();
-        SiteTimeComponentScript tc1_5Script 
-            = tc1_5.GetComponent<SiteTimeComponentScript>();
-        tc1_5.name = "Time: The_only_one";
-        ball.transform.SetParent(tc1_5.transform);
-        tc1_5Script.Date = 2024;
-
-        siteScript2.updateSpecifiedTimes();
-        */
-        
-        //testFeedback.text += "1.";
-
         // Determine list of objects to load
         loadSiteArray();
         // Loads in each one in turn
@@ -160,39 +54,12 @@ public class ImporterScript : MonoBehaviour
                 loadSite(name);
             }
         }
-
-        testFeedback.text += "2.";
-
-        /*
-        // Test cube
-        var objectURL = new WWW("https://raw.githubusercontent.com/Rowan-Mather/csproject2023/sites/dated/cone.obj");
-        while (!objectURL.isDone) System.Threading.Thread.Sleep(1);
-        var objStream = new MemoryStream(Encoding.UTF8.GetBytes(objectURL.text));
-        GameObject loadedObj = new OBJLoader().Load(objStream);
-
-        string mtlurl = "https://raw.githubusercontent.com/Rowan-Mather/csproject2023/sites/test-house/test-house.mtl";
-        var mtlURL = new WWW(mtlurl);
-        while (!mtlURL.isDone) System.Threading.Thread.Sleep(1);
-        var mtlStream = new MemoryStream(Encoding.UTF8.GetBytes(mtlURL.text));
-
-        var objectURL2 = new WWW("https://raw.githubusercontent.com/Rowan-Mather/csproject2023/sites/test-house/test-house.obj");
-        while (!objectURL2.isDone) System.Threading.Thread.Sleep(1);
-        var objStream2 = new MemoryStream(Encoding.UTF8.GetBytes(objectURL2.text));
-        GameObject loadedObj2 = new OBJLoader().Load(objStream2, mtlStream);
-        loadedObj2.transform.position += new Vector3(4,0,0);
-
-        testFeedback.text = "testing import";
-        if (objStream == null) testFeedback.text += "; stream null";
-        else { testFeedback.text += "; stream imported"; }
-        if (loadedObj == null) testFeedback.text += "; object null";
-        else { testFeedback.text += "; object imported"; }*/
     }
 
     // Reads the string array of names of objects from the webserver which are 
     // available to be imported and puts it in siteArray.
     void loadSiteArray() {
         var www = new WWW(repoURL + objectListFile);
-        //var www = new WWW("https://raw.githubusercontent.com/Rowan-Mather/csproject2023/sites/object-list.txt");
         while (!www.isDone) System.Threading.Thread.Sleep(1);
         var textStream = new MemoryStream(Encoding.UTF8.GetBytes(www.text));
         string rawText = Encoding.ASCII.GetString(textStream.ToArray());
@@ -202,21 +69,12 @@ public class ImporterScript : MonoBehaviour
         );
     }
 
-    // Metadata should be of the form:
-    /*
-    location:1.04,284,343;
-
-    model_name:church0|
-    date:1560|
-    tag:myinformation,2.35,5.43,2.5|
-    tag:anotherthing,2.4,343,34;
-
-    model_name:castle4|date:1069|tag:ruined,2.35,3.43,2.5     
-    */
-
+    // The main function for importing a site. Gets all models for it with their 
+    // respective textures, dates and tags where listed, and the location. 
+    // Each site can have multiple time components each corresponding to a 3D 
+    // model representing a different point in time.
     private void loadSite(string siteName) {
         Debug.Log("Downloading site: " + siteName);
-
         // Get the raw string data for the metadata file
         string locURL = repoURL + siteName + "/" + metadataFile;
         var metadataURL = new WWW(locURL);
@@ -265,6 +123,8 @@ public class ImporterScript : MonoBehaviour
         siteScript.updateSpecifiedTimes();
     }
 
+    // Decodes the location part of the metadata file to extract the latitude,
+    // longitude and altitude
     private void loadLocation(HistoricalSiteScript site, string locationData) {
         var locationValues = locationData.Substring(9).Split(",");
         Debug.Log(locationValues[0] + " " + locationValues[1] + " " + locationValues[2]);
@@ -279,6 +139,8 @@ public class ImporterScript : MonoBehaviour
         }
     }
 
+    // Decodes the date part of the metadata file. Dates can be listed as
+    // AD/BC/CE/BCE. CE dates represented as +ve integers and BCE as -ve.
     private void loadDate(SiteTimeComponentScript tc, string dateData) {
         try {
             if (dateData.Length >= 3) {
@@ -306,6 +168,8 @@ public class ImporterScript : MonoBehaviour
         }
     }
 
+    // Decodes the tag part of the metadata file. Time components can have 
+    // labels which are placed in locations relative to the model.
     private void loadTag(SiteTimeComponentScript tc, string tagData) {
         string[] tagSplit = tagData.Split(",");
         try {
@@ -351,6 +215,7 @@ public class ImporterScript : MonoBehaviour
         return loadedObj;
     }
 
+    // Helper function to remove characters from the metadata file for processing
     // https://stackoverflow.com/questions/6750116/how-to-eliminate-all-line-breaks-in-string
     private static string removeLineEndings(string value)
     {

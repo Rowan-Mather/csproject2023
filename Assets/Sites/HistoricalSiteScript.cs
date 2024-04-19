@@ -4,12 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/*
+The main site class containing information about its location and all its time
+components (optionally dated models).
+*/
 public class HistoricalSiteScript : MonoBehaviour
 {
-    /* Available Models (with tags) */
-    // These can optionally have a particular time period allocated.
+    /* Time components */
+    // The prefab for creating a time component for this site
     public GameObject timeComponentTemplate;
+    // The list of existing time component objects childed to this site
     private List<GameObject> timeComponents = new List<GameObject>();
+    // The set corresponding to the dates available from the time components
     private SortedSet<int> specifiedTimes = new SortedSet<int>();
     public SortedSet<int> SpecifiedTimes
     {
@@ -21,10 +27,13 @@ public class HistoricalSiteScript : MonoBehaviour
     private const double GCSscaler = 111139;
     // The distance in degrees to which the model is rendered (0.01), squared.
     private const double sceneRange = 0.0001;
+    // The GPS location of the model
     private GCS GCSlocation = new GCS();
+    // The position of the model in the unity editor 
     private float sceneX = 0;
     private float sceneY = 0;
     private float sceneZ = 0;
+    // Whether the model is close to the user
     bool inRange = false;
 
     public bool isRendered() { return inRange; }
@@ -36,6 +45,7 @@ public class HistoricalSiteScript : MonoBehaviour
         return timeComponent;
     }
 
+    // Collects all the dates from the time components into the master set
     public void updateSpecifiedTimes() {
         specifiedTimes.Clear();
         foreach (var comp in timeComponents) {
@@ -46,10 +56,14 @@ public class HistoricalSiteScript : MonoBehaviour
         }
     }
 
+    // Sets the GCS location of the site
     public void setGCSLocation(GCS loc) {
         GCSlocation = loc;
     }
 
+    // Calculates the position in the unity editor of the site given the 
+    // position of the user (or origin) and displays the models in the current
+    // selected time period
     public void setInScene(GCS relativeOrigin, int? date = null) {
         // Set the position of the object relative to the user
         double latDiff = (relativeOrigin.Latitude - GCSlocation.Latitude);
@@ -61,15 +75,6 @@ public class HistoricalSiteScript : MonoBehaviour
         this.transform.position = new Vector3(sceneX,sceneY,sceneZ);
         // Only render the object if it is within a certain distance
         inRange = Math.Pow(latDiff,2) + Math.Pow(lonDiff,2) < sceneRange;
-        /*Debug.Log(" userlat: " + relativeOrigin.Latitude.ToString() + 
-            " userlong: " + relativeOrigin.Longitude.ToString() +
-            " useralt: " + relativeOrigin.Altitude.ToString() +
-            " objlat: " + GCSlocation.Latitude.ToString() + 
-            " objlong: " + GCSlocation.Longitude.ToString() +
-            " objalt: " + GCSlocation.Altitude.ToString() + 
-            " scenex " + sceneX.ToString() + 
-            " sceney " + sceneY.ToString() + 
-            " scenez " + sceneZ.ToString());*/
 
         gameObject.SetActive(inRange);
 

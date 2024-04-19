@@ -43,36 +43,33 @@
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\ColorExtensions.cs" />
      <Compile Include="Assets\Sites\HistoricalSiteScript.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\Samples\ObjFromStream.cs" />
-     <Compile Include="Assets\InputHandler2Script.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\CharWordReader.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\OBJObjectBuilder.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\Samples\ObjFromFile.cs" />
      <Compile Include="Assets\Sites\SiteHolderScript.cs" />
+     <Compile Include="Assets\InputOutput\CameraScript.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\OBJLoader.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\BinaryExtensions.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\DDSLoader.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\BMPLoader.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\TGALoader.cs" />
-     <Compile Include="Assets\Location\UI\MovementButtonsScript.cs" />
+     <Compile Include="Assets\UI\LocationDisplayScript.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\MTLLoader.cs" />
      <Compile Include="Assets\Sites\TagScript.cs" />
      <Compile Include="Assets\Sites\SiteTimeComponentScript.cs" />
      <Compile Include="Assets\Location\GCS.cs" />
-     <Compile Include="Assets\CameraScript.cs" />
+     <Compile Include="Assets\InputOutput\InputHandler2Script.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\StringExtensions.cs" />
      <Compile Include="Assets\Sites\SliderScript.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\ImageLoader.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\ImageUtils.cs" />
      <Compile Include="Assets\Location\UserLocationScript.cs" />
-     <Compile Include="Assets\Location\IOHandler.cs" />
-     <Compile Include="Assets\Location\UI\LocationDisplayScript.cs" />
      <Compile Include="Assets\ModelImporting\ImporterScript.cs" />
-     <Compile Include="Assets\rec.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\ImageLoaderHelper.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\OBJLoaderHelper.cs" />
+     <Compile Include="Assets\UI\MovementButtonsScript.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
-     <None Include="Assets\take3text.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
@@ -86,10 +83,8 @@
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
-     <None Include="Assets\Assets\Simple Side-Menu\Shaders\Blur.shader" />
-     <None Include="Assets\take2text.shader" />
+     <None Include="Assets\Simple Side-Menu\Shaders\Blur.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
-     <None Include="Assets\TextInPlace.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
@@ -787,33 +782,33 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="UtilitiesEditor.csproj">
-      <Project>{916b2afa-fe66-3f1e-fa7f-fee40aba9e3c}</Project>
-      <Name>UtilitiesEditor</Name>
-    </ProjectReference>
     <ProjectReference Include="SimpleSideMenu.csproj">
       <Project>{769c7e10-7eaa-c984-9620-748d2df2b56a}</Project>
       <Name>SimpleSideMenu</Name>
-    </ProjectReference>
-    <ProjectReference Include="Utilities.csproj">
-      <Project>{380e0054-ffb8-3688-9413-28aa5e5e0217}</Project>
-      <Name>Utilities</Name>
-    </ProjectReference>
-    <ProjectReference Include="CopyrightNoticeEditor.csproj">
-      <Project>{8da4b606-5e64-206f-b470-b5891ba48d94}</Project>
-      <Name>CopyrightNoticeEditor</Name>
     </ProjectReference>
     <ProjectReference Include="SimpleSideMenuEditor.csproj">
       <Project>{ea441c86-9cb9-f37d-f3a6-976e6c3acb9c}</Project>
       <Name>SimpleSideMenuEditor</Name>
     </ProjectReference>
+    <ProjectReference Include="SimpleInspectorAttributes.csproj">
+      <Project>{f262c98b-7187-c01f-4cb9-5f301047b9ef}</Project>
+      <Name>SimpleInspectorAttributes</Name>
+    </ProjectReference>
+    <ProjectReference Include="UtilitiesEditor.csproj">
+      <Project>{916b2afa-fe66-3f1e-fa7f-fee40aba9e3c}</Project>
+      <Name>UtilitiesEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="CopyrightNoticeEditor.csproj">
+      <Project>{8da4b606-5e64-206f-b470-b5891ba48d94}</Project>
+      <Name>CopyrightNoticeEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="SimpleInspectorAttributesEditor.csproj">
       <Project>{61f59bf4-83c7-182c-50c2-5643dd811eba}</Project>
       <Name>SimpleInspectorAttributesEditor</Name>
     </ProjectReference>
-    <ProjectReference Include="SimpleInspectorAttributes.csproj">
-      <Project>{f262c98b-7187-c01f-4cb9-5f301047b9ef}</Project>
-      <Name>SimpleInspectorAttributes</Name>
+    <ProjectReference Include="Utilities.csproj">
+      <Project>{380e0054-ffb8-3688-9413-28aa5e5e0217}</Project>
+      <Name>Utilities</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

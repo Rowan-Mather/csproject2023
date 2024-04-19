@@ -40,17 +40,17 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.9f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Assets\Simple Side-Menu\Scripts\Plugins\SimpleInspectorAttributes\Runtime\DrawIfAttribute.cs" />
-     <Compile Include="Assets\Assets\Simple Side-Menu\Scripts\Plugins\SimpleInspectorAttributes\Runtime\MinMax.cs" />
-     <Compile Include="Assets\Assets\Simple Side-Menu\Scripts\Plugins\SimpleInspectorAttributes\Runtime\ButtonAttribute.cs" />
-     <Compile Include="Assets\Assets\Simple Side-Menu\Scripts\Plugins\SimpleInspectorAttributes\Runtime\HasFlagAttribute.cs" />
-     <Compile Include="Assets\Assets\Simple Side-Menu\Scripts\Plugins\SimpleInspectorAttributes\Runtime\ReadOnlyAttribute.cs" />
-     <Compile Include="Assets\Assets\Simple Side-Menu\Scripts\Plugins\SimpleInspectorAttributes\Runtime\DontDrawIfAttribute.cs" />
-     <Compile Include="Assets\Assets\Simple Side-Menu\Scripts\Plugins\SimpleInspectorAttributes\Runtime\DrawIfAttributeBase.cs" />
-     <Compile Include="Assets\Assets\Simple Side-Menu\Scripts\Plugins\SimpleInspectorAttributes\Runtime\Margins.cs" />
-     <Compile Include="Assets\Assets\Simple Side-Menu\Scripts\Plugins\SimpleInspectorAttributes\Runtime\RenameAttribute.cs" />
-     <Compile Include="Assets\Assets\Simple Side-Menu\Scripts\Plugins\SimpleInspectorAttributes\Runtime\IndentAttribute.cs" />
-     <None Include="Assets\Assets\Simple Side-Menu\Scripts\Plugins\SimpleInspectorAttributes\SimpleInspectorAttributes.asmdef" />
+     <Compile Include="Assets\Simple Side-Menu\Scripts\Plugins\SimpleInspectorAttributes\Runtime\ButtonAttribute.cs" />
+     <Compile Include="Assets\Simple Side-Menu\Scripts\Plugins\SimpleInspectorAttributes\Runtime\IndentAttribute.cs" />
+     <Compile Include="Assets\Simple Side-Menu\Scripts\Plugins\SimpleInspectorAttributes\Runtime\DrawIfAttribute.cs" />
+     <Compile Include="Assets\Simple Side-Menu\Scripts\Plugins\SimpleInspectorAttributes\Runtime\MinMax.cs" />
+     <Compile Include="Assets\Simple Side-Menu\Scripts\Plugins\SimpleInspectorAttributes\Runtime\Margins.cs" />
+     <Compile Include="Assets\Simple Side-Menu\Scripts\Plugins\SimpleInspectorAttributes\Runtime\DontDrawIfAttribute.cs" />
+     <Compile Include="Assets\Simple Side-Menu\Scripts\Plugins\SimpleInspectorAttributes\Runtime\HasFlagAttribute.cs" />
+     <Compile Include="Assets\Simple Side-Menu\Scripts\Plugins\SimpleInspectorAttributes\Runtime\DrawIfAttributeBase.cs" />
+     <Compile Include="Assets\Simple Side-Menu\Scripts\Plugins\SimpleInspectorAttributes\Runtime\ReadOnlyAttribute.cs" />
+     <Compile Include="Assets\Simple Side-Menu\Scripts\Plugins\SimpleInspectorAttributes\Runtime\RenameAttribute.cs" />
+     <None Include="Assets\Simple Side-Menu\Scripts\Plugins\SimpleInspectorAttributes\SimpleInspectorAttributes.asmdef" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.9f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

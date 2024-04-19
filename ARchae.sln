@@ -1,43 +1,43 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleInspectorAttributesEditor", "SimpleInspectorAttributesEditor.csproj", "{61f59bf4-83c7-182c-50c2-5643dd811eba}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopyrightNoticeEditor", "CopyrightNoticeEditor.csproj", "{8da4b606-5e64-206f-b470-b5891ba48d94}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{1b309e95-15c3-f022-9897-a595a666f5c2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleInspectorAttributes", "SimpleInspectorAttributes.csproj", "{f262c98b-7187-c01f-4cb9-5f301047b9ef}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleSideMenuEditor", "SimpleSideMenuEditor.csproj", "{ea441c86-9cb9-f37d-f3a6-976e6c3acb9c}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities.csproj", "{380e0054-ffb8-3688-9413-28aa5e5e0217}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleInspectorAttributesEditor", "SimpleInspectorAttributesEditor.csproj", "{61f59bf4-83c7-182c-50c2-5643dd811eba}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleSideMenu", "SimpleSideMenu.csproj", "{769c7e10-7eaa-c984-9620-748d2df2b56a}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilitiesEditor", "UtilitiesEditor.csproj", "{916b2afa-fe66-3f1e-fa7f-fee40aba9e3c}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleInspectorAttributes", "SimpleInspectorAttributes.csproj", "{f262c98b-7187-c01f-4cb9-5f301047b9ef}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopyrightNoticeEditor", "CopyrightNoticeEditor.csproj", "{8da4b606-5e64-206f-b470-b5891ba48d94}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities.csproj", "{380e0054-ffb8-3688-9413-28aa5e5e0217}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleSideMenuEditor", "SimpleSideMenuEditor.csproj", "{ea441c86-9cb9-f37d-f3a6-976e6c3acb9c}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilitiesEditor", "UtilitiesEditor.csproj", "{916b2afa-fe66-3f1e-fa7f-fee40aba9e3c}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{61f59bf4-83c7-182c-50c2-5643dd811eba}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{61f59bf4-83c7-182c-50c2-5643dd811eba}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1b309e95-15c3-f022-9897-a595a666f5c2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1b309e95-15c3-f022-9897-a595a666f5c2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{f262c98b-7187-c01f-4cb9-5f301047b9ef}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{f262c98b-7187-c01f-4cb9-5f301047b9ef}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ea441c86-9cb9-f37d-f3a6-976e6c3acb9c}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ea441c86-9cb9-f37d-f3a6-976e6c3acb9c}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{380e0054-ffb8-3688-9413-28aa5e5e0217}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{380e0054-ffb8-3688-9413-28aa5e5e0217}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{769c7e10-7eaa-c984-9620-748d2df2b56a}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{769c7e10-7eaa-c984-9620-748d2df2b56a}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{916b2afa-fe66-3f1e-fa7f-fee40aba9e3c}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{916b2afa-fe66-3f1e-fa7f-fee40aba9e3c}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8da4b606-5e64-206f-b470-b5891ba48d94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8da4b606-5e64-206f-b470-b5891ba48d94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1b309e95-15c3-f022-9897-a595a666f5c2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1b309e95-15c3-f022-9897-a595a666f5c2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61f59bf4-83c7-182c-50c2-5643dd811eba}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61f59bf4-83c7-182c-50c2-5643dd811eba}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{769c7e10-7eaa-c984-9620-748d2df2b56a}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{769c7e10-7eaa-c984-9620-748d2df2b56a}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{f262c98b-7187-c01f-4cb9-5f301047b9ef}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{f262c98b-7187-c01f-4cb9-5f301047b9ef}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{380e0054-ffb8-3688-9413-28aa5e5e0217}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{380e0054-ffb8-3688-9413-28aa5e5e0217}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ea441c86-9cb9-f37d-f3a6-976e6c3acb9c}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ea441c86-9cb9-f37d-f3a6-976e6c3acb9c}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{916b2afa-fe66-3f1e-fa7f-fee40aba9e3c}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{916b2afa-fe66-3f1e-fa7f-fee40aba9e3c}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

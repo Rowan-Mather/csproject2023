@@ -40,8 +40,8 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.9f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Assets\Simple Side-Menu\Scripts\Plugins\CopyrightEditor\Editor\CopyrightEditor.cs" />
-     <None Include="Assets\Assets\Simple Side-Menu\Scripts\Plugins\CopyrightEditor\Editor\CopyrightEditor.asmdef" />
+     <Compile Include="Assets\Simple Side-Menu\Scripts\Plugins\CopyrightEditor\Editor\CopyrightEditor.cs" />
+     <None Include="Assets\Simple Side-Menu\Scripts\Plugins\CopyrightEditor\Editor\CopyrightEditor.asmdef" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.9f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

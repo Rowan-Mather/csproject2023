@@ -1,5 +1,9 @@
 using System;
-//Global Co-ordinates system
+
+/* 
+Global Co-ordinates System data class storing the longitude, latitude, and 
+altitude.
+*/
 public class GCS
 {
     private double longitude;
@@ -30,6 +34,8 @@ public class GCS
         this.longitude = lon;
         this.altitude = alt;
     }
+    // Converts the decimal longitude and latitude representation to the 
+    // degree, minute, second representation
     public string toString() {
         string longLet = "S";
         string latLet = "W, ";

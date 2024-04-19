@@ -4,16 +4,28 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/*
+The container and creator of all site objects. Hierarchy:
+    SiteHolder -> HistoricalSite -> TimeComponent -> Tag 
+                                                 |-> Wavefront object (model)
+*/
 public class SiteHolderScript : MonoBehaviour
 {
+    // Link to the location script
     public UserLocationScript userLocation;
+    // Prefab for creating a site from 
     public GameObject siteTemplate;
+    // List of all site objects childed to this class
     public List<GameObject> sites = new List<GameObject>();
+    // The display text for the sites list 
+    public TMP_Text siteListText;
+    // The master list of all dates from the sites
     private SortedSet<int> availableDates = new SortedSet<int>();
     public SortedSet<int> AvailableDates
     {
         get { return availableDates; }
     }
+    // The currently selected date from the timeline slider
     private int selectedDate = 0;
     public int SelectedDate
     {
@@ -21,13 +33,12 @@ public class SiteHolderScript : MonoBehaviour
         set { selectedDate = value; }
     }
 
-    public TMP_Text siteListText;
-
-    // Update is called once per frame
     void Update()
     {
+        // Places each site in the world dependent on the user's location and
+        // if it is within render distance of the user, gets the time component
+        // dates from it
         availableDates.Clear();
-        // Places each site in the world dependent on the users location.
         GCS uL = userLocation.getLocation();
         foreach (GameObject s in sites) {
             var siteScript = s.GetComponent<HistoricalSiteScript>();
@@ -38,23 +49,18 @@ public class SiteHolderScript : MonoBehaviour
         }
     }
     
+    // Creates a new site given its name and childs it to this class
     public GameObject addEmptySite(string title) {
         // Create a new site parent for the model, set its name.
         GameObject site = Instantiate(siteTemplate, this.transform);
         site.name = "Site: " + title;
         siteListText.text += title + "\n";
-        /*
-        // Add the model as a child
-        siteModel.transform.SetParent(site.transform);
-        // Set location
-        var siteScript = site.GetComponent<SiteScript>();
-        siteScript.setGCSLocation(location);
-        siteScript.setInScene(userLocation.getLocation());*/
         // Put the parent in the site list
         sites.Add(site);
         return site;
     }
 
+    // Deletes a site (unused)
     public void removeSite(GameObject site) {
         sites.Remove(site);
         Destroy(site);
