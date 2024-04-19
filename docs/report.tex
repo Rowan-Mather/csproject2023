@@ -99,7 +99,7 @@ Having formulated many different ideas for a third year project, this was initia
 A lack of motivation is often the downfall of similar student projects. Countering this was a consideration right from the start of this project so this task was chosen in part for its exciting interdisciplinary nature that aligns well with this author's personal interests. The drive to contribute something meaningful to a primarily non-technical industry was highly self-motivating.
 
 \subsection{Augmented Reality in Education}
-Studies show that use of augmented reality in education, when combined with more typical learning styles, significantly benefits: \cite{education:ARlit}
+Studies show that use of augmented reality in education, when combined with more typical learning styles (such as lecture form or tutoring), significantly benefits: \cite{education:ARlit}
 
 \begin{itemize}
     \item Motivation
@@ -109,8 +109,6 @@ Studies show that use of augmented reality in education, when combined with more
     \item Collaboration
     \item Satisfaction
 \end{itemize}
-
-\could{take out of bullet points and include fun psych - mishka}
 
 It is ideal for students that struggle with the written word \cite{education:class} - it is innately visually oriented and a well-designed experience may include some text but should predominantly take advantage of the independent, exploratory possibilities. Exact details may be provided through a separate medium in the classroom, but a students should be able to grasp the basic concepts and ideas of the material with no trouble if they can discover it for themselves. In addition, AR can be an excellent substitute for inaccessible locations or materials \cite{education:placespotentials}. This could be virtually visiting museums or points-of-interest without significant monetary investment, or running simulations of experiments that would otherwise be deemed unsafe or too complex.
 
@@ -407,20 +405,48 @@ The web-server is available here: \url{https://github.com/Rowan-Mather/csproject
 \subsection{System Overview}
 The extended ARchae system is not simply comprised of the mobile app, as shown in Figure \ref{fig:systemoverview}. As mentioned in Section \ref{gitandgithub}, it pulls in the uploaded 3D models from the GitHub server. The app also takes input directly from the mobile device, namely the camera for AR purposes, the gyroscope for determining rotation, and the GPS co-ordinates for location.
 
-\begin{figure}[h]
+\begin{figure}[h!]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/design/systemoverview.png}
         \caption{Context model-like diagram showing the interactions of the ARchae system.}
         \label{fig:systemoverview}
 \end{figure}
 
-\could{?!?!? add some images of the system to complement}
-
 \subsection{UI Design}
 \label{uidesign}
-In Increment 3 (see \ref{increment3}), involving most the UI design, the mock-up shown in Figure \ref{fig:uimockup} was drawn up. Some modifications were made in the final design, shown in Figure \could{!?!?!}.
+In Increment 3 (see \ref{increment3}), involving most of the UI design, the mock-up shown in Figure \ref{fig:uimockup} was drawn up. Some modifications were made in the final design, shown in Figures \ref{fig:manualview}, \ref{fig:manualviewbar}, and \ref{fig:liveview}.
 
-The final design is shown on a mobile in portrait instead of landscape, but many of the features and relative positioning remain the same, with the main modification being the removal of the scroll wheel. In the final version of the app this was replaced by simply dragging the screen to rotate.
+The final design is shown on a mobile in portrait instead of landscape, but many of the features and relative positioning remain the same.
+
+\subsubsection{Arrow Keys}
+The arrow keys each have a bounding box (shown in Figure \ref{fig:manualmovement} in Section \ref{manualmovement}) on top of the actual arrow image. Initially, these boxes were simple button components, but this moves the user forward a fixed amount per press rather than for as long as they hold it. Instead, they each have two event triggers, one for being pressed and the other for release. These could call a function directly but this leads to differences in travel speed depending on the speed of the device's processor. In actuality, they are tied to boolean variables which are checked by the \verb|Update| function, which is called 30 times a second.
+
+\subsubsection{Drag to Move}
+The main modification from the sketch design to the final is the removal of the scroll wheel. It was implemented and the base images are shown in Figure \ref{fig:scroll}, but it was later replaced by dragging the screen to rotate due to the cumbersome nature of trying to move forward and turn simultaneously, and the dragging being a more common action.
+
+Now, every frame the \verb|handleTouch| or \verb|handleMouse| function is called (Section \ref{manualmovement}) which pans the camera.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.3\textwidth]{figures/design/combinedscrollimage.PNG}
+        \caption{The sprite used for the initial implementation of the rotation scroll wheel.}
+        \label{fig:scroll}
+\end{figure}
+
+\subsubsection{Timeline}
+The timeline was built from a slider component, and the position of the handle is queried every frame to get date selection information. Each date label is cloned from a prefab (template) using a TextMeshPro object, which was chosen for it's built-in depth rendering calculations - that is the labels will always appear in front of the models on the UI layer.
+
+\subsubsection{Sidebar}
+Since there is no Unity component for menus such as this, a modified version of the external asset Simple Side Menu was used \cite{design:sidemenu}. This was chosen for its level of customisation - the aesthetic style could be matched and variables such as the speed it slides at could be refined. Moreover the asset provides a number of functions called when there's a change to the state of the side bar, which was used to toggle the image on the pulled out tab.
+
+\subsubsection{GPS \& Year View}
+Design-wise, these two components are simple. They are both text objects attached to the side bar that can be updated by the \verb|LocationDisplayScript|. The complexity of the calculations to generate these values is detailed in Section \ref{implementation}.
+
+\subsubsection{Site List}
+Also attached to the side bar is the list of all available sites. This is updated by the \verb|SiteHolder| every time a site is added or removed (so typically in importing when first running the app). Enclosed in a vertical scroll bar component, many sites can be added and viewed in the list without it running out of space.
+
+\subsubsection{Live Button}
+The live button is a Unity toggle component containing the textures for the active and inactive state. When first pressed the button calls the \verb|toggleLive| function which hides the manual controls and updates the \verb|UserLocationScript| to take input from the device's sensors. Naturally the inverse process occurs when pressed again.
 
 \begin{figure}[h]
     \centering
@@ -429,7 +455,28 @@ The final design is shown on a mobile in portrait instead of landscape, but many
         \label{fig:uimockup}
 \end{figure}
 
-\could{?!?!? add view of final UI and some more detailing of the implementation of the buttons, side bar etc all that potentially could go in implementations too}
+\begin{figure}[H]
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.8\linewidth]{figures/design/manualview.jpg}
+  \caption{A view of the app in manual mode.}
+  \label{fig:manualview}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.8\linewidth]{figures/design/manualwithsideview.jpg}
+  \caption{Manual mode with the sidebar open.}
+  \label{fig:manualviewbar}
+\end{minipage}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{figures/design/liveview.jpg}
+        \caption{A view of the app in live mode.}
+        \label{fig:liveview}
+\end{figure}
 
 \subsubsection{Neilson's Design Principles}
 Where possible the interface has been designed in line with the well-known heuristics: Neilson's Design Principles \cite{design:neilsons}:
@@ -458,6 +505,7 @@ Where possible the interface has been designed in line with the well-known heuri
 \end{enumerate}
 
 \section{Implementation}
+\label{implementation}
 
 \subsection{Model Importing}
 \label{modelimporting}
@@ -564,6 +612,15 @@ Once all the valid dates are collected, they are passed to the script for the ti
         \label{fig:timelinetest}
 \end{figure}
 
+\subsubsection{Fixing the Build}
+A serious problem this project faced was that there were no importing issues in the test environment in the Unity editor, but when a full build of the project was made to an APK file, the models were not visible. 
+
+At first it was suspected to be due to the internet connection differences between the testing device and the development device, but following simple tests on reading a text web-page, this was shown to be not the case. Indeed, the models seemed to be importing correctly so it had to be an aesthetic issue. 
+
+Upon further investigation of the OBJ code and documentation, a recommendation to use a particular shader was found: Standard (Specular Setup). In the testing environment all the assets available for development can be used, but since the build needs to be as small as possible, anything unused will be disregarded. Since importing is done at runtime, the shader was not recognisably being used at compile time, so was not being included in the final build. 
+
+Correcting this by adding the shader to the graphical project settings explicitly was necessary. This lead to a hefty increase in memory usage (approximately 1GB) and build time (approximately 1.5hrs). Having performed this change in a test project first, there was high confidence it would work in the ARchae project, but initially only the tags were now visible. Moving the SiteHolder out of the canvas (the UI layer) remedied this and the models were visible just as in the testing environment.
+
 \subsection{Movement}
 \label{movement}
 
@@ -588,6 +645,7 @@ The GPS positions of the sites are loaded upon app start-up, but the globals are
 If there are too many vertices in one location, it is possible that the app could begin to struggle to render everything (although it has not so far in testing). To mitigate this, objects within a certain GPS distance of the user are the only ones rendered. Specifically, anything further than $0.01\degree$ ($\approx$ 1km) is hidden.
 
 \subsubsection{Manual Movement}
+\label{manualmovement}
 In the early stages of the project, the location was updated through the editor \verb|ContextMenu|, which allows a developer to create tools to quickly call test functions. Indeed the ContextMenu was used throughout the project, but for this purpose it was quickly replaced with the UI on-screen arrow keys for manual movement (as shown in Figure \ref{fig:manualmovement}). Pressing the forward button updates the stored GPS locations with the following formula:
 
 \hspace{1cm} $longitude -= cos(\theta) \cdot speed \cdot deltaTime$
@@ -672,10 +730,6 @@ In early development of this feature, the camera display was very slow to update
 
 Finally, the camera didn't fill the screen correctly. A Unity component was added called an `Aspect Ratio Fitter'. At first it was configured to fit in the parent - that is the camera input plane shrinks to match the size of the device screen (the canvas), maintaining its aspect ratio. However, this left gaps where there was just the virtual world visible. It was decided that it would be better to always cover the canvas even if some of the edges from the camera input spilled over, so `Envelop Parent' was selected instead and the textured plane was set to stretch over the whole canvas. This created the final seamless display.
 
-\section{building to mobile and nothing works}
-
-\section{but now it does yay}
-
 \section{Testing}
 
 \subsection{Incremental Testing}
@@ -694,7 +748,7 @@ Much of the testing for Increment 1 was done in a separate project to the main A
 6          & Normal        & Imports 3 models from GitHub simultaneously.                & Success.        \\
 7          & Normal        & Reads metadata from GitHub server and outputs to terminal.  & Success.        \\
 8          & Normal        & Places 3 models in global co-ordinates defined by metadata. & Success.        \\
-9          & Boundary      & Imports only 1 model in master list when 3 are available.   & Success         \\
+9          & Boundary      & Imports only model specified by master list when 3 are uploaded.   & Success         \\
 10 & Boundary  & Imports only 3 truly available models when 4 are listed in master file. & Success                                                           \\
 11         & Erroneous     & Does not import model of the .fbx type and does not crash.  & Success         \\
 12 & Erroneous & Positions model at the origin given invalid metadata co-ordinates.      & Success 
@@ -892,10 +946,45 @@ Again, there were some issues with the alignment and the orientation of the virt
 It would be ideal to use the cathedral as the first generally available site in the app and this is the intention after the assessment of this project is complete.
 
 \subsection{Stress Testing}
+To ensure the system was sufficiently robust, some extreme sample sites were uploaded.
 
 \subsubsection{One Complex Model}
+Firstly, it was critical to check that the system could handle a large number of vertices. Often in order to precisely map a site, photogrammetric software will output a highly complex model. To simulate this a plane was generated and subdivided many times, then the positions of the vertices randomised along their normal. Figure \ref{fig:stressplane} shows the plane with 10,404 points.
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=1\linewidth]{figures/testing/manyvertices.PNG}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.835\linewidth]{figures/testing/manyverticesrandomised.PNG}
+\end{minipage}
+\caption{The initial plane (created in Blender) used for stress-testing, subdivided to include 10,404 vertices. The right image shows the vertices at randomised heights.}
+\label{fig:stressplane}
+\end{figure}
+
+The system handled this without fault, loading the model instantly and showed no latency whilst moving around in manual or live mode (see Figure \ref{fig:manyverticesapp}). 
 
 \subsubsection{Many Models}
+Similarly, a site may be constructed of many models, each representing a building for example. It is also common when modelling a city to use many primitive objects, such as cuboids and applying the detailing exclusively as textures. To simulate this 25 cubes were generated. 17 are placed in a line and the rest are scattered arbitrarily. (See figure \ref{fig:manymodelsapp}) When initially booting the app, there is a little latency - approximately 10 seconds to load. But as with the single complex model, the app handles rendering all models without any strain. 
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.95\linewidth]{figures/testing/manyverticesapp.jpg}
+    \caption{Stress test on one complex model.}
+  \label{fig:manyverticesapp}
+\end{minipage}%
+\begin{minipage}{.5\textwidth}
+  \centering
+  \includegraphics[width=0.95\linewidth]{figures/testing/manymodelsapp2.jpg}
+  \caption{Test on many models in the app.}
+    \label{fig:manymodelsapp}
+\end{minipage}
+\end{figure}
 
 \section{Future Work}
 \label{futurework}
@@ -906,7 +995,7 @@ Lightmapping is a potential optimisation in the rendering of the sites. It invol
 
 \begin{figure}
 \centering
-    \includegraphics[width=0.5\linewidth]{figures/futurework/Lightmap.png}
+    \includegraphics[width=0.8\linewidth]{figures/futurework/Lightmap.png}
         \caption{Lightmapping a cube. The right-hand image shows the flattened texture including the lighting state. \cite{futurework:lightmapping}}
         \label{fig:lightmapping}
 \end{figure}
@@ -916,7 +1005,7 @@ The level-of-detail pertains to how many vertices are currently being used to di
 
 \begin{figure}
 \centering
-    \includegraphics[width=0.5\linewidth]{figures/futurework/levelofdetail.png}
+    \includegraphics[width=0.8\linewidth]{figures/futurework/levelofdetail.png}
         \caption{A model at two different levels of detail. More vertices are included in the left-hand side. \cite{futurework:levelofdetail}}
         \label{fig:levelofdetail}
 \end{figure}
@@ -1052,7 +1141,7 @@ Below the objectives are listen again with those in \light{grey} being the compl
 \subsection{Scalability and Practical Use}
 
 \section{Conclusion}
-In this project, an application for displaying historical sites in augmented reality has been developed. Via the upload point, a curator can set up a site with various 3D models and make it available for visitors to walk around with a mobile device. 
+In this project, an application for displaying historical sites in augmented reality has been developed. Via the upload point, a curator can set up a site with various 3D models and make it available for visitors to walk around with a mobile device using their GPS to locate the site. 
 
 The interface was designed from scratch and implemented using the Unity game engine, and all of the web access and location processing was written in C\# in the Unity project. 
 
@@ -1060,6 +1149,7 @@ Models are displayed with texturing detail from the associated .mtl file and ren
 
 Sites can be made visible at different time periods and each period can be labelled with tags to identify key features and highlight the changes in the structure over time.
 
+Going forward, the success of this project will be evident from its use. It is the intention to finalise the model at Coventry Cathedral and make the software publicly available to visitors to explore.
 
 \section{Acknowledgments}
 This author would like to acknowledge my supervisor Claire Rocks for you ongoing support, guidance and general loveliness.
@@ -1075,7 +1165,6 @@ And to my wonderful housemates for being my test subjects, ducks, and immaculate
 And finally thank you to my partner for keeping me sane and righting me again when absolutely nothing worked. 
 
 \section{TODO IN CODE}
-check if the tablet can read the metadata because t may just be the deprecated www thats the problem.
 Altitude should do something
 Add a reset orientation button
 Add a help button
@@ -1097,5 +1186,30 @@ should i have used the compass
 \appendix
 
 \section{How to Run ARchae}
+Since the app is not yet publicly available in an app store, the steps to compile and run the software on an Android device, and those to add your own site are given below. For a future user it will simply be downloadable.
+
+\subsection{Setting up Unity}
+\begin{enumerate}
+    \item To run the app you will need a Unity installation. Development was done in Unity 2022.3.9, so that is recommended as the version.
+    \item You can import the project attached to this report, or download it from the GitHub.
+    \item You will then need the Android SDK development toolkit. This is optionally installable when you first open Unity, or go to File $\succ\succ$ Build Settings $\succ\succ$ Android and you can install from there.
+\end{enumerate}
+
+\subsection{Unity Remote}
+\begin{enumerate}
+    \item On your mobile device, install the Unity Remote app.
+    \item Plug your device into the development machine and ensure all debug permissions are granted.
+    \item Press play at the top of the Unity editor and you should see the app appear on your device screen.
+    \item To place a version permanently onto the device, you will need to build it: File $\succ\succ$ Build Settings $\succ\succ$ Android $\succ\succ$ Build and Run.
+\end{enumerate}
+
+\subsection{Adding a Site}
+\begin{enumerate}
+    \item This is best demonstrated via the video demo.
+    \item First go to the GitHub page for sites. And request  developer permissions.
+    \item Create a new folder for your site and add the name of the folder to the object list text file.
+    \item Drag any object and material files for your site into the folder.
+    \item Add a metadata.txt file for the location, tagging, and timeline information as detailed above.
+\end{enumerate}
 
 \end{document}
