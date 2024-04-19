@@ -1,1 +1,1 @@
-many_vertices_stress_test
+many_models_stress_test
