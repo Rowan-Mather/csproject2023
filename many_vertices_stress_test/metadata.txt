@@ -1,1 +1,2 @@
-hi
+location:52.37531,-1.552912,142.2;
+model_name:manyverticesstresstest|date:2024CE;
