@@ -1,1 +1,26 @@
-
+location:52.37927, -1.560173, 140;
+model_name:cube1;
+model_name:cube2;
+model_name:cube3;
+model_name:cube4;
+model_name:cube5;
+model_name:cube6;
+model_name:cube7;
+model_name:cube8;
+model_name:cube9;
+model_name:cube10;
+model_name:cube11;
+model_name:cube12;
+model_name:cube13;
+model_name:cube14;
+model_name:cube15;
+model_name:cube16;
+model_name:cube17;
+model_name:cube18;
+model_name:cube19;
+model_name:cube20;
+model_name:cube21;
+model_name:cube22;
+model_name:cube23;
+model_name:cube24;
+model_name:cube25;
