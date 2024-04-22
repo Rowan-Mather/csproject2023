@@ -1,2 +1,2 @@
-location:52.3837449,-1.5603326,142.2;
+location: 52.37534, -1.552832, 143.1;
 model_name:cov-cathedral|date:1500AD|tag:pillars,3,0,0;
