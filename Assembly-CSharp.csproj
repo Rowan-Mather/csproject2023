@@ -46,9 +46,10 @@
      <Compile Include="Assets\ModelImporting\OBJImport\CharWordReader.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\OBJObjectBuilder.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\Samples\ObjFromFile.cs" />
-     <Compile Include="Assets\Sites\SiteHolderScript.cs" />
      <Compile Include="Assets\InputOutput\CameraScript.cs" />
+     <Compile Include="Assets\Sites\SiteHolderScript.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\OBJLoader.cs" />
+     <Compile Include="Assets\UI\MainMenuScript.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\BinaryExtensions.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\DDSLoader.cs" />
      <Compile Include="Assets\ModelImporting\OBJImport\TextureLoader\BMPLoader.cs" />

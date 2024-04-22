@@ -36,13 +36,20 @@ public class UserLocationScript : MonoBehaviour
     void Start()
     {
         locDisplay.updateLocationDisplay(userLoc);
+        setLiveLocation();
     }
 
+    int livestarter = 0; 
     private void Update() {
         if (liveMode) {
             setLiveLocation();
             setLiveRotation();
         }
+        if (livestarter < 300) {
+            setLiveLocation();
+            livestarter++;
+        }
+
     }
 
     // --------- LOCATION --------- //

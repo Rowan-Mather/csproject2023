@@ -28,6 +28,7 @@ public class MovementButtonsScript : MonoBehaviour
 
     void Start() {
         camera = Camera.main;
+        arrowImage.transform.localScale = new Vector3(1,1,1);
     }
 
     // Updates the user position and rotation in manual mode based on the input
