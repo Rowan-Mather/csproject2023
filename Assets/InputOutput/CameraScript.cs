@@ -53,7 +53,7 @@ public class CameraScript : MonoBehaviour
         // Uses the live camera input where possible in live mode
         if (loc.LiveMode && realCamAvailable) {
             // Display the input image and hide the plane 
-            virtualPlane.transform.localScale = hideVec;
+            //virtualPlane.transform.localScale = hideVec;
             realBackground.transform.localScale = showVec;
             realBackground.texture = realCam;
 
@@ -68,7 +68,7 @@ public class CameraScript : MonoBehaviour
         }
         // In manual mode, simply display the floor plane
         else {
-            virtualPlane.transform.localScale = showVec;
+            //virtualPlane.transform.localScale = showVec;
             realBackground.transform.localScale = hideVec;
         }
     }

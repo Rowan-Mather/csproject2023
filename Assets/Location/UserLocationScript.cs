@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -61,7 +62,7 @@ public class UserLocationScript : MonoBehaviour
     public void setLocation(double lon, double lat, double alt) {
         userLoc.Longitude = lon;
         userLoc.Latitude = lat;
-        userLoc.Altitude = 0; //alt;
+        userLoc.Altitude = alt;
         locDisplay.updateLocationDisplay(userLoc);
     }
 
@@ -75,13 +76,29 @@ public class UserLocationScript : MonoBehaviour
     }
 
     // Sets location in live mode accordig to the GPS readings
+    private double altTicker = 1;
+    private double altTot = 0;
+    private double altLast = 0;
     public void setLiveLocation() {
         GCS gps = ioHandler.getLocation();
         if (gps != null) {
             //To show: Debug.Log("Lon: "+ gps.Longitude.ToString() + " Lat: "+ gps.Latitude);
             userLoc.Longitude = gps.Longitude;
             userLoc.Latitude = gps.Latitude;
-            userLoc.Altitude = 0; //gps.Altitude;
+            userLoc.Altitude = gps.Altitude;
+            /*
+            // Altitude is updated less frequently and meaned
+            if ((altTicker > 600) || (Math.Abs(altLast - gps.Altitude) > 15)) {
+                userLoc.Altitude = altTot/altTicker;
+                altLast = userLoc.Altitude;
+                altTicker = 1;
+                altTot = 0;
+            }
+            else { 
+                altTicker++; 
+                altTot += gps.Altitude;
+                altLast = gps.Altitude;
+            }*/
             locDisplay.updateLocationDisplay(gps);
         }
     }

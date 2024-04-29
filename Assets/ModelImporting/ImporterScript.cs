@@ -131,7 +131,7 @@ public class ImporterScript : MonoBehaviour
         try {
             double lat = Double.Parse(locationValues[0]);
             double lon = Double.Parse(locationValues[1]);
-            double alt = 0; //Double.Parse(locationValues[2]);
+            double alt = Double.Parse(locationValues[2]);
             site.setGCSLocation(new GCS(lon, lat, alt));
         }
         catch {
